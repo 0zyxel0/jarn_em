@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{asset('css/_all-skins.css')}}">
     <link rel="stylesheet" href="{{asset('css/bootstrap-datepicker.css')}}">
     <link rel="stylesheet" href="{{asset('css/select2.css')}}">
+    <link rel="stylesheet" href="{{asset('css/parsley.css')}}">
 
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -323,6 +324,8 @@
     <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="{{asset('js/jquery.js')}}"></script>
 <script src="{{asset('js/bootstrap.js')}}"></script>
 <script src="{{asset('js/jquery.slimscroll.js')}}"></script>
@@ -330,13 +333,13 @@
 <script src="{{asset('js/adminlte.js')}}"></script>
 <script src="{{asset('js/bootstrap-datepicker.js')}}"></script>
 <script src="{{asset('js/select2.full.js')}}"></script>
+<script src="{{asset('js/parsley.js')}}"></script>
 <script src="{{asset('js/demo.js')}}"></script>
 <script>
     $(document).ready(function () {
         $('.sidebar-menu').tree();
-        $('#datepicker').datepicker({
-            autoclose: true
-        })
+
+
 
     $('.dropdown-toggle').click(function() {
         if($( "#clickme" ).hasClass( "open" ))

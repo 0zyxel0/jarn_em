@@ -15,6 +15,10 @@
                     @endif
 
                     You are logged in!
+                <br>
+                        <br>
+                        <a href="dashboard"> Proceed to Dashboard</a>
+
                 </div>
             </div>
         </div>

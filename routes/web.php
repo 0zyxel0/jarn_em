@@ -24,6 +24,8 @@ Route::get('/newEmployee', function () {
 });
 
 
+Route::post('saveEmployeeDetails', 'EmployeeController@saveEmployeeDetails');
+
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
