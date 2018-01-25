@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap-datepicker.css')}}">
     <link rel="stylesheet" href="{{asset('css/select2.css')}}">
     <link rel="stylesheet" href="{{asset('css/parsley.css')}}">
+    <link rel="stylesheet" href="{{asset('css/datatables.css')}}">
 
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -334,7 +335,9 @@
 <script src="{{asset('js/bootstrap-datepicker.js')}}"></script>
 <script src="{{asset('js/select2.full.js')}}"></script>
 <script src="{{asset('js/parsley.js')}}"></script>
-<script src="{{asset('js/demo.js')}}"></script>
+
+<script src="{{asset('js/datatables.js')}}"></script>
+
 <script>
     $(document).ready(function () {
         $('.sidebar-menu').tree();
@@ -351,6 +354,7 @@
         }
 
     });
+
 
 });
 </script>

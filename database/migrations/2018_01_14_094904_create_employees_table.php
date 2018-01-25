@@ -30,6 +30,7 @@ class CreateEmployeesTable extends Migration
             $table->string('statusid');
             $table->date('startdate');
             $table->date('enddate')->nullable();
+            $table->integer('isActive');
             $table->string('updatedby');
             $table->timestamps();
         });

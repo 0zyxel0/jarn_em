@@ -23,6 +23,9 @@ Route::get('/newEmployee', function () {
     return view('content.employee.new_employee');
 });
 
+Route::get('/showEmployeeList', 'EmployeeController@showEmployeeList');
+Route::get('/editEmployeeDetails/{id}', 'EmployeeController@editEmployeeDetails');
+
 
 Route::post('saveEmployeeDetails', 'EmployeeController@saveEmployeeDetails');
 

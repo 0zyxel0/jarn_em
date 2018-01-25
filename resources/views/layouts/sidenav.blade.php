@@ -36,7 +36,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="/jarn_em/public/newEmployee"><i class="fa fa-circle-o"></i> New Employee</a></li>
-                    <li><a href="../forms/advanced.html"><i class="fa fa-circle-o"></i> Employee List</a></li>
+                    <li><a href="/jarn_em/public/showEmployeeList"><i class="fa fa-circle-o"></i> Employee List</a></li>
 
                 </ul>
             </li>

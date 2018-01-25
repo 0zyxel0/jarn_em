@@ -10,10 +10,11 @@ use App\Employees;
 class EmployeeController extends Controller
 {
    public function saveEmployeeDetails(Request $request){
+       $genId =  Uuid::uuid();
 
-      $employee = new Employees;
+       $employee = new Employees;
 
-      $employee->partyid = Uuid::uuid();
+      $employee->partyid = $genId;
       $employee->givenname = $request->givenname;
        $employee->familyname = $request->familyname;
       $employee->middlename = $request->middlename;
@@ -32,5 +33,27 @@ class EmployeeController extends Controller
       $employee->updatedby = $request->username;
       $employee->save();
 
+      redirect('dashboard');
    }
+
+
+public function showEmployeeList(){
+
+       $query = Employees::all('partyid','givenname','familyname','contactnumber','startdate','enddate');
+       $json = json_encode($query);
+
+       return view('content.employee.employee_list',['data'=>json_decode($json ,true)]);
+}
+
+public function editEmployeeDetails($id){
+
+$data = Employees::where('partyid',$id)->get();
+dd($data);
+
+}
+
+
+
+
+
 }
