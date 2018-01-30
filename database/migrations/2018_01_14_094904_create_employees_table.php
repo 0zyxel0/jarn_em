@@ -16,7 +16,7 @@ class CreateEmployeesTable extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->uuid('partyid')->unique();
             $table->string('givenname');
-            $table->string('familyName');
+            $table->string('familyname');
             $table->string('middlename');
             $table->date('birthday');
             $table->integer('age');
@@ -27,7 +27,7 @@ class CreateEmployeesTable extends Migration
             $table->string('email');
             $table->string('civilstatus');
             $table->text('comments')->nullable();
-            $table->string('statusid');
+            $table->string('status');
             $table->date('startdate');
             $table->date('enddate')->nullable();
             $table->integer('isActive');

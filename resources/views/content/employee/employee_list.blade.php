@@ -21,9 +21,12 @@ $(document).ready(function(){
 
         var data = table.row( $(this).parents('tr') ).data();
         window.location.href='editEmployeeDetails/'+data[0];
+    });
 
+    $('#employee-list tbody').on( 'click', '#btn_viewProfile', function () {
 
-
+        var data = table.row( $(this).parents('tr') ).data();
+        window.location.href='profile/'+data[0];
     });
 
 });
@@ -78,8 +81,9 @@ $(document).ready(function(){
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
+
                                             @foreach($data as $item)
+                                                <tr>
                                                     <td>   {{$item['partyid']}}</td>
                                                     <td>   {{$item['givenname']}}</td>
                                                     <td>   {{$item['familyname']}}</td>
@@ -87,12 +91,13 @@ $(document).ready(function(){
                                                     <td>   {{$item['startdate']}}</td>
                                                     <td>   {{$item['enddate']}}</td>
                                                     <td>
-                                                        <button><i class="fa fa-book"></i> View</button>
+                                                        <button id="btn_viewProfile"><i class="fa fa-book"></i> View</button>
                                                         <button id="btn_editProfile"><i class="fa fa-edit"></i> Edit</button>
                                                     </td>
+                                                </tr>
                                             @endforeach
 
-                                            </tr>
+
                                             </tbody>
 
                                         </table>

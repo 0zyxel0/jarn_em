@@ -51,6 +51,7 @@
                     <div class="box-body">
                         <form action="saveEmployeeDetails" method="post" data-parsley-validate="">
                             <!-- text input -->
+
                             <div class="form-group">
                                 <label>Given Name</label>
                                 <input type="text" class="form-control" placeholder="Enter ..." id="givenname" name="givenname" required="">
@@ -154,8 +155,8 @@
                                 <div class="form-group">
                                     <label>Employee Status</label>
                                     <select class="form-control" id="emp_stat" name="emp_stat" required="">
-                                        <option>Single</option>
-                                        <option>Married</option>
+                                        <option>Full-Time</option>
+                                        <option>Contractual</option>
 
                                     </select>
                                     <!-- /.input group -->
@@ -226,11 +227,15 @@
 
                     <div class="box-body">
                         <div class="form-group">
-                            <label>Rate</label>
-                            <input type="text" class="form-control" placeholder="Enter ...">
+                            <label>Salary Rate</label>
+                            <input type="text" class="form-control" placeholder="Enter ..." id="salary_rate" name="salary_rate" required="" data-parsley-pattern="^[0-9]*\.[0-9]{2}$">
                         </div>
                         <div class="form-group">
                             <label>SSS ID</label>
+                            <input type="text" class="form-control" placeholder="Enter ...">
+                        </div>
+                        <div class="form-group">
+                            <label>PHILHEALTH ID</label>
                             <input type="text" class="form-control" placeholder="Enter ...">
                         </div>
                         <div class="form-group">

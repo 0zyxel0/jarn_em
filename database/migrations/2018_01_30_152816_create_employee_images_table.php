@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEmployeeTeamsTable extends Migration
+class CreateEmployeeImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateEmployeeTeamsTable extends Migration
      */
     public function up()
     {
-        Schema::create('employee_teams', function (Blueprint $table) {
+        Schema::create('employee_images', function (Blueprint $table) {
             $table->increments('id');
-            $table->uuid('teamid')->unique();
-            $table->string('name');
-            $table->string('userpartyid');
-            $table->boolean('isAdmin');
-            $table->string('updatedby');
+            $table->uuid('imageid')->unique();
+            $table->text('imageurl');
+            $table->string('partyid');
+            $table->string('updatedBy');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateEmployeeTeamsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employee_teams');
+        Schema::dropIfExists('employee_images');
     }
 }

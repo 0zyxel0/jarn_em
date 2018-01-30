@@ -50,7 +50,7 @@
                 <ul class="treeview-menu">
                     <li><a href="../forms/general.html"><i class="fa fa-circle-o"></i> Create Team</a></li>
                     <li><a href="../forms/advanced.html"><i class="fa fa-circle-o"></i> Assign Members</a></li>
-                    <li><a href="../forms/advanced.html"><i class="fa fa-circle-o"></i> View Team</a></li>
+                    <li><a href="/jarn_em/public/viewTeamList"><i class="fa fa-circle-o"></i> View Team</a></li>
 
                 </ul>
             </li>

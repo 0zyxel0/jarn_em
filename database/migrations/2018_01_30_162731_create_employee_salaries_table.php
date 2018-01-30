@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEmployeeTeamsTable extends Migration
+class CreateEmployeeSalariesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateEmployeeTeamsTable extends Migration
      */
     public function up()
     {
-        Schema::create('employee_teams', function (Blueprint $table) {
-            $table->increments('id');
-            $table->uuid('teamid')->unique();
-            $table->string('name');
-            $table->string('userpartyid');
-            $table->boolean('isAdmin');
+        Schema::create('employee_salaries', function (Blueprint $table) {
+            $table->uuid('salaryid');
+            $table->float('daily_rate');
+            $table->string('partyid');
             $table->string('updatedby');
             $table->timestamps();
         });
@@ -31,6 +29,6 @@ class CreateEmployeeTeamsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employee_teams');
+        Schema::dropIfExists('employee_salaries');
     }
 }

@@ -336,6 +336,7 @@
 <script src="{{asset('js/select2.full.js')}}"></script>
 <script src="{{asset('js/parsley.js')}}"></script>
 
+
 <script src="{{asset('js/datatables.js')}}"></script>
 
 <script>
