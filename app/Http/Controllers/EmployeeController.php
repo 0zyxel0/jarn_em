@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\EmployeeTeam;
+use App\EmployeeTeamAssignment;
 use Illuminate\Http\Request;
 use Faker\Provider\Uuid;
 use DB;
@@ -45,7 +47,14 @@ class EmployeeController extends Controller
       $salary->daily_rate= $request->salary_rate;
       $salary->partyid = $genId;
       $salary->updatedby = $request->username;
-     $salary->save();
+      $salary->save();
+
+
+      $team = new EmployeeTeamAssignment();
+      $team->partyid = $genId;
+      $team->teamid = $request->assignteam;
+      $team->updatedby = $request->username;
+      $team->save();
        $request->session()->flash('alert-success', 'Record was successful added!');
        return redirect('/showEmployeeList');
    }
@@ -54,7 +63,7 @@ class EmployeeController extends Controller
 public function showEmployeeList(){
 
 
-       $query = Employees::all('partyid','givenname','familyname','contactnumber','startdate','enddate','salary');
+       $query = Employees::all('partyid','givenname','familyname','contactnumber','startdate','enddate');
        $json = json_encode($query);
 
        return view('content.employee.employee_list',['data'=>json_decode($json ,true)]);
@@ -82,10 +91,10 @@ public function viewProfile($id){
 public function newEmployee(){
 
     $query = Area::all('name','areaid');
+    $query2 = EmployeeTeam::all('teamid','name');
 
 
-
-    return view('content.employee.new_employee',compact('query'));
+    return view('content.employee.new_employee',compact('query','query2'));
 }
 
 

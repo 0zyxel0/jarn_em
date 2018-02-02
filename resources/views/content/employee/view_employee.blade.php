@@ -457,6 +457,6 @@
             <!-- /.col -->
         </div>
         <!-- /.row -->
-
+        </div>
     </section>
 @stop

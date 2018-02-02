@@ -27,10 +27,13 @@ Route::get('/viewTeamList','TeamController@viewTeamList');
 Route::get('/profile/{id}','EmployeeController@viewProfile');
 Route::get('/area','AreaController@viewArea');
 Route::get('/createarea','AreaController@createArea');
+Route::get('/createteam','TeamController@createTeam');
+Route::get('/viewMembers/{id}','TeamController@viewMembers');
+
 
 Route::post('saveAreaDetails','AreaController@saveAreaDetails');
 Route::post('saveEmployeeDetails', 'EmployeeController@saveEmployeeDetails');
-
+Route::post('saveTeamRecord','TeamController@saveTeamRecord');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

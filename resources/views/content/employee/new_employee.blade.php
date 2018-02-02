@@ -181,9 +181,10 @@
 
                         <div class="form-group">
                             <label>Team Name</label>
-                            <select class="form-control">
-                                <option>Male</option>
-                                <option>Female</option>
+                            <select class="form-control" id="assignteam" name="assignteam">
+                                @foreach($query2 as $q2)
+                                    <option value="{{$q2['teamid']}}">{{$q2['name']}}</option>
+                                @endforeach
                             </select>
                         </div>
 
