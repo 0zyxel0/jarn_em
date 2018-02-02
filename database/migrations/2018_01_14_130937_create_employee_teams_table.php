@@ -18,7 +18,7 @@ class CreateEmployeeTeamsTable extends Migration
             $table->uuid('teamid')->unique();
             $table->string('name');
             $table->string('userpartyid');
-            $table->boolean('isAdmin');
+            $table->boolean('isAdmin')->nullable();
             $table->string('updatedby');
             $table->timestamps();
         });

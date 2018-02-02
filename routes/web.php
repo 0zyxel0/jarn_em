@@ -19,16 +19,16 @@ Route::get('/dashboard', function () {
     return view('content.dashboard');
 });
 
-Route::get('/newEmployee', function () {
-    return view('content.employee.new_employee');
-});
+Route::get('/newEmployee','EmployeeController@newEmployee');
 
 Route::get('/showEmployeeList', 'EmployeeController@showEmployeeList');
 Route::get('/editEmployeeDetails/{id}', 'EmployeeController@editEmployeeDetails');
 Route::get('/viewTeamList','TeamController@viewTeamList');
 Route::get('/profile/{id}','EmployeeController@viewProfile');
+Route::get('/area','AreaController@viewArea');
+Route::get('/createarea','AreaController@createArea');
 
-
+Route::post('saveAreaDetails','AreaController@saveAreaDetails');
 Route::post('saveEmployeeDetails', 'EmployeeController@saveEmployeeDetails');
 
 

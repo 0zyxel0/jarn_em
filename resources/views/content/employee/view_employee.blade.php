@@ -12,20 +12,33 @@
                 <!-- Profile Image -->
                 <div class="box box-primary">
                     <div class="box-body box-profile">
-                        <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+                        <img class="profile-user-img img-responsive img-square" src="" alt="User profile picture">
                         @foreach($data as $d)
                         <h3 class="profile-username text-center">{{$d['givenname']}} {{$d['familyname']}}</h3>
                             <p class="text-muted text-center">Assignment</p>
                         @endforeach
                         <ul class="list-group list-group-unbordered">
                             <li class="list-group-item">
-                                <b>Salary Rate</b> <a class="pull-right">1,322</a>
+
+                                    <b>Salary Rate</b> <a class="pull-right">
+                                    @foreach($data2 as $d2){{$d2['daily_rate']}}
+                                    @endforeach
+                                </a>
+
+
                             </li>
                             <li class="list-group-item">
-                                <b>Start Date</b> <a class="pull-right">543</a>
+                                <b>Start Date</b> <a class="pull-right">
+                                    @foreach($data as $d3)
+                                        {{$d3['startdate']}}
+                                    @endforeach</a>
                             </li>
                             <li class="list-group-item">
-                                <b>Status</b> <a class="pull-right">13,287</a>
+                                <b>Status</b> <a class="pull-right">
+                                    @foreach($data as $d3)
+                                        {{$d3['status']}}
+                                    @endforeach</a>
+                                </a>
                             </li>
                         </ul>
 
@@ -80,7 +93,7 @@
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#activity" data-toggle="tab" aria-expanded="true">Activity</a></li>
                         <li class=""><a href="#timeline" data-toggle="tab" aria-expanded="false">Timeline</a></li>
-                        <li class=""><a href="#settings" data-toggle="tab" aria-expanded="false">Settings</a></li>
+                        <li class=""><a href="#Attendance" data-toggle="tab" aria-expanded="false">Attendance</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="activity">
@@ -294,58 +307,148 @@
                         </div>
                         <!-- /.tab-pane -->
 
-                        <div class="tab-pane" id="settings">
-                            <form class="form-horizontal">
-                                <div class="form-group">
-                                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+                        <div class="tab-pane" id="Attendance">
+                            <div class="col-md-12">
+                                <table class="table table-bordered" id="my_table">
+                                    <thead>
+                                    <tr>
+                                        <td style="text-align: center;">
+                                            Employees<i class="entypo-down-thin"></i> |
+                                            Date <i class="entypo-right-thin"></i>
+                                        </td>
+                                        <td style="text-align: center;">
+                                            Summary<br>( Total Presence / Total Absence )                        </td>
+                                        <td style="text-align: center;">1</td>
+                                        <td style="text-align: center;">2</td>
+                                        <td style="text-align: center;">3</td>
+                                        <td style="text-align: center;">4</td>
+                                        <td style="text-align: center;">5</td>
+                                        <td style="text-align: center;">6</td>
+                                        <td style="text-align: center;">7</td>
+                                        <td style="text-align: center;">8</td>
+                                        <td style="text-align: center;">9</td>
+                                        <td style="text-align: center;">10</td>
+                                        <td style="text-align: center;">11</td>
+                                        <td style="text-align: center;">12</td>
+                                        <td style="text-align: center;">13</td>
+                                        <td style="text-align: center;">14</td>
+                                        <td style="text-align: center;">15</td>
+                                        <td style="text-align: center;">16</td>
+                                        <td style="text-align: center;">17</td>
+                                        <td style="text-align: center;">18</td>
+                                        <td style="text-align: center;">19</td>
+                                        <td style="text-align: center;">20</td>
+                                        <td style="text-align: center;">21</td>
+                                        <td style="text-align: center;">22</td>
+                                        <td style="text-align: center;">23</td>
+                                        <td style="text-align: center;">24</td>
+                                        <td style="text-align: center;">25</td>
+                                        <td style="text-align: center;">26</td>
+                                        <td style="text-align: center;">27</td>
+                                        <td style="text-align: center;">28</td>
+                                    </tr>
+                                    </thead>
 
-                                    <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="inputName" placeholder="Name">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                                    <tbody>
+                                    <tr>
+                                        <td style="text-align: center;">
+                                            John Doe                            </td>
+                                        <td style="text-align: center;">
+                                            1 / 0                            </td>
+                                        <td style="text-align: center;">
+                                        </td>
 
-                                    <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+                                        <td style="text-align: center;">
+                                            <i class="entypo-record" style="color: #00a651;"></i>
+                                        </td>
 
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="inputName" placeholder="Name">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
+                                        <td style="text-align: center;">
+                                        </td>
 
-                                    <div class="col-sm-10">
-                                        <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
+                                        <td style="text-align: center;">
+                                        </td>
 
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-10">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="submit" class="btn btn-danger">Submit</button>
-                                    </div>
-                                </div>
-                            </form>
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                        </td>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                                <center>
+                                    <a href="http://creativeitem.com/demo/hrm/index.php?admin/attendance_report_print_view/1/2018/2" class="btn btn-primary" target="_blank">
+                                        Print Attendance Sheet                </a>
+                                </center>
+                            </div>
                         </div>
                         <!-- /.tab-pane -->
                     </div>

@@ -136,7 +136,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input type="text" class="form-control pull-right" id="startdate" required="">
+                                        <input type="text" class="form-control pull-right" id="startdate" name="startdate" required="">
                                     </div>
                                     <!-- /.input group -->
                                 </div>
@@ -202,9 +202,10 @@
 
                         <div class="form-group">
                             <label>Area</label>
-                            <select class="form-control">
-                                <option>Male</option>
-                                <option>Female</option>
+                            <select class="form-control" name="selectarea" id="selectarea">
+                                @foreach($query as $q)
+                                <option value="{{$q['id']}}">{{$q['name']}}</option>
+                                    @endforeach
                             </select>
                         </div>
 

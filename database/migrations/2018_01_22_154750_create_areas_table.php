@@ -19,9 +19,9 @@ class CreateAreasTable extends Migration
             $table->text('address');
             $table->text('city');
             $table->text('country');
-            $table->text('size');
-            $table->date('acquiredDate');
-            $table->string('status');
+            $table->float('size')->nullable();
+            $table->date('acquiredDate')->nullable();
+            $table->string('status')->nullable();
             $table->string('contact_person');
             $table->string('updatedby');
             $table->string('createdby');
