@@ -23,6 +23,7 @@
                             <div class="form-group">
                                 <label>Team Leader</label>
                                 <select class="form-control" name="selectleader" id="selectleader">
+                                    <option value="">------</option>
                                     @foreach($query2 as $q2)
                                         <option value="{{$q2['partyid']}}">{{$q2['givenname']}} {{$q2['familyname']}}</option>
                                     @endforeach

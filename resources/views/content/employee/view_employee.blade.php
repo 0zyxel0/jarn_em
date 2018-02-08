@@ -4,6 +4,11 @@
     <script src="{{asset('js/jquery.js')}}"></script>
     <script src="{{asset('js/bootstrap3.min.js')}}"></script>
 
+    <script>
+        </script>
+
+
+
     <section class="content">
 
         <div class="row">
@@ -12,7 +17,30 @@
                 <!-- Profile Image -->
                 <div class="box box-primary">
                     <div class="box-body box-profile">
-                        <img class="profile-user-img img-responsive img-square" src="" alt="User profile picture">
+
+                        @forelse($image as $image)
+                            <img class="profile-user-img img-responsive img-square" src="{{asset("storage/photo_library/".$image['imageid'])}}.jpeg"  alt="User profile picture">
+                        @empty
+                            <img class="profile-user-img img-responsive img-square" src="" alt="User profile picture">
+
+
+                            <form action="store" method="post" enctype="multipart/form-data">
+                                <label>Select image to upload:</label>
+                                <input type="hidden" value="{{ csrf_token() }}" name="_token">
+                                <input type="hidden" value="{{ Auth::user()->name }}" name="updatedby" id="updatedby">
+
+                                @foreach($data as $c)
+                                    <input type="hidden" value="{{$c['partyid']}}" name="userId" id="userId">
+                                @endforeach
+                                <input type="file" name="image_file" id="image_file">
+                                <input type="submit" value="Upload" name="submit">
+
+                            </form>
+                        @endforelse
+
+
+
+
                         @foreach($data as $d)
                         <h3 class="profile-username text-center">{{$d['givenname']}} {{$d['familyname']}}</h3>
                             <p class="text-muted text-center">Assignment</p>
@@ -308,7 +336,8 @@
                         <!-- /.tab-pane -->
 
                         <div class="tab-pane" id="Attendance">
-                            <div class="col-md-12">
+
+                                <div class="tab-content">
                                 <table class="table table-bordered" id="my_table">
                                     <thead>
                                     <tr>
@@ -448,7 +477,8 @@
                                     <a href="http://creativeitem.com/demo/hrm/index.php?admin/attendance_report_print_view/1/2018/2" class="btn btn-primary" target="_blank">
                                         Print Attendance Sheet                </a>
                                 </center>
-                            </div>
+                                </div>
+
                         </div>
                         <!-- /.tab-pane -->
                     </div>

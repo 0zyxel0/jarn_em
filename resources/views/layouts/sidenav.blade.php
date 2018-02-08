@@ -54,11 +54,17 @@
 
                 </ul>
             </li>
-            <li>
-                <a href="../calendar.html">
-                    <i class="fa fa-calendar"></i> <span>Attendance</span>
-
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-edit"></i> <span>Attendace</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
                 </a>
+                <ul class="treeview-menu">
+                    <li><a href="/jarn_em/public/attendancelist"><i class="fa fa-circle-o"></i>Attendance List</a></li>
+
+                </ul>
             </li>
             <li class="treeview">
                 <a href="#">

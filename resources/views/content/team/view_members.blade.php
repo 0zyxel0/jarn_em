@@ -21,18 +21,25 @@
                             <li class="list-group-item">
 
                                 <b>Team Name</b> <a class="pull-right">
-                                    @foreach($data as $d2)
+
+                                    @forelse($data as $d2)
                                         <td><h3 class="box-title">{{$d2['Teamname']}}</h3></td>
-                                    @endforeach
+                                    @empty
+                                        <td><h3 class="box-title"> </h3></td>
+                                    @endforelse
+
                                 </a>
 
 
                             </li>
                             <li class="list-group-item">
                                 <b>Team Leader</b> <a class="pull-right">
-                                    @foreach($data as $d2)
+
+                                    @forelse($data as $d2)
                                         <td><h3 class="box-title">{{$d2['givenname']}} {{$d2['familyname']}}</h3></td>
-                                    @endforeach
+                                    @empty
+                                        <td><h3 class="box-title"> </h3></td>
+                                    @endforelse
                                 </a>
                             </li>
                             <li class="list-group-item">
@@ -57,7 +64,11 @@
 
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Members of {{$d2['Teamname']}}</h3>
+                        @forelse($data as $d2)
+                            <h3 class="box-title">Members of {{$d2['Teamname']}}</h3>
+                        @empty
+                            <td><h3 class="box-title"> </h3></td>
+                        @endforelse
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">

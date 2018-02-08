@@ -19,6 +19,10 @@ Route::get('/dashboard', function () {
     return view('content.dashboard');
 });
 
+Route::get('/show','UploadController@show');
+
+
+
 Route::get('/newEmployee','EmployeeController@newEmployee');
 
 Route::get('/showEmployeeList', 'EmployeeController@showEmployeeList');
@@ -30,7 +34,9 @@ Route::get('/createarea','AreaController@createArea');
 Route::get('/createteam','TeamController@createTeam');
 Route::get('/viewMembers/{id}','TeamController@viewMembers');
 
+Route::get('/attendancelist', 'AttendanceController@getEmployeeAttendanceList');
 
+Route::post('/profile/{id}','UploadController@store');
 Route::post('saveAreaDetails','AreaController@saveAreaDetails');
 Route::post('saveEmployeeDetails', 'EmployeeController@saveEmployeeDetails');
 Route::post('saveTeamRecord','TeamController@saveTeamRecord');

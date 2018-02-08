@@ -20,7 +20,7 @@ class TeamController extends Controller
         $query = DB::table('employee_teams')
             ->select('employee_teams.teamid','employee_teams.name as Teamname','areas.name as Areaname','employees.givenname','employees.familyname')
             ->join('areas', 'employee_teams.areaid', '=', 'areas.areaid')
-            ->join('employees','employee_teams.userpartyid','=','employees.partyid')
+            ->leftjoin('employees','employee_teams.userpartyid','=','employees.partyid')
 
             ->get();
         $convs2 = json_encode($query);

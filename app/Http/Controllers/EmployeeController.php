@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\EmployeeImage;
 use App\EmployeeTeam;
 use App\EmployeeTeamAssignment;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use DB;
 use App\Employees;
 use App\EmployeeSalary;
 use App\Area;
+use Illuminate\Support\Facades\Input;
 
 class EmployeeController extends Controller
 {
@@ -60,6 +62,9 @@ class EmployeeController extends Controller
    }
 
 
+
+
+
 public function showEmployeeList(){
 
 
@@ -82,10 +87,11 @@ public function viewProfile($id){
 
     $data2 = EmployeeSalary::where('partyid',$id)->get();
 
+    $image = EmployeeImage::where('partyid',$id)->get();
 
     $data = Employees::where('partyid',$id)->get();
 
-    return view('content.employee.view_employee' ,compact('data','data2'));
+    return view('content.employee.view_employee' ,compact('data','data2','image'));
 }
 
 public function newEmployee(){
@@ -94,7 +100,7 @@ public function newEmployee(){
     $query2 = EmployeeTeam::all('teamid','name');
 
 
-    return view('content.employee.new_employee',compact('query','query2'));
+    return view('content.employee.create_new_employee',compact('query','query2'));
 }
 
 
