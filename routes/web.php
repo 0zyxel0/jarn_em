@@ -33,7 +33,8 @@ Route::get('/area','AreaController@viewArea');
 Route::get('/createarea','AreaController@createArea');
 Route::get('/createteam','TeamController@createTeam');
 Route::get('/viewMembers/{id}','TeamController@viewMembers');
-
+Route::get('/viewprojects','ProjectsController@viewProjects');
+Route::get('/newprojects','ProjectsController@createProjects');
 Route::get('/attendancelist', 'AttendanceController@getEmployeeAttendanceList');
 
 Route::post('/profile/{id}','UploadController@store');

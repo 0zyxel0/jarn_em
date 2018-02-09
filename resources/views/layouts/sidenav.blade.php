@@ -56,7 +56,19 @@
             </li>
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-edit"></i> <span>Attendace</span>
+                    <i class="fa fa-asterisk"></i> <span>Projects</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/jarn_em/public/newprojects"><i class="fa fa-circle-o"></i> Create Project Category</a></li>
+                    <li><a href="/jarn_em/public/viewprojects"><i class="fa fa-circle-o"></i> View Projects</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-edit"></i> <span>Attendance</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

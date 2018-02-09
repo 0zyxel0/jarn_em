@@ -119,9 +119,11 @@
             <div class="col-md-9">
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
+                        <li class=""><a href="#Attendance" data-toggle="tab" aria-expanded="false">Personal Details</a></li>
                         <li class="active"><a href="#activity" data-toggle="tab" aria-expanded="true">Activity</a></li>
                         <li class=""><a href="#timeline" data-toggle="tab" aria-expanded="false">Timeline</a></li>
                         <li class=""><a href="#Attendance" data-toggle="tab" aria-expanded="false">Attendance</a></li>
+                        <li class=""><a href="#Attendance" data-toggle="tab" aria-expanded="false">Team</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="activity">
