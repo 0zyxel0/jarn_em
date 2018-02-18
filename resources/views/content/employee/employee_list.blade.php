@@ -40,8 +40,8 @@ $(document).ready(function(){
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">Tables</a></li>
-                <li class="active">Data tables</li>
+                <li><a href="#">Employee</a></li>
+                <li class="active">Employee List</li>
             </ol>
         </section>
 
@@ -49,20 +49,11 @@ $(document).ready(function(){
         <section class="content">
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="box">
-                        <div class="box-header">
-                            <h3 class="box-title">Hover Data Table</h3>
-                        </div>
-                        <!-- /.box-header -->
 
-
-                    </div>
                     <!-- /.box -->
 
                     <div class="box">
-                        <div class="box-header">
-                            <h3 class="box-title">Data Table With Full Features</h3>
-                        </div>
+
                         <!-- /.box-header -->
                         <div class="box-body">
 

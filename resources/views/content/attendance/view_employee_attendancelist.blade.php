@@ -87,7 +87,6 @@
                             <tr>
                                 <th class="active">Employee Id</th>
                                 <th class="active">Employee</th>
-                                <th class="active">Job Title</th>
                                 <th class="active">
                                     <label class="css-input css-checkbox css-checkbox-success">
                                         <input type="checkbox" class="checkbox-inline select_one" id="parent_present"><span></span> Attendance                                            </label>
@@ -101,22 +100,21 @@
                             </thead>
                             <tbody>
 
+                            @foreach($emps as $e)
                             <tr>
 
-                                <td> 10002 </td>
+                                <td> {{$e['partyid']}}</td>
 
                                 <td>
-                                    <input type="hidden" name="date" value="2018-02-09">
-
-                                    <input type="hidden" name="employee_id[]" value="2"> Manny Design
+                                    {{$e['givenname']}} {{$e['familyname']}}
                                 </td>
 
 
-                                <td>Accounts Clerk</td>
+
 
                                 <td  style="text-align: center;">
 
-                                    <input name="attendance[]" id="2" value="2" type="checkbox" class="child_present"">
+                                    <input name="attendance[]" id="2" value="2" type="checkbox" class="child_present">
 
 
 
@@ -128,9 +126,11 @@
 
                                     <div id="l_category" class="col-sm-9">
                                         <select name="leave_category_id[]" class="form-control">
-                                            <option value="">Select Project...</option>
-                                            <option value="2">
-                                                Sick Leave</option>;
+                                            <option disabled>Select Project...</option>
+                                            @foreach($data2 as $prj)
+
+                                                <option value="{{$prj['projectid']}}">{{$prj['project_code']}}</option>
+                                                @endforeach
                                         </select>
                                     </div>
 
@@ -141,14 +141,17 @@
 
                                     <div id="l_category" class="col-sm-9">
                                         <select name="leave_category_id[]" class="form-control">
-                                            <option value="">Select Project...</option>
-                                            <option value="2">
-                                                Sick Leave</option>;
+                                            <option disabled>Select Project...</option>
+
+                                            @foreach($area as $a)
+                                                <option value="{{$a['areaid']}}">{{$a['name']}}</option>
+                                                @endforeach
                                         </select>
                                     </div>
 
                                 </td>
                             </tr>
+                                @endforeach
                             </tbody>
                         </table>
                             <div style="text-align: right;">

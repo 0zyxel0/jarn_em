@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\EmployeeGovernmentDetail;
 use App\EmployeeImage;
 use App\EmployeeTeam;
 use App\EmployeeTeamAssignment;
@@ -19,6 +20,9 @@ class EmployeeController extends Controller
        $genId =  Uuid::uuid();
 
        $employee = new Employees;
+
+       $salary = new EmployeeSalary;
+       $team = new EmployeeTeamAssignment();
 
       $employee->partyid = $genId;
       $employee->givenname = $request->givenname;
@@ -41,7 +45,7 @@ class EmployeeController extends Controller
 
       $employee->save();
 
-        $salary = new EmployeeSalary;
+
 
       $salaryId = Uuid::uuid();
 
@@ -52,12 +56,52 @@ class EmployeeController extends Controller
       $salary->save();
 
 
-      $team = new EmployeeTeamAssignment();
+
       $team->partyid = $genId;
       $team->teamid = $request->assignteam;
       $team->updatedby = $request->username;
       $team->save();
+
+       $gov1  = new EmployeeGovernmentDetail;
+       $gov2  = new EmployeeGovernmentDetail;
+       $gov3  = new EmployeeGovernmentDetail;
+       $gov4  = new EmployeeGovernmentDetail;
+       $detailid1 = Uuid::uuid();
+       $detailid2 = Uuid::uuid();
+       $detailid3 = Uuid::uuid();
+       $detailid4 = Uuid::uuid();
+
+        $gov1->detailid = $detailid1;
+        $gov1->partyid = $genId;
+        $gov1->name = 'SSS';
+        $gov1->government_num = $request->sss_id;
+        $gov1->createdby = $request->username;
+        $gov1->save();
+
+       $gov2->detailid = $detailid2;
+       $gov2->partyid = $genId;
+       $gov2->name = 'PHILHEALTH';
+       $gov2->government_num = $request->philhealth_id;
+       $gov2->createdby = $request->username;
+       $gov2->save();
+       $gov3->detailid = $detailid3;
+       $gov3->partyid = $genId;
+       $gov3->name = 'PAGIBIG';
+       $gov3->government_num = $request->pagibig_id;
+       $gov3->createdby = $request->username;
+       $gov3->save();
+       $gov4->detailid = $detailid4;
+       $gov4->partyid = $genId;
+       $gov4->name = 'TIN';
+       $gov4->government_num = $request->tax_id;
+       $gov4->createdby = $request->username;
+       $gov4->save();
+
+
+
+
        $request->session()->flash('alert-success', 'Record was successful added!');
+
        return redirect('/showEmployeeList');
    }
 
@@ -91,7 +135,9 @@ public function viewProfile($id){
 
     $data = Employees::where('partyid',$id)->get();
 
-    return view('content.employee.view_employee' ,compact('data','data2','image'));
+    $govid = EmployeeGovernmentDetail::select('name','government_num')->where('partyid',$id)->get();
+
+    return view('content.employee.view_employee' ,compact('data','data2','image','govid'));
 }
 
 public function newEmployee(){

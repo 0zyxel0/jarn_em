@@ -7,10 +7,14 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Add New Project</h3>
                         <hr/>
-                        <form method="post" action="saveAreaDetails">
+                        <form method="post" action="saveProjectDetails">
                             <div class="form-group">
                                 <label>Project Name</label>
                                 <input type="text" class="form-control" placeholder="Enter ..." id="prjname" name="prjname" required="">
+                            </div>
+                            <div class="form-group">
+                                <label>Project Code</label>
+                                <input type="text" class="form-control" placeholder="Enter ..." id="prjcode" name="prjcode" required="">
                             </div>
                             <div class="form-group">
                                 <label>Rate</label>

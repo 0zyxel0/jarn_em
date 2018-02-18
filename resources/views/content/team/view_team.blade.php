@@ -71,7 +71,7 @@
                                     <td>
                                         <button id="btn_viewMember"><i class="fa fa-book"></i> View</button>
                                         <button id="btn_editProfile"><i class="fa fa-edit"></i> Edit</button>
-                                        <button id="btn_editProfile"><i class="fa fa-edit"></i> Assign Leader</button>
+
                                         <button id="btn_editProfile"><i class="fa fa-edit"></i> Delete</button>
 
                                     </td>

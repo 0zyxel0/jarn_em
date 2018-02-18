@@ -26,6 +26,7 @@
                                         <td><h3 class="box-title">{{$d2['Teamname']}}</h3></td>
                                     @empty
                                         <td><h3 class="box-title"> </h3></td>
+
                                     @endforelse
 
                                 </a>
@@ -38,7 +39,7 @@
                                     @forelse($data as $d2)
                                         <td><h3 class="box-title">{{$d2['givenname']}} {{$d2['familyname']}}</h3></td>
                                     @empty
-                                        <td><h3 class="box-title"> </h3></td>
+                                        <td><h3 class="box-title"> </h3></td> <button>Assign Team Leader</button>
                                     @endforelse
                                 </a>
                             </li>

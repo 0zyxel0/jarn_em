@@ -119,14 +119,45 @@
             <div class="col-md-9">
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <li class=""><a href="#Attendance" data-toggle="tab" aria-expanded="false">Personal Details</a></li>
-                        <li class="active"><a href="#activity" data-toggle="tab" aria-expanded="true">Activity</a></li>
+                        <li class="active"><a href="#Government" data-toggle="tab" aria-expanded="true">Personal Details</a></li>
+                        <li class=""><a href="#activity" data-toggle="tab" aria-expanded="false">Activity</a></li>
                         <li class=""><a href="#timeline" data-toggle="tab" aria-expanded="false">Timeline</a></li>
                         <li class=""><a href="#Attendance" data-toggle="tab" aria-expanded="false">Attendance</a></li>
-                        <li class=""><a href="#Attendance" data-toggle="tab" aria-expanded="false">Team</a></li>
+                        <li class=""><a href="#Team" data-toggle="tab" aria-expanded="false">Team</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane active" id="activity">
+                        <div class="tab-pane active" id="Government">
+
+                            <div class="tab-content">
+
+                                <table class="table table-condensed">
+                                    <tbody><tr>
+
+                                        <th>Government ID</th>
+                                        <th>#</th>
+                                    </tr>
+                                    @foreach($govid as $govid)
+                                        <tr>
+
+                                            <td> {{$govid['name']}}</td>
+                                            <td>    {{$govid['government_num']}}</td>
+
+
+                                        </tr>
+                                    @endforeach
+                                    </tbody></table>
+
+
+
+
+
+
+
+
+                            </div>
+
+                        </div>
+                        <div class="tab-pane " id="activity">
                             <!-- Post -->
                             <div class="post">
                                 <div class="user-block">

@@ -182,6 +182,7 @@
                         <div class="form-group">
                             <label>Team Name</label>
                             <select class="form-control" id="assignteam" name="assignteam">
+                                <option value="">----</option>
                                 @foreach($query2 as $q2)
                                     <option value="{{$q2['teamid']}}">{{$q2['name']}}</option>
                                 @endforeach
@@ -204,6 +205,7 @@
                         <div class="form-group">
                             <label>Area</label>
                             <select class="form-control" name="selectarea" id="selectarea">
+                                <option value="">----</option>
                                 @foreach($query as $q)
                                 <option value="{{$q['id']}}">{{$q['name']}}</option>
                                     @endforeach
@@ -234,19 +236,19 @@
                         </div>
                         <div class="form-group">
                             <label>SSS ID</label>
-                            <input type="text" class="form-control" placeholder="Enter ...">
+                            <input type="text" id="sss_id" name="sss_id" class="form-control" placeholder="Enter ...">
                         </div>
                         <div class="form-group">
                             <label>PHILHEALTH ID</label>
-                            <input type="text" class="form-control" placeholder="Enter ...">
+                            <input type="text" class="form-control" id="philhealth_id" name="philhealth_id" placeholder="Enter ...">
                         </div>
                         <div class="form-group">
                             <label>PAG-IBIG</label>
-                            <input type="text" class="form-control" placeholder="Enter ...">
+                            <input type="text" class="form-control" id="pagibig_id" name="pagibig_id" placeholder="Enter ...">
                         </div>
                         <div class="form-group">
                             <label>TIN</label>
-                            <input type="text" class="form-control" placeholder="Enter ...">
+                            <input type="text" class="form-control" id="tax_id" name="tax_id" placeholder="Enter ...">
                         </div>
                     </div>
                     <!-- /.box-body -->

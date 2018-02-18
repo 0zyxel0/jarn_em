@@ -16,16 +16,9 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
             <li class="treeview">
-                <a href="#">
+                <a href="/jarn_em/public/dashboard">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
                 </a>
-                <ul class="treeview-menu">
-                    <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                    <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-                </ul>
             </li>
             <li class="treeview">
                 <a href="#">
@@ -62,7 +55,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/jarn_em/public/newprojects"><i class="fa fa-circle-o"></i> Create Project Category</a></li>
+                    <!--i><a href="/jarn_em/public/newprojects"><i class="fa fa-circle-o"></i> Create Project Category</a></li-->
                     <li><a href="/jarn_em/public/viewprojects"><i class="fa fa-circle-o"></i> View Projects</a></li>
                 </ul>
             </li>
@@ -74,7 +67,37 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
+                    <li><a href="/jarn_em/public/weeklist"><i class="fa fa-circle-o"></i>Create Week List</a></li>
                     <li><a href="/jarn_em/public/attendancelist"><i class="fa fa-circle-o"></i>Attendance List</a></li>
+
+
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-edit"></i> <span>Schedule</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/jarn_em/public/createSchedule"><i class="fa fa-circle-o"></i>Create Schedule</a></li>
+
+
+
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-edit"></i> <span>Deduction</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/jarn_em/public/createDeductionType"><i class="fa fa-circle-o"></i>Create Deduction Type</a></li>
+
+
 
                 </ul>
             </li>
@@ -90,6 +113,7 @@
                     <li><a href="../tables/data.html"><i class="fa fa-circle-o"></i> Payslip List</a></li>
                 </ul>
             </li>
+
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>Area</span>
