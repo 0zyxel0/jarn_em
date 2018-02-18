@@ -39,6 +39,7 @@ Route::get('/viewprojects','ProjectsController@viewProjects');
 Route::get('/newprojects','ProjectsController@createProjects');
 Route::get('/attendancelist', 'AttendanceController@getEmployeeAttendanceList');
 
+Route::post('/viewMembers/{id}','TeamController@store');
 Route::post('/saveSchedule','ScheduleController@store');
 Route::post('/saveDeductionType','DeductionController@store');
 Route::post('/saveProjectDetails' ,'ProjectsController@saveProjectDetails');

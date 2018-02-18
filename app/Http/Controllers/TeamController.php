@@ -42,8 +42,8 @@ class TeamController extends Controller
     public function viewMembers($id){
         $query = DB::table('employee_teams')
             ->select('employee_teams.teamid','employee_teams.name as Teamname','areas.name as Areaname','employees.givenname','employees.familyname','employees.contactnumber')
-            ->join('areas', 'employee_teams.areaid', '=', 'areas.areaid')
-            ->join('employees','employee_teams.userpartyid','=','employees.partyid')
+            ->leftjoin('areas', 'employee_teams.areaid', '=', 'areas.areaid')
+            ->leftjoin('employees','employee_teams.userpartyid','=','employees.partyid')
             ->where('employee_teams.teamid','=',$id)
             ->get();
         $convs2 = json_encode($query);
@@ -88,5 +88,20 @@ class TeamController extends Controller
 
 
         return redirect('/viewTeamList');
+    }
+
+
+
+    public function store(Request $request){
+
+
+
+
+       $team = $request->get('teamid');
+       $leader = $request->get('selectleader');
+    //    dd($team,$leader);
+
+       EmployeeTeam::where('teamid',$team)->update(['userpartyid'=>$leader]);
+        return redirect('viewMembers/' .$team);
     }
 }

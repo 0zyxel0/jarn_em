@@ -1,5 +1,18 @@
 @extends('layouts.master')
 @section('content')
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src="{{asset('js/bootstrap3.min.js')}}"></script>
+    <script>
+
+        $(document).ready(function() {
+
+        });
+
+    </script>
+
+
     <section class="content-header">
         <h1>
             Teams
@@ -11,6 +24,7 @@
         </ol>
     </section>
     <section class="content">
+
         <div class="row">
             <div class="col-md-3">
 
@@ -37,9 +51,14 @@
                                 <b>Team Leader</b> <a class="pull-right">
 
                                     @forelse($data as $d2)
+
                                         <td><h3 class="box-title">{{$d2['givenname']}} {{$d2['familyname']}}</h3></td>
+                                        @if (is_null($d2['givenname']))
+                                            <button type="button"  data-toggle="modal" data-target="#myModal">Assign Team Leader</button>
+                                        @endif
                                     @empty
-                                        <td><h3 class="box-title"> </h3></td> <button>Assign Team Leader</button>
+
+                                        <button type="button"  data-toggle="modal" data-target="#myModal">Assign Team Leader</button>
                                     @endforelse
                                 </a>
                             </li>
@@ -108,6 +127,50 @@
                             </tbody>
 
                         </table>
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Assign Team Leader</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="post" action="updateTeamLeader">
+                                            <div class="form-group">
+                                                <label>Team Name</label>
+                                                @foreach($data as $name)
+                                                {{$name['Teamname']}}
+                                                    <input type="hidden" name="teamid" id="teamid" value="{{$name['teamid']}}">
+                                                    @endforeach
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Employee Name</label>
+                                                <select class="form-control" name="selectleader" id="selectleader">
+                                                    <option value="">------</option>
+                                                    @foreach($data2 as $emps)
+                                                        <option value="{{$emps['partyid']}}">{{$emps['givenname']}} {{$emps['familyname']}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <input type="hidden" name="username" id="username" value="{{ Auth::user()->id }}">
+                                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                            <div style="text-align: right;">
+                                                <button type="submit" class="btn-lg btn-info">Save</button>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -116,5 +179,6 @@
             <!-- /.col -->
         </div>
         <!-- /.row -->
+
     </section>
 @stop

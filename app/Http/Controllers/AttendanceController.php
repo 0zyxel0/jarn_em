@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\EmployeeAttendance;
 use App\EmployeeImage;
 use App\EmployeeTeam;
 use App\EmployeeTeamAssignment;
+use App\Schedule;
 use Illuminate\Http\Request;
 use Faker\Provider\Uuid;
 use DB;
@@ -39,6 +41,11 @@ class AttendanceController extends Controller
 
 
    public function createWeeklist(){
-       return view('content.attendance.create_attendancelist');
+
+
+       $sked = Schedule::all();
+
+
+       return view('content.attendance.create_attendancelist',compact('sked'));
    }
 }
