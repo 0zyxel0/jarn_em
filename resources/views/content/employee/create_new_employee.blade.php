@@ -1,10 +1,18 @@
 @extends('layouts.master') @section('content')
 
-
-    <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
+
     <script>
         $(document).ready(function () {
+
+            $('#cmd').click(function(){
+                $('#content').append('<br>a datepicker <input class="datepicker_recurring_start"/>');
+            });
+            $('body').on('focus',".datepicker_recurring_start", function(){
+                $(this).datepicker();
+            });
+
 
             $("#startdate").datepicker({ autoclose:true});
             $("#enddate").datepicker({ autoclose:true});

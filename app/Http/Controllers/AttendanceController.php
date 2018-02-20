@@ -43,9 +43,18 @@ class AttendanceController extends Controller
    public function createWeeklist(){
 
 
-       $sked = Schedule::all();
+       $sked = Schedule::all()->take(1);
+
 
 
        return view('content.attendance.create_attendancelist',compact('sked'));
    }
+
+
+
+   public function createEmployeeAttendance(){}
+
+
+
+
 }
