@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\EmployeeGovernmentDetail;
 use App\EmployeeImage;
 use App\EmployeeTeam;
+use App\Area;
 use App\EmployeeTeamAssignment;
 use Illuminate\Http\Request;
 use Faker\Provider\Uuid;
 use DB;
 use App\Employees;
 use App\EmployeeSalary;
-use App\Area;
 use Illuminate\Support\Facades\Input;
+use App\EmployeeArea;
+use Symfony\Component\Console\Tests\TerminalTest;
 
 class EmployeeController extends Controller
 {
@@ -55,6 +57,14 @@ class EmployeeController extends Controller
       $salary->updatedby = $request->username;
       $salary->save();
 
+       $emp_areaid = Uuid::uuid();
+       $emp_area = new EmployeeArea();
+
+       $emp_area->employeeareaid = $emp_areaid;
+       $emp_area->partyid = $genId;
+       $emp_area->areaid = $request->areaid;
+        $emp_area->createdby = $request->username;
+        $emp_area->save();
 
 
       $team->partyid = $genId;
@@ -121,7 +131,14 @@ public function showEmployeeList(){
 public function editEmployeeDetails($id){
 
 $data = Employees::where('partyid',$id)->get();
-return view('content.employee.edit_employee',compact('data'));
+$area = Area::all('areaid','name');
+$area_spec = DB::table('employee_areas')
+    ->select('areas.areaid','areas.name')
+    ->join('areas','employee_areas.areaid','=','areas.areaid')
+    ->where('employee_areas.partyid',$id)
+    ->get();
+$team = EmployeeTeam::all();
+return view('content.employee.edit_employee',compact('data','area','area_spec','team'));
 
 }
 

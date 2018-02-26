@@ -22,7 +22,7 @@ class CreateAreasTable extends Migration
             $table->float('size')->nullable();
             $table->date('acquiredDate')->nullable();
             $table->string('status')->nullable();
-            $table->string('contact_person');
+            $table->string('contact_person')->nullable();
             $table->string('updatedby');
             $table->string('createdby');
             $table->timestamps();

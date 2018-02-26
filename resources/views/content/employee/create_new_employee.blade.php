@@ -212,10 +212,10 @@
 
                         <div class="form-group">
                             <label>Area</label>
-                            <select class="form-control" name="selectarea" id="selectarea">
+                            <select class="form-control" name="areaid" id="areaid">
                                 <option value="">----</option>
                                 @foreach($query as $q)
-                                <option value="{{$q['id']}}">{{$q['name']}}</option>
+                                <option value="{{$q['areaid']}}">{{$q['name']}}</option>
                                     @endforeach
                             </select>
                         </div>

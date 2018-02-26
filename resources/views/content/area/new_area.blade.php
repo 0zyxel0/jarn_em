@@ -50,13 +50,6 @@
                             </div>
 
 
-                            <div class="form-group">
-                                <label>Contact Person</label>
-                                <select class="form-control" id="contactperson" name="contactperson">
-                                    <option>Male</option>
-                                    <option>Female</option>
-                                </select>
-                            </div>
                             <input type="hidden" name="username" id="username" value="{{ Auth::user()->id }}">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <div style="text-align: right;">

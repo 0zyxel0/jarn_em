@@ -64,12 +64,18 @@
                     +"<td><input type='checkbox' name='ispresent[]'/></td>"
                     +"<td>"
                     +"<select name='areaid[]' class='form-control'>"
-                    +"<option >Select Area...</option>"
+                    +"<option disabled>Select Area...</option>"
+                    +"@foreach($area as $a)"
+                    +"<option value={{$a['areaid']}}>{{$a['name']}}</option>"
+                    +"@endforeach"
                 +"</select>"
                 +"</td>"
                 +"<td>"
                 +"<select name='projectid[]' class='form-control'>"
-                    +"<option >Select Project...</option>"
+                    +"<option disabled>Select Project...</option>"
+                        +"@foreach($project as $p)"
+                    +"<option value={{$p['projectid']}}>{{$p['project_name']}}</option>"
+                        +"@endforeach"
                 +"</select>"
                 +"</td>"
                     +"</tr>"
@@ -103,13 +109,19 @@
                 <div class="box">
                     <div class="box-body">
                         <button class="add-row">Add Row</button>
-                        <form method="post" action="test">
 
+                        <form method="post" action="test">
                         <table id="weeklist" class="table table-bordered table-striped dataTable" >
                             <thead>
                             <tr>
                                 <th>Employee Name</th>
-                                <td> Sample Name</td>
+
+
+                                @foreach($emp as $e)
+                                <td>{{$e['givenname']}} {{$e['familyname']}}</td>
+                                    <input type="hidden" name="partyid" value="{{$e['partyid']}}"/>
+                                @endforeach
+
                             <tr/>
                             <tr role="row">
                                 <th style="display:none">id</th>
@@ -134,6 +146,7 @@
                             </tr>
                             </tr>
                             </thead>
+
                             <tfoot>
                             <tr>
                                 <td></td>
@@ -181,14 +194,17 @@
 
                                 <td>
                                     <select name="areaid[]" class="form-control">
-                                        <option >Select Area...</option>
-
+                                        <option disabled>Select Area...</option>
+                                        @foreach($area as $a)
+                                            <option value="{{$a['areaid']}}">{{$a['name']}}</option>
+                                            @endforeach
                                     </select>
                                     </td>
                                 <td>
                                     <select name="projectid[]" class="form-control">
-                                        <option >Select Project...</option>
-
+                                        @foreach($project as $p)
+                                            <option value="{{$p['projectid']}}">{{$p['project_name']}}</option>
+                                        @endforeach
                                     </select>
                                 </td>
 
@@ -200,6 +216,8 @@
     <input type="hidden" name="username" value="{{ Auth::user()->id }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
 </form>
+
+
                     </div>
                     <!-- /.box-body -->
                 </div>

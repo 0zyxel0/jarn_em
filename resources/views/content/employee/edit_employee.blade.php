@@ -192,8 +192,10 @@
                         <div class="form-group">
                             <label>Team Name</label>
                             <select class="form-control">
-                                <option>Male</option>
-                                <option>Female</option>
+
+                                @foreach($team as $t)
+                                    <option value="{{$t['teamid']}}">{{$t['name']}}</option>
+                                   @endforeach
                             </select>
                         </div>
 
@@ -213,8 +215,12 @@
                         <div class="form-group">
                             <label>Area</label>
                             <select class="form-control">
-                                <option>Male</option>
-                                <option>Female</option>
+
+                                @foreach($area as $a)
+                                        <option value="{{$a['areaid']}}">{{$a['name']}}</option>
+                                    @endforeach
+
+
                             </select>
                         </div>
 

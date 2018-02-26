@@ -67,7 +67,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/jarn_em/public/weeklist"><i class="fa fa-circle-o"></i>Create Week List</a></li>
+                    <li><a href="/jarn_em/public/viewareaattendance"><i class="fa fa-circle-o"></i>Create Week List</a></li>
                     <li><a href="/jarn_em/public/attendancelist"><i class="fa fa-circle-o"></i>Attendance List</a></li>
 
 

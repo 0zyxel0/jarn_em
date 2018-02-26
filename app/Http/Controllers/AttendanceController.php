@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\EmployeeArea;
 use App\EmployeeAttendance;
 use App\EmployeeImage;
 use App\EmployeeTeam;
@@ -35,25 +36,59 @@ class AttendanceController extends Controller
        $emps = Employees::all('partyid','givenname','familyname');
        $convs_emps = json_encode($emps);
 
-       return view("content.attendance.view_employee_attendancelist", ['data'=>json_decode($convs ,true),'data2'=>json_decode($convs_prj ,true),'area'=>json_decode($convs_area,true),'emps'=>json_decode($convs_emps,true)]);
+       $sched = Schedule::all('scheduleid','week_number','startdate','enddate');
+       $convs_sched = json_encode($sched);
+       return view("content.attendance.view_employee_attendancelist", ['data'=>json_decode($convs ,true),'data2'=>json_decode($convs_prj ,true),'area'=>json_decode($convs_area,true),'emps'=>json_decode($convs_emps,true),'sched'=>json_decode($convs_sched,true)]);
    }
 
 
 
-   public function createWeeklist(){
+   public function createWeeklist($id){
 
-
+        $emp = Employees::all()->where('partyid',$id);
        $sked = Schedule::all()->take(1);
+        $area = Area::all('areaid','name');
+        $project = Project::all('projectid','project_name');
 
 
-
-       return view('content.attendance.create_attendancelist',compact('sked'));
+       return view('content.attendance.create_attendancelist',compact('sked','emp','area','project'));
    }
 
 
 
-   public function createEmployeeAttendance(){}
+   public function createEmployeeAttendance(){
+       return view('content.attendance.view_attendanceweeklist');
+   }
 
+    public function generateWeekSchedule(Request $request){
+
+       $areaid = $request->get('areaid');
+       $scheduleid = $request->get('scheduleid');
+
+        $list = DB::table('employees')
+            ->select('employees.partyid','employees.givenname','employees.familyname')
+            ->join('employee_areas' ,'employees.partyid' ,'=','employee_areas.partyid')
+            ->where ('employee_areas.areaid',$areaid)
+            ->get();
+        $conv_list = json_encode($list);
+
+       return view('content.attendance.view_employee_attendancelist',['data'=>json_decode($conv_list,true)]);
+    }
+
+
+    public function viewAreaAttendance()
+    {
+
+        $area = Area::all('areaid','name');
+        $schedule = Schedule::all('scheduleid','week_number');
+
+        return view('content.attendance.view_select_weeklist',compact('area','schedule'));
+    }
+
+    public function generateWeekList(Request $request){
+        return $input = $request->all();
+
+    }
 
 
 

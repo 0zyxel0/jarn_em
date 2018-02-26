@@ -24,7 +24,7 @@ Route::get('/show','UploadController@show');
 
 
 Route::get('/newEmployee','EmployeeController@newEmployee');
-Route::get('/weeklist','AttendanceController@createWeeklist');
+Route::get('/weeklist/{id}','AttendanceController@createWeeklist');
 Route::get('/createSchedule','ScheduleController@createSchedule');
 Route::get('/createDeductionType','DeductionController@createDeductionType');
 Route::get('/showEmployeeList', 'EmployeeController@showEmployeeList');
@@ -39,8 +39,14 @@ Route::get('/viewprojects','ProjectsController@viewProjects');
 Route::get('/newprojects','ProjectsController@createProjects');
 Route::get('/attendancelist', 'AttendanceController@getEmployeeAttendanceList');
 
+Route::get('generateWeekSchedule','AttendanceController@generateWeekSchedule');
 
-Route::post('test','ScheduleAttendanceController@test');
+Route::get('/viewareaattendance','AttendanceController@viewAreaAttendance');
+
+
+Route::post('generateWeekList','AttendanceController@generateWeekList');
+Route::post('generateWeekSchedule','AttendanceController@generateWeekSchedule');
+Route::post('/weeklist/{id}','ScheduleAttendanceController@test');
 Route::post('/viewMembers/{id}','TeamController@store');
 Route::post('/saveSchedule','ScheduleController@store');
 Route::post('/saveDeductionType','DeductionController@store');
