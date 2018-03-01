@@ -42,7 +42,7 @@ class ScheduleAttendanceController extends Controller
                           ,'partyid'=>$partyid
                           ,'ispresent'=>$ispresent[$key]
                           ,'startdate' => $startdate[$key]
-                          ,'enddate'=>$enddate[$key]
+                          ,'enddate'=>$startdate[$key]
                           ,'areaid'=>$area[$key]
                           ,'projectid'=>$projectid[$key]
                           ,'createdby'=>$username

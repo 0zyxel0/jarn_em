@@ -53,15 +53,11 @@
                     +"</div>"
                     +"</div>"
                     +"</td>"
+
+
                     +"<td>"
-                    +"<div class='form-group'>"
-                    +"<div class='input-group date'>"
-                    +"<div class='input-group-addon'><i class='fa fa-calendar'></i></div>"
-                    +"<input type='text' class='form-control pull-right enddate' name='enddate[]'>"
-                    +"</div>"
-                    +"</div>"
-                    +"</td>"
-                    +"<td><input type='checkbox' name='ispresent[]'/></td>"
+                    +"<input type='hidden' class='form-control pull-right enddate' name='enddate[]'>"
+                    +"<input type='checkbox' name='ispresent[]'/></td>"
                     +"<td>"
                     +"<select name='areaid[]' class='form-control'>"
                     +"<option disabled>Select Area...</option>"
@@ -137,7 +133,7 @@
                             <tr role="row">
                                 <th>id</th>
                                 <th>Date Start</th>
-                                <th>Date End</th>
+
                                 <th>Present</th>
                                 <th>Area</th>
                                 <th>Project</th>
@@ -176,18 +172,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="form-group">
-
-                                        <div class="input-group date">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
-                                            </div>
-                                            <input type="text" class="form-control pull-right enddate" name="enddate[]">
-                                        </div>
-                                        <!-- /.input group -->
-                                    </div>
-                                </td>
-                                <td>
+                                    <input type="hidden" class="form-control pull-right enddate" name="enddate[]">
                                     <input type="checkbox" name="ispresent[]"/>
 
                                 </td>

@@ -43,13 +43,12 @@ class AttendanceController extends Controller
 
 
 
-   public function createWeeklist($id){
+   public function createWeeklist($id, $week){
 
         $emp = Employees::all()->where('partyid',$id);
-       $sked = Schedule::all()->take(1);
+       $sked = Schedule::all()->where('scheduleid',$week);
         $area = Area::all('areaid','name');
         $project = Project::all('projectid','project_name');
-
 
        return view('content.attendance.create_attendancelist',compact('sked','emp','area','project'));
    }
@@ -65,6 +64,12 @@ class AttendanceController extends Controller
        $areaid = $request->get('areaid');
        $scheduleid = $request->get('scheduleid');
 
+
+        $week = DB::table('schedules')
+                ->where('scheduleid',$scheduleid)
+                ->get();
+
+        $conv_week = json_encode($week);
         $list = DB::table('employees')
             ->select('employees.partyid','employees.givenname','employees.familyname')
             ->join('employee_areas' ,'employees.partyid' ,'=','employee_areas.partyid')
@@ -72,7 +77,9 @@ class AttendanceController extends Controller
             ->get();
         $conv_list = json_encode($list);
 
-       return view('content.attendance.view_employee_attendancelist',['data'=>json_decode($conv_list,true)]);
+
+
+       return view('content.attendance.view_employee_attendancelist',['data'=>json_decode($conv_list,true),'data_week'=>json_decode($conv_week,true)]);
     }
 
 
