@@ -118,10 +118,10 @@
                             <table class="table table-hover table-bordered">
                                 <thead>
                                 <tr>
-                                    <th >Week #</th>
-                                    <th >From</th>
-                                    <th >To</th>
-                                    <th>Created By</th>
+                                    <th>Year</th>
+                                    <th>Week #</th>
+                                    <th>From</th>
+                                    <th>To</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -131,6 +131,7 @@
                                     <td>{{$d['week_number']}}</td>
                                     <td>{{$d['startdate']}}</td>
                                     <td>{{$d['enddate']}}</td>
+                                    <td></td>
                                 </tr>
                                     @endforeach
                                 </tbody>
