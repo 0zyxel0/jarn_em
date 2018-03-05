@@ -57,8 +57,10 @@
                     <!-- /.box-header -->
 
                     <div class="box-body">
-                        <form action="saveEmployeeDetails" method="post" data-parsley-validate="">
+                        <form action="updateEmployeeDetails" method="post" data-parsley-validate="">
+
                             <!-- text input -->
+                            <input type="hidden" class="form-control" id="partyid" name="partyid" required="" value="{{$data['partyid']}}">
                             <div class="form-group">
                                 <label>Given Name</label>
                                 <input type="text" class="form-control" id="givenname" name="givenname" required="" value="{{$data['givenname']}}">
@@ -244,20 +246,19 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label>Rate</label>
-                            <input type="text" class="form-control" placeholder="Enter ...">
+                            @foreach($salary as $sal)
+
+                            <input type="text" class="form-control" placeholder="Enter ..." value="{{$sal['daily_rate']}}">
+                            @endforeach
                         </div>
-                        <div class="form-group">
-                            <label>SSS ID</label>
-                            <input type="text" class="form-control" placeholder="Enter ...">
-                        </div>
-                        <div class="form-group">
-                            <label>PAG-IBIG</label>
-                            <input type="text" class="form-control" placeholder="Enter ...">
-                        </div>
-                        <div class="form-group">
-                            <label>TIN</label>
-                            <input type="text" class="form-control" placeholder="Enter ...">
-                        </div>
+                        @foreach($governmentid as $gov)
+                            <div class="form-group">
+                                <label>{{$gov['name']}}</label>
+                                <input type="text" class="form-control" placeholder="Enter ..." value="{{$gov['government_num']}}">
+                            </div>
+                        @endforeach
+
+
                     </div>
                     <!-- /.box-body -->
 

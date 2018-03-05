@@ -132,13 +132,19 @@ public function editEmployeeDetails($id){
 
 $data = Employees::where('partyid',$id)->get();
 $area = Area::all('areaid','name');
+
 $area_spec = DB::table('employee_areas')
     ->select('areas.areaid','areas.name')
     ->join('areas','employee_areas.areaid','=','areas.areaid')
     ->where('employee_areas.partyid',$id)
     ->get();
 $team = EmployeeTeam::all();
-return view('content.employee.edit_employee',compact('data','area','area_spec','team'));
+$salary = EmployeeSalary::where('partyid',$id)->get();
+$governmentid = EmployeeGovernmentDetail::select('name','government_num')->where('partyid',$id)->get();
+
+
+
+return view('content.employee.edit_employee',compact('data','area','area_spec','team','salary','governmentid'));
 
 }
 
@@ -161,10 +167,14 @@ public function newEmployee(){
 
     $query = Area::all('name','areaid');
     $query2 = EmployeeTeam::all('teamid','name');
-
-
     return view('content.employee.create_new_employee',compact('query','query2'));
 }
 
+public function updateEmployeeDetails(Request $request){
+
+$input = $request->all();
+    return $input;
+
+}
 
 }

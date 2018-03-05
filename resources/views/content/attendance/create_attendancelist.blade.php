@@ -106,7 +106,7 @@
                     <div class="box-body">
                         <button class="add-row">Add Row</button>
 
-                        <form method="post" action="test">
+                        <form method="post" action="store">
                         <table id="weeklist" class="table table-bordered table-striped dataTable" >
                             <thead>
                             <tr>

@@ -8,6 +8,7 @@ use App\EmployeeImage;
 use App\EmployeeTeam;
 use App\EmployeeTeamAssignment;
 use App\Schedule;
+use App\ScheduleAttendanceStatus;
 use Illuminate\Http\Request;
 use Faker\Provider\Uuid;
 use DB;
@@ -70,16 +71,26 @@ class AttendanceController extends Controller
                 ->get();
 
         $conv_week = json_encode($week);
-        $list = DB::table('employees')
-            ->select('employees.partyid','employees.givenname','employees.familyname')
-            ->join('employee_areas' ,'employees.partyid' ,'=','employee_areas.partyid')
-            ->where ('employee_areas.areaid',$areaid)
-            ->get();
+        $list = DB::select('
+                            SELECT DISTINCT
+                            e.partyid as partyid,
+                            e.givenname as givenname,
+                            e.familyname as familyname,
+                            s.scheduleid as scheduleid,
+                            CASE WHEN t1.status is null THEN "OPEN" else t1.status END AS status
+                            From employees e
+                            left Join employee_areas ea on ea.partyid = e.partyid
+                            left JOIN schedule_attendances sa on e.partyid = sa.partyid
+                            left join schedules s on s.scheduleid = sa.scheduleid
+                            left join (
+                                        select s.scheduleid,sas.status from schedules s
+                                        left join schedule_attendance_statuses sas on sas.scheduleid = s.scheduleid
+                                        where s.scheduleid ="'. $scheduleid.'"
+                                      ) t1 on sa.scheduleid = t1.scheduleid
+                            where ea.areaid = "'.$areaid.'"
+                            ');
         $conv_list = json_encode($list);
-
-
-
-       return view('content.attendance.view_employee_attendancelist',['data'=>json_decode($conv_list,true),'data_week'=>json_decode($conv_week,true)]);
+        return view('content.attendance.view_employee_attendancelist',['data'=>json_decode($conv_list,true),'data_week'=>json_decode($conv_week,true)]);
     }
 
 

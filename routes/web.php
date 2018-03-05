@@ -42,11 +42,11 @@ Route::get('/attendancelist', 'AttendanceController@getEmployeeAttendanceList');
 Route::get('generateWeekSchedule','AttendanceController@generateWeekSchedule');
 
 Route::get('/viewareaattendance','AttendanceController@viewAreaAttendance');
-
-
+Route::post('/weeklist/{id}/{week}/','ScheduleAttendanceController@store');
+Route::post('/editEmployeeDetails/{id}', 'EmployeeController@updateEmployeeDetails');
 Route::post('generateWeekList','AttendanceController@generateWeekList');
 Route::post('generateWeekSchedule','AttendanceController@generateWeekSchedule');
-Route::post('/test','ScheduleAttendanceController@test');
+
 Route::post('/viewMembers/{id}','TeamController@store');
 Route::post('/saveSchedule','ScheduleController@store');
 Route::post('/saveDeductionType','DeductionController@store');

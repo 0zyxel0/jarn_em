@@ -45,11 +45,11 @@
                         <table id="list" class="table table-bordered table-striped dataTable">
                             <thead>
                             <tr>
-                                <th>Schedule Id</th>
                                 <th>Employee Id</th>
-                                <th >Employee Name</th>
+                                <th>Schedule Id</th>
+                                <th>Employee Name</th>
                                 <th>Status</th>
-                                <th >Option</th>
+                                <th>Option</th>
 
                             </tr>
                             </thead>
@@ -64,12 +64,12 @@
             <td>{{$week['scheduleid']}}</td>
         @endforeach
         <td>{{$d['givenname']}} {{$d['familyname']}}</td>
-        <td></td>
+        <td class="current_status">
+            {{$d['status']}}
+        </td>
         <td>
             <button id="btn_setAttendance"><i class="fa fa-book"></i> View Attendance</button>
             <button id="btn_editProfile"><i class="fa fa-edit"></i> Update Attendance</button>
-            <button id="btn_editProfile"><i class="fa fa-edit"></i> Submit for Approval</button>
-
         </td>
     </tr>
     @endforeach

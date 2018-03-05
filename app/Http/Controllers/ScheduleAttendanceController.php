@@ -17,10 +17,14 @@ use App\Area;
 use Illuminate\Support\Facades\Input;
 use App\Project;
 use App\ScheduleAttendance;
+use App\ScheduleAttendanceStatus;
 
 class ScheduleAttendanceController extends Controller
 {
-    public function test(Request $request){
+    public function store(Request $request){
+
+
+
 
         $genid = Uuid::uuid();
 
@@ -37,24 +41,33 @@ class ScheduleAttendanceController extends Controller
         $dataset = [];
 
         foreach ($ispresent as $key => $value) {
-            $dataset[] = ['scheduleattendanceid'=>$genid
+            $dataset[] = ['scheduleattendanceid' => Uuid::uuid()
                           ,'scheduleid'=>$scheduleid
                           ,'partyid'=>$partyid
                           ,'ispresent'=>$ispresent[$key]
-                          ,'startdate' => $startdate[$key]
-                          ,'enddate'=>$startdate[$key]
+                          ,'startdate' => date("Y-m-d", strtotime($startdate[$key]))
+                          ,'enddate'=>date("Y-m-d", strtotime($startdate[$key]))
                           ,'areaid'=>$area[$key]
                           ,'projectid'=>$projectid[$key]
                           ,'createdby'=>$username
             ];
         }
 
-        dd($dataset);
+
+       DB::table('schedule_attendances')->insert($dataset);
 
 
+        $statusid = Uuid::uuid();
 
+        $status = new ScheduleAttendanceStatus();
+        $status->attendance_statusid = $statusid;
+        $status->scheduleid = $scheduleid;
+        $status->partyid = $partyid;
+        $status->status = "Submitted";
+        $status->updatedby = $username;
+        $status->save();
 
-        return $input;
+        return 'Success';
 
     }
 }

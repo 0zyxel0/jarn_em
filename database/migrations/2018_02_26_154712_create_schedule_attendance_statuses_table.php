@@ -15,7 +15,8 @@ class CreateScheduleAttendanceStatusesTable extends Migration
     {
         Schema::create('schedule_attendance_statuses', function (Blueprint $table) {
             $table->string('attendance_statusid');
-            $table->string('scheduleattendanceid');
+            $table->string('scheduleid');
+            $table->string('partyid');
             $table->string('status');
             $table->text('comments');
             $table->string('updatedby');

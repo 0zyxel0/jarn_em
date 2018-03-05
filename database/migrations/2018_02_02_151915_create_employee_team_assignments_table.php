@@ -16,7 +16,7 @@ class CreateEmployeeTeamAssignmentsTable extends Migration
         Schema::create('employee_team_assignments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('partyid');
-            $table->string('teamid');
+            $table->string('teamid')->nullable();
             $table->string('updatedby');
             $table->timestamps();
         });
