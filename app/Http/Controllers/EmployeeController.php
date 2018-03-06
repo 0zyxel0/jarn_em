@@ -153,14 +153,30 @@ public function viewProfile($id){
 
 
     $data2 = EmployeeSalary::where('partyid',$id)->get();
-
+    $data2_json  = json_encode($data2);
     $image = EmployeeImage::where('partyid',$id)->get();
-
+    $image_json  = json_encode($image);
     $data = Employees::where('partyid',$id)->get();
-
+    $data_json  = json_encode($data);
     $govid = EmployeeGovernmentDetail::select('name','government_num')->where('partyid',$id)->get();
+    $govid_json  = json_encode($govid);
 
-    return view('content.employee.view_employee' ,compact('data','data2','image','govid'));
+    $area =DB::table('employees')
+            ->select('areas.name')
+            ->leftJoin('employee_areas','employees.partyid','=','employee_areas.partyid')
+            ->leftJoin('areas','employee_areas.areaid','=','areas.areaid')
+            ->where('employees.partyid',$id)
+            ->get();
+
+        $area_json  = json_encode($area);
+
+    return view('content.employee.view_employee' ,[
+                                                            'data2'=>json_decode($data2_json,true),
+                                                            'image'=>json_decode($image_json,true),
+                                                            'data'=>json_decode($data_json,true),
+                                                            'govid'=>json_decode($govid_json,true),
+                                                            'area'=>json_decode($area_json,true)
+                                                        ]);
 }
 
 public function newEmployee(){

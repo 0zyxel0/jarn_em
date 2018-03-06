@@ -29,4 +29,5 @@ class Employees extends Model
                             'updated_at'
                             ];
 
+
 }

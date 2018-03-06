@@ -92,7 +92,7 @@ $employee_name = Employees::all('givenname','familyname','partyid')->where('part
 
         $conv_week = json_encode($week);
         $list = DB::select('
-                            SELECT DISTINCT
+                            SELECT DISTINCT 
                             e.partyid as partyid,
                             e.givenname as givenname,
                             e.familyname as familyname,
@@ -104,12 +104,14 @@ $employee_name = Employees::all('givenname','familyname','partyid')->where('part
                             left join schedules s on s.scheduleid = sa.scheduleid
                             left join (
                                         select s.scheduleid,sas.status from schedules s
-                                        left join schedule_attendance_statuses sas on sas.scheduleid = s.scheduleid
+                                        join schedule_attendance_statuses sas on sas.scheduleid = s.scheduleid
                                         where s.scheduleid ="'. $scheduleid.'"
                                       ) t1 on sa.scheduleid = t1.scheduleid
                             where ea.areaid = "'.$areaid.'"
                             ');
         $conv_list = json_encode($list);
+
+        dd($list);
         return view('content.attendance.update_employee_attendance',['data'=>json_decode($conv_list,true),'data_week'=>json_decode($conv_week,true)]);
     }
 

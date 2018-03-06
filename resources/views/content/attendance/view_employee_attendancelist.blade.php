@@ -5,7 +5,23 @@
     <link rel="stylesheet" href="{{asset('css/datatables.css')}}">
     <script>
         $(document).ready(function(){
+            var table =  $('#list').DataTable({
+                "columnDefs":
+                    [
+                        {
+                            "targets": [ 1 ],
+                            "render": function(data){
+                                if(data == 1){
+                                    return 'Present';
+                                }
+                                else{ return 'Absent'}
+                            },
+                            "data": 1,
+                            "defaultContent": "Click to edit"
+                        }
 
+                    ]
+            });
         });
     </script>
     <section class="content-header">

@@ -18,7 +18,7 @@ class CreateScheduleAttendanceStatusesTable extends Migration
             $table->string('scheduleid');
             $table->string('partyid');
             $table->string('status');
-            $table->text('comments');
+            $table->text('comments')->nullable();
             $table->string('updatedby');
             $table->timestamps();
         });

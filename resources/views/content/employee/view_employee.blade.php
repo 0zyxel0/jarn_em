@@ -43,7 +43,9 @@
 
                         @foreach($data as $d)
                         <h3 class="profile-username text-center">{{$d['givenname']}} {{$d['familyname']}}</h3>
-                            <p class="text-muted text-center">Assignment</p>
+                            @foreach($area as $area)
+                            <p class="text-muted text-center">{{$area['name']}}</p>
+                                @endforeach
                         @endforeach
                         <ul class="list-group list-group-unbordered">
                             <li class="list-group-item">
