@@ -12,9 +12,9 @@
                             "targets": [ 1 ],
                             "render": function(data){
                                 if(data == 1){
-                                    return 'Present';
+                                    return  "<div class='circle_green'> </div>";
                                 }
-                                else{ return 'Absent'}
+                                else{ return  "<div class='circle_red'> </div>"}
                             },
                             "data": 1,
                             "defaultContent": "Click to edit"
@@ -24,6 +24,30 @@
             });
         });
     </script>
+    <style>
+        .circle_green
+        {
+            border: 2px solid #a1a1a1;
+            padding: 10px 11px;
+            background: green;
+            width: 2px;
+            border-radius: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            width: 1%;
+        }
+        .circle_red
+        {
+            border: 2px solid #a1a1a1;
+            padding: 10px 11px;
+            background: orangered;
+            width: 2px;
+            border-radius: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            width: 1%;
+        }
+    </style>
     <section class="content-header">
         <h1>
             Attendance

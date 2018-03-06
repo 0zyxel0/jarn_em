@@ -108,10 +108,11 @@ $employee_name = Employees::all('givenname','familyname','partyid')->where('part
                                         where s.scheduleid ="'. $scheduleid.'"
                                       ) t1 on sa.scheduleid = t1.scheduleid
                             where ea.areaid = "'.$areaid.'"
+                            and s.scheduleid = "'.$scheduleid.'"
                             ');
         $conv_list = json_encode($list);
 
-        dd($list);
+
         return view('content.attendance.update_employee_attendance',['data'=>json_decode($conv_list,true),'data_week'=>json_decode($conv_week,true)]);
     }
 
