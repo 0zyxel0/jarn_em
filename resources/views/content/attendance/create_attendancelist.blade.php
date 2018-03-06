@@ -149,7 +149,6 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
                                 <td><button class="pull-right">Submit For Approval</button></td>
 
 

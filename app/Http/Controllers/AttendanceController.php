@@ -56,8 +56,28 @@ class AttendanceController extends Controller
 
 
 
-   public function createEmployeeAttendance(){
-       return view('content.attendance.view_attendanceweeklist');
+   public function viewEmployeeAttendanceList($id, $week){
+
+$employee_name = Employees::all('givenname','familyname','partyid')->where('partyid',$id);
+       $conv_name = json_encode($employee_name);
+
+        $schedule_name = Schedule::all('scheduleid','week_number','year_number')->where('scheduleid',$week);
+       $conv_week = json_encode($schedule_name);
+
+
+       $attendance_data = DB::table('employees')
+           ->select('employees.partyid','employees.givenname','employees.familyname','areas.name','projects.project_name','schedule_attendances.startdate','schedule_attendances.isPresent','schedules.week_number','schedules.year_number')
+           ->leftJoin('schedule_attendances','employees.partyid','=','schedule_attendances.partyid')
+           ->leftJoin('schedules','schedule_attendances.scheduleid','=','schedules.scheduleid')
+           ->leftJoin('projects','schedule_attendances.projectid','=','projects.projectid')
+           ->leftJoin('areas','areas.areaid','=','schedule_attendances.areaid')
+           ->where('employees.partyid',$id)
+           ->where('schedules.scheduleid',$week)
+       ->get();
+
+        $conv_data = json_encode($attendance_data);
+
+       return view('content.attendance.view_employee_attendancelist',['data'=>json_decode($conv_data,true),'emp_data'=>json_decode($conv_name,true),'week_data'=>json_decode($conv_week,true)]);
    }
 
     public function generateWeekSchedule(Request $request){
@@ -90,7 +110,7 @@ class AttendanceController extends Controller
                             where ea.areaid = "'.$areaid.'"
                             ');
         $conv_list = json_encode($list);
-        return view('content.attendance.view_employee_attendancelist',['data'=>json_decode($conv_list,true),'data_week'=>json_decode($conv_week,true)]);
+        return view('content.attendance.update_employee_attendance',['data'=>json_decode($conv_list,true),'data_week'=>json_decode($conv_week,true)]);
     }
 
 
