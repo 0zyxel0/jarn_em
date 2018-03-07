@@ -82,6 +82,7 @@ $employee_name = Employees::all('givenname','familyname','partyid')->where('part
 
     public function generateWeekSchedule(Request $request){
 
+
        $areaid = $request->get('areaid');
        $scheduleid = $request->get('scheduleid');
 
@@ -96,8 +97,8 @@ $employee_name = Employees::all('givenname','familyname','partyid')->where('part
                             e.partyid as partyid,
                             e.givenname as givenname,
                             e.familyname as familyname,
-                            s.scheduleid as scheduleid,
-                            CASE WHEN t1.status is null THEN "OPEN" else t1.status END AS status
+                            s.scheduleid as scheduleid
+                            ,CASE WHEN t1.status is null THEN "OPEN" else t1.status END AS status
                             From employees e
                             left Join employee_areas ea on ea.partyid = e.partyid
                             left JOIN schedule_attendances sa on e.partyid = sa.partyid
@@ -105,10 +106,10 @@ $employee_name = Employees::all('givenname','familyname','partyid')->where('part
                             left join (
                                         select s.scheduleid,sas.status from schedules s
                                         join schedule_attendance_statuses sas on sas.scheduleid = s.scheduleid
-                                        where s.scheduleid ="'. $scheduleid.'"
+                                        where s.scheduleid ="'.$scheduleid.'"
                                       ) t1 on sa.scheduleid = t1.scheduleid
                             where ea.areaid = "'.$areaid.'"
-                            and s.scheduleid = "'.$scheduleid.'"
+                            
                             ');
         $conv_list = json_encode($list);
 
@@ -116,6 +117,25 @@ $employee_name = Employees::all('givenname','familyname','partyid')->where('part
         return view('content.attendance.update_employee_attendance',['data'=>json_decode($conv_list,true),'data_week'=>json_decode($conv_week,true)]);
     }
 
+public function viewAreaTileList(){
+    $area = Area::all('areaid','name');
+
+        return view('content.attendance.view_areatile', compact('area'));
+}
+
+public function viewAreaTileWeekList(){
+
+    $week = Schedule::all();
+    return view('content.attendance.view_areatile_weeklist',compact('week'));
+}
+
+public function getEmployeeAreaCount(){
+    $employee = DB::table('employees')
+        ->select(DB::raw('count(*) as user_count'))
+        ->leftJoin('employee_areas','employees.partyid','=','employee_areas.partyid')
+        ->leftJoin('areas','employee_areas.areaid','=','areas.areaid')
+        ->get();
+}
 
     public function viewAreaAttendance()
     {

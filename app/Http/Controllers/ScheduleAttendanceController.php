@@ -67,7 +67,7 @@ class ScheduleAttendanceController extends Controller
         $status->updatedby = $username;
         $status->save();
 
-        return 'Success';
+       return redirect('/viewEmployeeAttendanceList/'.$partyid.'/'.$scheduleid);
 
     }
 }

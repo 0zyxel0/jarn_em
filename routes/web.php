@@ -38,16 +38,17 @@ Route::get('/viewMembers/{id}','TeamController@viewMembers');
 Route::get('/viewprojects','ProjectsController@viewProjects');
 Route::get('/newprojects','ProjectsController@createProjects');
 Route::get('/attendancelist', 'AttendanceController@getEmployeeAttendanceList');
-
+Route::get('/areatiles','AttendanceController@viewAreaTileList');
+Route::get('/weektiles','AttendanceController@viewAreaTileWeekList');
 Route::get('/viewEmployeeAttendanceList/{id}/{week}','AttendanceController@viewEmployeeAttendanceList');
 
-Route::get('generateWeekSchedule','AttendanceController@generateWeekSchedule');
+Route::post('generateWeekSchedule','AttendanceController@generateWeekSchedule');
 
 Route::get('/viewareaattendance','AttendanceController@viewAreaAttendance');
 Route::post('/weeklist/{id}/{week}/','ScheduleAttendanceController@store');
 Route::post('/editEmployeeDetails/{id}', 'EmployeeController@updateEmployeeDetails');
 Route::post('generateWeekList','AttendanceController@generateWeekList');
-Route::post('generateWeekSchedule','AttendanceController@generateWeekSchedule');
+Route::get('/generateWeekSchedule','AttendanceController@generateWeekSchedule');
 
 Route::post('/viewMembers/{id}','TeamController@store');
 Route::post('/saveSchedule','ScheduleController@store');

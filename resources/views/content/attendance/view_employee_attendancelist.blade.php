@@ -20,7 +20,10 @@
                             "defaultContent": "Click to edit"
                         }
 
-                    ]
+                    ],
+                "bFilter":false,
+                "paging":   false,
+                "info":     false
             });
         });
     </script>
