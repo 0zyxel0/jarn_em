@@ -6,12 +6,21 @@
     <script>
         $(document).ready(function(){
             var table =  $('#list').DataTable();
+
+            $('#list tbody').on( 'click', '#btn_pickWeek', function () {
+
+                var data = table.row( $(this).parents('tr') ).data();
+
+                window.location.href='/jarn_em/public/generateWeekSchedule/'+data[0]+'/'+data[1];
+            });
         });
     </script>
     <section class="content-header">
+        @foreach($area as $area)
         <h1>
-            Attendance
+            Attendance for {{$area['name']}}
         </h1>
+        @endforeach
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Attendance</a></li>
@@ -29,6 +38,8 @@
                         <table id="list" class="table table-bordered table-striped dataTable">
                             <thead>
                             <tr>
+                                <th>AreaId</th>
+                                <th>ScheduleId</th>
                                 <th>Year</th>
                                 <th>Period</th>
                                 <th>Coverage</th>
@@ -40,12 +51,13 @@
                             <tbody>
 @foreach($week as $week)
     <tr>
+        <td>{{$area['areaid']}}</td>
+        <td>{{$week['scheduleid']}}</td>
         <td>{{$week['year_number']}}</td>
         <td>{{$week['week_number']}}</td>
         <td>{{$week['startdate']}} - {{$week['enddate']}}</td>
         <td>
-            <button id="btn_viewProfile"><i class="fa fa-book"></i> View</button>
-            <button id="btn_editProfile"><i class="fa fa-edit"></i> Edit</button>
+            <button id="btn_pickWeek"><i class="fa fa-book"></i> View</button>
         </td>
     </tr>
     @endforeach

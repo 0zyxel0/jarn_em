@@ -39,9 +39,12 @@ Route::get('/viewprojects','ProjectsController@viewProjects');
 Route::get('/newprojects','ProjectsController@createProjects');
 Route::get('/attendancelist', 'AttendanceController@getEmployeeAttendanceList');
 Route::get('/areatiles','AttendanceController@viewAreaTileList');
-Route::get('/weektiles','AttendanceController@viewAreaTileWeekList');
+Route::get('/weektiles/{areaid}','AttendanceController@viewAreaTileWeekList');
 Route::get('/viewEmployeeAttendanceList/{id}/{week}','AttendanceController@viewEmployeeAttendanceList');
 
+
+
+Route::get('generateWeekSchedule/{areaid}/{scheduleid}','AttendanceController@generateWeekSchedule');
 Route::post('generateWeekSchedule','AttendanceController@generateWeekSchedule');
 
 Route::get('/viewareaattendance','AttendanceController@viewAreaAttendance');

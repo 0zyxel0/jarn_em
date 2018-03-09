@@ -17,7 +17,7 @@ Choose Area
         <div class="col-md-3 col-sm-6 col-xs-12">
 
             <div class="info-box">
-                <button class="info-box-icon bg-aqua"><i class="fa fa-map"></i></button>
+                <a href="weektiles/{{$area['areaid']}}" class="info-box-icon bg-aqua" ><i class="fa fa-map"></i></a>
 
                 <div class="info-box-content">
                     <span class="info-box-text"><h3>{{$area['name']}}</h3></span>

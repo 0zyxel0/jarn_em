@@ -10,13 +10,13 @@
 
                 var data = table.row( $(this).parents('tr') ).data();
 
-                window.location.href='weeklist/'+data[0]+'/'+data[1];
+                window.location.href='/jarn_em/public/weeklist/'+data[0]+'/'+data[1];
             });
 
             $('#list tbody').on( 'click', '#btn_viewAttendance', function () {
 
                 var data = table.row( $(this).parents('tr') ).data();
-                window.location.href='viewEmployeeAttendanceList/'+data[0]+'/'+data[1];
+                window.location.href='/jarn_em/public/viewEmployeeAttendanceList/'+data[0]+'/'+data[1];
             });
 
         });

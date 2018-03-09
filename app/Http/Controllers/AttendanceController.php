@@ -80,14 +80,9 @@ $employee_name = Employees::all('givenname','familyname','partyid')->where('part
        return view('content.attendance.view_employee_attendancelist',['data'=>json_decode($conv_data,true),'emp_data'=>json_decode($conv_name,true),'week_data'=>json_decode($conv_week,true)]);
    }
 
-    public function generateWeekSchedule(Request $request){
-
-
-       $areaid = $request->get('areaid');
-       $scheduleid = $request->get('scheduleid');
-
-
-        $week = DB::table('schedules')
+    //public function generateWeekSchedule(Request $request){
+        public function generateWeekSchedule($areaid,$scheduleid){
+            $week = DB::table('schedules')
                 ->where('scheduleid',$scheduleid)
                 ->get();
 
@@ -109,7 +104,7 @@ $employee_name = Employees::all('givenname','familyname','partyid')->where('part
                                         where s.scheduleid ="'.$scheduleid.'"
                                       ) t1 on sa.scheduleid = t1.scheduleid
                             where ea.areaid = "'.$areaid.'"
-                            
+                         
                             ');
         $conv_list = json_encode($list);
 
@@ -123,10 +118,11 @@ public function viewAreaTileList(){
         return view('content.attendance.view_areatile', compact('area'));
 }
 
-public function viewAreaTileWeekList(){
+public function viewAreaTileWeekList($areaid){
 
+    $area = Area::all('areaid','name')->where('areaid',$areaid);
     $week = Schedule::all();
-    return view('content.attendance.view_areatile_weeklist',compact('week'));
+    return view('content.attendance.view_areatile_weeklist',compact('week','area'));
 }
 
 public function getEmployeeAreaCount(){
