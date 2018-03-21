@@ -56,12 +56,12 @@ class AttendanceController extends Controller
 
 
 
-   public function viewEmployeeAttendanceList($id, $week){
+   public function viewEmployeeAttendanceList($partyid, $scheduleid){
 
-$employee_name = Employees::all('givenname','familyname','partyid')->where('partyid',$id);
+$employee_name = Employees::all('givenname','familyname','partyid')->where('partyid',$partyid);
        $conv_name = json_encode($employee_name);
 
-        $schedule_name = Schedule::all('scheduleid','week_number','year_number')->where('scheduleid',$week);
+        $schedule_name = Schedule::all('scheduleid','week_number','year_number')->where('scheduleid',$scheduleid);
        $conv_week = json_encode($schedule_name);
 
 
@@ -71,8 +71,8 @@ $employee_name = Employees::all('givenname','familyname','partyid')->where('part
            ->leftJoin('schedules','schedule_attendances.scheduleid','=','schedules.scheduleid')
            ->leftJoin('projects','schedule_attendances.projectid','=','projects.projectid')
            ->leftJoin('areas','areas.areaid','=','schedule_attendances.areaid')
-           ->where('employees.partyid',$id)
-           ->where('schedules.scheduleid',$week)
+           ->where('employees.partyid',$partyid)
+           ->where('schedules.scheduleid',$scheduleid)
        ->get();
 
         $conv_data = json_encode($attendance_data);
@@ -88,29 +88,52 @@ $employee_name = Employees::all('givenname','familyname','partyid')->where('part
 
         $conv_week = json_encode($week);
         $list = DB::select('
-                            SELECT DISTINCT 
+                           SELECT 
+                           x.partyid 
+                           , x.givenname
+                           , x.familyname
+                           , "a" as status            
+                           FROM (
+                            SELECT
                             e.partyid as partyid,
                             e.givenname as givenname,
-                            e.familyname as familyname,
-                            s.scheduleid as scheduleid
-                            ,CASE WHEN t1.status is null THEN "OPEN" else t1.status END AS status
+                            e.familyname as familyname
+                            ,s.scheduleid as scheduleid
+                          
                             From employees e
-                            left Join employee_areas ea on ea.partyid = e.partyid
-                            left JOIN schedule_attendances sa on e.partyid = sa.partyid
-                            left join schedules s on s.scheduleid = sa.scheduleid
-                            left join (
-                                        select s.scheduleid,sas.status from schedules s
-                                        join schedule_attendance_statuses sas on sas.scheduleid = s.scheduleid
-                                        where s.scheduleid ="'.$scheduleid.'"
+                            LEFT Join employee_areas ea on ea.partyid = e.partyid
+                            LEFT JOIN schedule_attendances sa on e.partyid = sa.partyid
+                            LEFT join schedules s on s.scheduleid = sa.scheduleid
+                            LEFT join (
+                select s1.scheduleid,sas.status
+                                        from schedules s1
+                                        left join schedule_attendance_statuses sas on sas.scheduleid = s1.scheduleid
+                                        where s1.scheduleid = "'.$scheduleid.'" 
+                                       
                                       ) t1 on sa.scheduleid = t1.scheduleid
-                            where ea.areaid = "'.$areaid.'"
-                         
+                            where ea.areaid = "'.$areaid.'" OR sa.areaid is NULL
+                
+            and s.scheduleid ="'.$scheduleid.'")x
+           group by x.scheduleid
                             ');
+
+
+
+
+
+
+
         $conv_list = json_encode($list);
 
 
         return view('content.attendance.update_employee_attendance',['data'=>json_decode($conv_list,true),'data_week'=>json_decode($conv_week,true)]);
     }
+
+
+
+
+
+
 
 public function viewAreaTileList(){
     $area = Area::all('areaid','name');
@@ -146,6 +169,47 @@ public function getEmployeeAreaCount(){
         return $input = $request->all();
 
     }
+
+
+public function getAreaEmployeeList($areaid){
+
+    $area = DB::select('
+        SELECT areaid, name
+        FROM areas
+        WHERE areaid = "'.$areaid.'"
+    ');
+    $area_json = json_encode($area);
+
+
+    $employeelist = DB::select('
+          select a.areaid,a.name,e.partyid, e.givenname,e.familyname 
+from employee_areas eas
+left join areas a on eas.areaid = a.areaid
+left join employees e on eas.partyid = e.partyid
+where eas.areaid = "'.$areaid.'"
+
+
+    ');
+
+    $employee_json = json_encode($employeelist);
+
+    return view('content.attendance.view_employeelist',['employee'=>json_decode($employee_json,true),'area'=>json_decode($area_json,true)]);
+}
+
+public function viewAttendanceWeekList($areaid,$employeeid){
+
+    $employee = Employees::all('givenname','familyname','partyid')->where('partyid',$employeeid);
+    $area = Area::all('areaid','name')->where('areaid',$areaid);
+    $week = Schedule::all();
+
+
+
+
+
+
+
+    return view('content.attendance.view_employee_weeklist',compact('week','area','employee'));
+}
 
 
 

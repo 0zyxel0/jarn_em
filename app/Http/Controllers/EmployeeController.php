@@ -189,7 +189,7 @@ public function newEmployee(){
 public function updateEmployeeDetails(Request $request){
 
 $input = $request->all();
-    return $input;
+    return "Feature Not Yet Available";
 
 }
 

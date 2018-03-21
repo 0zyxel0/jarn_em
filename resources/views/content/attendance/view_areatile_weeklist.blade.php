@@ -16,6 +16,7 @@
         });
     </script>
     <section class="content-header">
+
         @foreach($area as $area)
         <h1>
             Attendance for {{$area['name']}}

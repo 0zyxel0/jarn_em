@@ -13,26 +13,26 @@ class EmployeeTableSeeder extends Seeder
     public function run()
     {
         DB::table('employees')->insert([
-            'partyid' => '',
-            'givenname' => '',
-            'familyname' => bcrypt('123456'),
-            'middlename' => '',
-            'birthday' => '',
-            'password'=> '',
-            'age' => '',
-            'gender' => '',
+            'partyid' => '9fae38b1-d7e8-383c-a69f-59cf636bd34b',
+            'givenname' => 'Kimberly',
+            'familyname' => 'Eversole',
+            'middlename' => 'Sarah',
+            'birthday' => '1963-01-18',
+            'age' => '55',
+            'gender' => 'Female',
             'religion'=> '',
-            'address' => '',
-            'contactnumber' => '',
-             'civilstatus' => '',
+            'address' => 'Vidalia, Georgia(GA), 30474',
+            'contactnumber' => '912-244-7227',
+             'email'=>'triston.bergstr@hotmail.com',
+             'civilstatus' => 'Single',
             'comments' => '',
-            'status' => '',
+            'status' => 'Contractual',
              'religion' => '',
-            'startdate' => '',
+            'startdate' => '2018-03-22',
             'enddate' => '',
              'religion' => '',
-            'isActive' => '',
-            'updatedby' => ''
+            'isActive' => '1',
+            'updatedby' => '1'
         ]);
     }
 }

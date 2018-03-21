@@ -37,21 +37,29 @@ Route::get('/createteam','TeamController@createTeam');
 Route::get('/viewMembers/{id}','TeamController@viewMembers');
 Route::get('/viewprojects','ProjectsController@viewProjects');
 Route::get('/newprojects','ProjectsController@createProjects');
+
+
+//---------------------Attendance Controller-------------------------//
+
 Route::get('/attendancelist', 'AttendanceController@getEmployeeAttendanceList');
 Route::get('/areatiles','AttendanceController@viewAreaTileList');
 Route::get('/weektiles/{areaid}','AttendanceController@viewAreaTileWeekList');
-Route::get('/viewEmployeeAttendanceList/{id}/{week}','AttendanceController@viewEmployeeAttendanceList');
-
-
+Route::get('/area/{areaid}','AttendanceController@getAreaEmployeeList');
+Route::get('/attendance/{areaid}/{employeeid}','AttendanceController@viewAttendanceWeekList');
+Route::get('/viewEmployeeAttendanceList/{partyid}/{scheduleid}','AttendanceController@viewEmployeeAttendanceList');
 
 Route::get('generateWeekSchedule/{areaid}/{scheduleid}','AttendanceController@generateWeekSchedule');
-Route::post('generateWeekSchedule','AttendanceController@generateWeekSchedule');
-
 Route::get('/viewareaattendance','AttendanceController@viewAreaAttendance');
+Route::get('/generateWeekSchedule','AttendanceController@generateWeekSchedule');
+
+
+
+
+
+Route::post('generateWeekSchedule','AttendanceController@generateWeekSchedule');
 Route::post('/weeklist/{id}/{week}/','ScheduleAttendanceController@store');
 Route::post('/editEmployeeDetails/{id}', 'EmployeeController@updateEmployeeDetails');
 Route::post('generateWeekList','AttendanceController@generateWeekList');
-Route::get('/generateWeekSchedule','AttendanceController@generateWeekSchedule');
 
 Route::post('/viewMembers/{id}','TeamController@store');
 Route::post('/saveSchedule','ScheduleController@store');
