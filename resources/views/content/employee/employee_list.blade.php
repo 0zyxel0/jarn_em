@@ -34,10 +34,8 @@ $(document).ready(function(){
 
     <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>
-                Employee
-                <small>advanced tables</small>
-            </h1>
+            <button class="btn btn-block btn-default" onclick="location.href='dashboard'; return false;" type="button" style="width: 150px;"> < Back to Dashboard</button>
+
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li><a href="#">Employee</a></li>
@@ -53,7 +51,11 @@ $(document).ready(function(){
                     <!-- /.box -->
 
                     <div class="box">
-
+                        <div class="box-header">
+                            <h3 class="box-title">
+                                Employee
+                            </h3>
+                        </div>
                         <!-- /.box-header -->
                         <div class="box-body">
 

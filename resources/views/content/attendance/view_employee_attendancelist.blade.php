@@ -52,15 +52,17 @@
         }
     </style>
     <section class="content-header">
-        <h1>
-            Attendance
-        </h1>
+
+
+        <button class="btn btn-block btn-default" onclick="window.history.go(-1); return false;" type="button" style="width: 150px;"> < Back to Week List</button>
+
+
+
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Attendance</a></li>
-            <li class="active">View Week Attendance</li>
+            <li class="active">Choose Area List</li>
         </ol>
-
     </section>
     <section class="content">
         <div class="row">
@@ -68,6 +70,12 @@
 
                 <div class="box">
                                        <!-- /.box-header -->
+
+                    <div class="box-header">
+                        <h3 class="box-title">
+                            Attendance
+                        </h3>
+                    </div>
                     <div class="box-body">
                         <table id="list" class="table table-bordered table-striped dataTable">
                             <thead>

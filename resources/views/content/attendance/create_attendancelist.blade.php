@@ -88,9 +88,8 @@
 
 
     <section class="content-header">
-        <h1>
-            Attendance Period
-        </h1>
+        <button class="btn btn-block btn-default" onclick="window.history.go(-1); return false;" type="button" style="width: 150px;"> < Back to Week List</button>
+
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Schedule</a></li>
@@ -103,8 +102,17 @@
             <div class="col-xs-12">                <!-- /.box -->
 
                 <div class="box">
-                    <div class="box-body">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            Attendance Period
+
+                        </h3>
+                        <br/> <br/>
                         <button class="add-row">Add Row</button>
+                        <!-- /.box-tools -->
+                    </div>
+                    <div class="box-body">
+
 
                         <form method="post" action="store">
                         <table id="weeklist" class="table table-bordered table-striped dataTable" >
