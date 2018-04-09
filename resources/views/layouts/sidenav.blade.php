@@ -121,7 +121,6 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/jarn_em/public/createarea"><i class="fa fa-circle-o"></i> New Area</a></li>
                     <li><a href="/jarn_em/public/area"><i class="fa fa-circle-o"></i> Area List</a></li>
                 </ul>
             </li>

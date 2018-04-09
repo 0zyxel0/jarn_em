@@ -31,15 +31,32 @@ Route::get('/showEmployeeList', 'EmployeeController@showEmployeeList');
 Route::get('/editEmployeeDetails/{id}', 'EmployeeController@editEmployeeDetails');
 Route::get('/viewTeamList','TeamController@viewTeamList');
 Route::get('/profile/{id}','EmployeeController@viewProfile');
-Route::get('/area','AreaController@viewArea');
-Route::get('/createarea','AreaController@createArea');
+
 Route::get('/createteam','TeamController@createTeam');
 Route::get('/viewMembers/{id}','TeamController@viewMembers');
 Route::get('/viewprojects','ProjectsController@viewProjects');
 Route::get('/newprojects','ProjectsController@createProjects');
 
 
-//---------------------Attendance Controller-------------------------//
+
+
+//---------------------Area GET Routes-------------------------//
+
+Route::get('/area','AreaController@viewArea');
+Route::get('/createarea','AreaController@createArea');
+Route::get('/areadetails/{areaid}','AreaController@viewChildArea');
+//--------------------- END Area GET Routes-------------------------//
+
+//---------------------Area POST Routes-------------------------//
+
+Route::post('/areadetails/{areaid}','AreaController@saveChildAreaRecord');
+
+//---------------------END Area POST Routes-------------------------//
+
+
+
+
+//---------------------Attendance GET Routes-------------------------//
 
 Route::get('/attendancelist', 'AttendanceController@getEmployeeAttendanceList');
 Route::get('/areatiles','AttendanceController@viewAreaTileList');
@@ -52,14 +69,19 @@ Route::get('generateWeekSchedule/{areaid}/{scheduleid}','AttendanceController@ge
 Route::get('/viewareaattendance','AttendanceController@viewAreaAttendance');
 Route::get('/generateWeekSchedule','AttendanceController@generateWeekSchedule');
 
+//--------------------- END Attendance GET Routes-------------------------//
 
-
+//---------------------Attendance POST Routes-------------------------//
 
 
 Route::post('generateWeekSchedule','AttendanceController@generateWeekSchedule');
+Route::post('generateWeekList','AttendanceController@generateWeekList');
+
+//--------------------- END Attendance POST Routes-------------------------//
+
+
 Route::post('/weeklist/{id}/{week}/','ScheduleAttendanceController@store');
 Route::post('/editEmployeeDetails/{id}', 'EmployeeController@updateEmployeeDetails');
-Route::post('generateWeekList','AttendanceController@generateWeekList');
 
 Route::post('/viewMembers/{id}','TeamController@store');
 Route::post('/saveSchedule','ScheduleController@store');

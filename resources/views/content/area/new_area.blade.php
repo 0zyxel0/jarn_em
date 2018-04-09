@@ -18,6 +18,10 @@
                         <hr/>
                         <form method="post" action="saveAreaDetails">
                             <div class="form-group">
+                                <label>A</label>
+                                <input type="text" class="form-control" placeholder="Enter ..." id="areaname" name="areaname" required="">
+                            </div>
+                            <div class="form-group">
                                 <label>Name</label>
                                 <input type="text" class="form-control" placeholder="Enter ..." id="areaname" name="areaname" required="">
                             </div>

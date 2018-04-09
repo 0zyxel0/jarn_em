@@ -2,6 +2,7 @@
 @section('content')
     <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/bootstrap3.min.js') }}"></script>
     <script>
         $(document).ready(function () {
             $("#startdate").datepicker({ autoclose:true});
@@ -48,71 +49,82 @@
     </section>
     <section class="content">
         <div class="row">
+
+            <div class="pull-right" style="margin-right: 15px;">
+                <button type="button" class="btn btn-primary btn-large" data-toggle="modal" data-target="#myModal">Add Work Week</button>
+            </div>
             <div class="col-xs-12">                <!-- /.box -->
 
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">Create Schedule</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
+
+
+
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="purchaseLabel" aria-hidden="true">
+                    <div class="modal-dialog">
                         <form method="post" action="saveSchedule">
-                            <div class="form-group">
-                                <label>Year #</label>
-                                <input type="text" class="form-control" placeholder="Enter ..." id="yearnum" name="yearnum" required="">
-                            </div>
-                            <div class="form-group">
-                                <label>Week #</label>
-                                <input type="text" class="form-control" placeholder="Enter ..." id="weeknum" name="weeknum" required="">
-                            </div>
-                            <div class="form-group">
-                                <label>Start Date:</label>
-
-                                <div class="input-group date">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    <input type="text" class="form-control pull-right" id="startdate" name="startdate">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="modalLabel">Add New Area</h4>
                                 </div>
 
-                                <!-- /.input group -->
-                            </div>
-                            <div class="form-group">
-                                <label>End Date:</label>
+                                <div class="modal-body">
 
 
-                                <div class="input-group date">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    <input type="text" class="form-control pull-right" id="enddate" name="enddate">
+                                        <div class="form-group">
+                                            <label>Year #</label>
+                                            <input type="text" class="form-control" placeholder="Enter ..." id="yearnum" name="yearnum" required="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Week #</label>
+                                            <input type="text" class="form-control" placeholder="Enter ..." id="weeknum" name="weeknum" required="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Start Date:</label>
+
+                                            <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right" id="startdate" name="startdate">
+                                            </div>
+
+                                            <!-- /.input group -->
+                                        </div>
+                                        <div class="form-group">
+                                            <label>End Date:</label>
+
+
+                                            <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right" id="enddate" name="enddate">
+                                            </div>
+
+
+                                            <!-- /.input group -->
+                                        </div>
+
+                                        <input type="hidden" name="username" id="username" value="{{ Auth::user()->id }}">
+                                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
 
-
-                                <!-- /.input group -->
                             </div>
-
-
-
-
-                            <div style="text-align: right;">
-                                <button type="submit" class="btn-lg btn-info">Save</button>
-                            </div>
-
-                            <input type="hidden" name="username" id="username" value="{{ Auth::user()->id }}">
-                            <input type="hidden" name="_token" value="{{csrf_token()}}">
                         </form>
-
-
-
                     </div>
-                    <!-- /.box-body -->
                 </div>
-                <!-- /.box -->
+
+
 
 
                 <!-- box -->
-                <div class="box">
+                <div class="box" style="margin-top:5px;">
                     <div class="box-body">
 
                             <table class="table table-hover table-bordered">
@@ -122,6 +134,7 @@
                                     <th>Week #</th>
                                     <th>From</th>
                                     <th>To</th>
+                                    <th>Option</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -131,7 +144,11 @@
                                     <td>{{$d['week_number']}}</td>
                                     <td>{{$d['startdate']}}</td>
                                     <td>{{$d['enddate']}}</td>
-                                    <td></td>
+                                    <td>
+                                        <button id="btn_viewProfile"><i class="fa fa-book"></i> View</button>
+                                        <button id="btn_editProfile"><i class="fa fa-edit"></i> Edit</button>
+                                        <button id="btn_editProfile"><i class="fa fa-edit"></i> Delete</button>
+                                    </td>
                                 </tr>
                                     @endforeach
                                 </tbody>

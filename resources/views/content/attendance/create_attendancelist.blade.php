@@ -53,21 +53,27 @@
                     +"</div>"
                     +"</div>"
                     +"</td>"
-
-
                     +"<td>"
                     +"<input type='hidden' class='form-control pull-right enddate' name='enddate[]'>"
                     +"<input type='checkbox' name='ispresent[]'/></td>"
+                    +"<td>"
+                    +"<select name='presenttype[]' class='form-control'>"
+                    +"<option disabled>Select Attendance Type...</option>"
+                    +"<option value='Whole Day'>Whole Day</option>"
+                    +"<option value='AM'>AM</option>"
+                    +"<option value='PM'>PM</option>"
+                    +"</select>"
+                    +"</td>"
                     +"<td>"
                     +"<select name='areaid[]' class='form-control'>"
                     +"<option disabled>Select Area...</option>"
                     +"@foreach($area as $a)"
                     +"<option value={{$a['areaid']}}>{{$a['name']}}</option>"
                     +"@endforeach"
-                +"</select>"
-                +"</td>"
-                +"<td>"
-                +"<select name='projectid[]' class='form-control'>"
+                    +"</select>"
+                    +"</td>"
+                    +"<td>"
+                    +"<select name='projectid[]' class='form-control'>"
                     +"<option disabled>Select Project...</option>"
                         +"@foreach($project as $p)"
                     +"<option value={{$p['projectid']}}>{{$p['project_name']}}</option>"
@@ -143,6 +149,7 @@
                                 <th>Date Start</th>
 
                                 <th>Present</th>
+                                <th>Present Type</th>
                                 <th>Area</th>
                                 <th>Project</th>
 
@@ -153,6 +160,7 @@
 
                             <tfoot>
                             <tr>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -183,7 +191,15 @@
                                     <input type="checkbox" name="ispresent[]"/>
 
                                 </td>
+                                <td>
+                                    <select name="presenttype[]" class="form-control">
+                                        <option disabled>Select Attendance Type...</option>
+                                        <option value="Whole Day">Whole Day</option>
+                                        <option value="AM">AM</option>
+                                        <option value="PM">PM</option>
 
+                                    </select>
+                                </td>
                                 <td>
                                     <select name="areaid[]" class="form-control">
                                         <option disabled>Select Area...</option>
@@ -191,7 +207,7 @@
                                             <option value="{{$a['areaid']}}">{{$a['name']}}</option>
                                             @endforeach
                                     </select>
-                                    </td>
+                                </td>
                                 <td>
                                     <select name="projectid[]" class="form-control">
                                         @foreach($project as $p)

@@ -28,7 +28,7 @@ class ScheduleAttendanceController extends Controller
 
         $genid = Uuid::uuid();
 
-        $input = $request->all();
+      // $input = $request->all();
         $partyid = $request->get('partyid');
         $scheduleid = $request->get('scheduleid');
         $username = $request->get('username');
@@ -36,6 +36,7 @@ class ScheduleAttendanceController extends Controller
         $startdate = $request->get('startdate');
         $enddate = $request->get('enddate');
         $ispresent = $request->get('ispresent');
+        $presenttype = $request->get('presenttype');
         $projectid = $request->get('projectid');
 
         $dataset = [];
@@ -45,6 +46,7 @@ class ScheduleAttendanceController extends Controller
                           ,'scheduleid'=>$scheduleid
                           ,'partyid'=>$partyid
                           ,'ispresent'=>$ispresent[$key]
+                          ,'presenttype'=>$presenttype[$key]
                           ,'startdate' => date("Y-m-d", strtotime($startdate[$key]))
                           ,'enddate'=>date("Y-m-d", strtotime($startdate[$key]))
                           ,'areaid'=>$area[$key]

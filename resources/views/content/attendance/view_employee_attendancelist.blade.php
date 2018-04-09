@@ -94,6 +94,7 @@
                             <tr>
                                 <th>Date</th>
                                 <th>Attendance</th>
+                                <th>Attendance Type</th>
                                 <th>Area</th>
                                 <th>Work Done</th>
                                                             </tr>
@@ -102,7 +103,8 @@
                             @foreach($data as $d)
                             <tr>
                                 <td>{{$d['startdate']}}</td>
-                                    <td>{{$d['isPresent']}}</td>
+                                <td>{{$d['isPresent']}}</td>
+                                <td>{{$d['presenttype']}}</td>
                                 <td>{{$d['name']}}</td>
                                 <td>{{$d['project_name']}}</td>
                             </tr>

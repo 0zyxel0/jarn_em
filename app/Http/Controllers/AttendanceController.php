@@ -66,7 +66,7 @@ $employee_name = Employees::all('givenname','familyname','partyid')->where('part
 
 
        $attendance_data = DB::table('employees')
-           ->select('employees.partyid','employees.givenname','employees.familyname','areas.name','projects.project_name','schedule_attendances.startdate','schedule_attendances.isPresent','schedules.week_number','schedules.year_number')
+           ->select('employees.partyid','employees.givenname','employees.familyname','areas.name','projects.project_name','schedule_attendances.startdate','schedule_attendances.isPresent','schedule_attendances.presenttype','schedules.week_number','schedules.year_number')
            ->leftJoin('schedule_attendances','employees.partyid','=','schedule_attendances.partyid')
            ->leftJoin('schedules','schedule_attendances.scheduleid','=','schedules.scheduleid')
            ->leftJoin('projects','schedule_attendances.projectid','=','projects.projectid')

@@ -27,24 +27,17 @@
             $('#area-list tbody').on( 'click', '#btn_viewArea', function () {
 
                 var data = table.row( $(this).parents('tr') ).data();
-                window.location.href='areadetails/'+data[0];
+                window.location.href='profile/'+data[0];
             });
 
 
 
 
-                $('.flash-message').fadeIn('fast').delay(1000).fadeOut('fast');
-            });
+            $('.flash-message').fadeIn('fast').delay(1000).fadeOut('fast');
 
+            $('#acquiredate').datepicker();
 
-
-
-
-
-
-
-
-
+        });
     </script>
     <div class="flash-message">
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
@@ -55,9 +48,11 @@
         @endforeach
     </div> <!-- end .flash-message -->
     <section class="content-header">
+        @foreach($area as $ad)
         <h1>
-            Area
+            {{$ad['name']}} Area
         </h1>
+        @endforeach
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Area</a></li>
@@ -87,19 +82,21 @@
                                 <th>id</th>
                                 <th>Area</th>
                                 <th>Address</th>
+                                <th>Size</th>
                                 <th>Options</th>
                             </tr>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($data as $item)
+                            @foreach($areaData as $item)
                                 <tr>
                                     <td>   {{$item['areaid']}}</td>
                                     <td>   {{$item['name']}}</td>
                                     <td>   {{$item['address']}}</td>
+                                    <td>   {{$item['size']}}</td>
                                     <td>
-                                        <button id="btn_viewArea"><i class="fa fa-book"></i> View</button>
-                                        <button id="btn_editArea"><i class="fa fa-edit"></i> Edit</button>
+                                        <button id="btn_viewProfile"><i class="fa fa-book"></i> View</button>
+                                        <button id="btn_editProfile"><i class="fa fa-edit"></i> Edit</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -118,16 +115,20 @@
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="purchaseLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form method="post" action="saveAreaDetails">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="modalLabel">Add New Area</h4>
-                </div>
+            <form method="post" action="saveChildAreaRecord">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="modalLabel">Add New Area</h4>
+                    </div>
 
-                <div class="modal-body">
+                    <div class="modal-body">
 
-
+                        <div class="form-group">
+                            @foreach($area as $a)
+                                <input type="hidden" class="form-control" placeholder="Enter ..." id="parentid" name="parentid" value="{{$a['areaid']}}">
+                            @endforeach
+                        </div>
                         <div class="form-group">
                             <label>Name</label>
                             <input type="text" class="form-control" placeholder="Enter ..." id="areaname" name="areaname" required="">
@@ -144,18 +145,32 @@
                             <label>Country</label>
                             <input type="text" class="form-control" placeholder="Enter ..." id="country" name="country" required="">
                         </div>
+                        <div class="form-group">
+                            <label>Size</label>
+                            <input type="text" class="form-control" placeholder="Enter ..." id="size" name="size" required="">
+                        </div>
+                        <div class="form-group">
+                            <label>Acquired Date</label>
 
-                        
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input type="text" class="form-control pull-right" id="acquiredate" name="acquiredate" required="">
+                            </div>
+                            <!-- /.input group -->
+                        </div>
+
 
                         <input type="hidden" name="username" id="username" value="{{ Auth::user()->id }}">
                         <input type="hidden" name="_token" value="{{csrf_token()}}">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
 
-            </div>
+                </div>
             </form>
         </div>
     </div>

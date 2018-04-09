@@ -18,6 +18,7 @@ class CreateScheduleAttendancesTable extends Migration
             $table->string('scheduleid');
             $table->string('partyid');
             $table->boolean('isPresent');
+            $table->string('presenttype')->nullable();
             $table->string('timein')->nullable();
             $table->string('timeout')->nullable();
             $table->date('startdate');
