@@ -3,7 +3,7 @@
 <section class="content-header">
 
 
-        <button class="btn btn-block btn-default" onclick="window.history.go(-1); return false;" type="button" style="width: 150px;"> < Back to Dashboard</button>
+        <button class="btn btn-block btn-default" onclick="location.href='dashboard'; return false;" type="button" style="width: 150px;"> < Back to Dashboard</button>
 
 
 
@@ -33,7 +33,7 @@
                     <div class="col-md-3 col-sm-6 col-xs-12">
 
                         <div class="info-box">
-                            <a href="area/{{$area['areaid']}}" class="info-box-icon bg-aqua" ><i class="fa fa-map"></i></a>
+                            <a href="arealocation/{{$area['areaid']}}" class="info-box-icon bg-aqua" ><i class="fa fa-map"></i></a>
 
                             <div class="info-box-content">
                                 <span class="info-box-text"><h3>{{$area['name']}}</h3></span>

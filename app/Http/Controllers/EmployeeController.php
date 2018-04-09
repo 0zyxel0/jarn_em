@@ -181,7 +181,7 @@ public function viewProfile($id){
 
 public function newEmployee(){
 
-    $query = Area::all('name','areaid');
+    $query = Area::select('name','areaid')->whereNotNull('parentareaid')->get();
     $query2 = EmployeeTeam::all('teamid','name');
     return view('content.employee.create_new_employee',compact('query','query2'));
 }

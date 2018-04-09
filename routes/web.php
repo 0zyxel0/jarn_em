@@ -60,8 +60,10 @@ Route::post('/areadetails/{areaid}','AreaController@saveChildAreaRecord');
 
 Route::get('/attendancelist', 'AttendanceController@getEmployeeAttendanceList');
 Route::get('/areatiles','AttendanceController@viewAreaTileList');
+Route::get('/arealocation/{areaid}','AttendanceController@viewAreaLocationTileList');
+
 Route::get('/weektiles/{areaid}','AttendanceController@viewAreaTileWeekList');
-Route::get('/area/{areaid}','AttendanceController@getAreaEmployeeList');
+Route::get('/areaEmployee/{areaid}','AttendanceController@getAreaEmployeeList');
 Route::get('/attendance/{areaid}/{employeeid}','AttendanceController@viewAttendanceWeekList');
 Route::get('/viewEmployeeAttendanceList/{partyid}/{scheduleid}','AttendanceController@viewEmployeeAttendanceList');
 

@@ -48,7 +48,7 @@ class AttendanceController extends Controller
 
         $emp = Employees::all()->where('partyid',$id);
        $sked = Schedule::all()->where('scheduleid',$week);
-        $area = Area::all('areaid','name');
+        $area = Area::select('areaid','name')->where('parentareaid',$id)->get();
         $project = Project::all('projectid','project_name');
 
        return view('content.attendance.create_attendancelist',compact('sked','emp','area','project'));
@@ -136,10 +136,17 @@ $employee_name = Employees::all('givenname','familyname','partyid')->where('part
 
 
 public function viewAreaTileList(){
-    $area = Area::all('areaid','name');
+    $area = Area::select('areaid','name')->whereNull('parentareaid')->get();
 
         return view('content.attendance.view_areatile', compact('area'));
 }
+
+public function viewAreaLocationTileList($parentid){
+    $area = Area::select('areaid','name')->where('parentareaid',$parentid)->get();
+
+    return view('content.attendance.view_arealocationtile', compact('area'));
+}
+
 
 public function viewAreaTileWeekList($areaid){
 
