@@ -12,7 +12,7 @@
                     ,bInfo:false
                     ,order: [[ 4, "desc" ]]
                     ,  columnDefs: [
-                    { targets: [0, 1,2], visible: false}
+                    { targets: [ 0,1,2], visible: false}
 
                 ]
                 }
@@ -21,13 +21,13 @@
 
                 var data = table.row( $(this).parents('tr') ).data();
 
-                window.location.href='/jarn_em/public/weeklist/'+data[2]+'/'+data[1];
+                window.location.href='/jarn_em/public/weeklist/'+data[0]+'/'+data[3]+'/'+data[2];
             });
 
             $('#list tbody').on( 'click', '#btn_viewAttendance', function () {
 
                 var data = table.row( $(this).parents('tr') ).data();
-                window.location.href='/jarn_em/public/viewEmployeeAttendanceList/'+data[2]+'/'+data[1];
+                window.location.href='/jarn_em/public/viewEmployeeAttendanceList/'+data[3]+'/'+data[2];
             });
 
         });
@@ -63,6 +63,7 @@
                         <table id="list" class="table table-bordered table-striped dataTable">
                             <thead>
                             <tr>
+                                <th>parentAreaId</th>
                                 <th>AreaId</th>
                                 <th>ScheduleId</th>
                                 <th>EmployeeId</th>
@@ -77,6 +78,7 @@
                             <tbody>
                             @foreach($week as $week)
                                 <tr>
+                                    <td>@foreach($parentarea as $pa){{$pa['parentareaid']}}@endforeach</td>
                                     <td>@foreach($area as $a){{$a['areaid']}}@endforeach</td>
                                     <td>{{$week['scheduleid']}}</td>
                                     <td>{{$e['partyid']}}</td>

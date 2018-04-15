@@ -7,6 +7,7 @@ use App\EmployeeAttendance;
 use App\EmployeeImage;
 use App\EmployeeTeam;
 use App\EmployeeTeamAssignment;
+use App\PresentStatusType;
 use App\Schedule;
 use App\ScheduleAttendanceStatus;
 use Illuminate\Http\Request;
@@ -44,14 +45,15 @@ class AttendanceController extends Controller
 
 
 
-   public function createWeeklist($id, $week){
+   public function createWeeklist($areaid,$id, $week){
 
         $emp = Employees::all()->where('partyid',$id);
        $sked = Schedule::all()->where('scheduleid',$week);
-        $area = Area::select('areaid','name')->where('parentareaid',$id)->get();
-        $project = Project::all('projectid','project_name');
+        $area = Area::select('areaid','name')->where('parentareaid',$areaid)->get();
 
-       return view('content.attendance.create_attendancelist',compact('sked','emp','area','project'));
+        $project = Project::all('projectid','project_name');
+        $presenttype = PresentStatusType::select('id','typename')->get();
+       return view('content.attendance.create_attendancelist',compact('sked','emp','area','project','presenttype'));
    }
 
 
@@ -66,16 +68,21 @@ $employee_name = Employees::all('givenname','familyname','partyid')->where('part
 
 
        $attendance_data = DB::table('employees')
-           ->select('employees.partyid','employees.givenname','employees.familyname','areas.name','projects.project_name','schedule_attendances.startdate','schedule_attendances.isPresent','schedule_attendances.presenttype','schedules.week_number','schedules.year_number')
+           ->select('employees.partyid','employees.givenname','employees.familyname','areas.name','projects.project_name','schedule_attendances.startdate','schedule_attendances.isPresent','present_status_types.typename','schedules.week_number','schedules.year_number')
+          // ->select('*')
            ->leftJoin('schedule_attendances','employees.partyid','=','schedule_attendances.partyid')
            ->leftJoin('schedules','schedule_attendances.scheduleid','=','schedules.scheduleid')
            ->leftJoin('projects','schedule_attendances.projectid','=','projects.projectid')
+           ->leftJoin('present_status_types','present_status_types.id','=','schedule_attendances.presenttype')
            ->leftJoin('areas','areas.areaid','=','schedule_attendances.areaid')
            ->where('employees.partyid',$partyid)
            ->where('schedules.scheduleid',$scheduleid)
        ->get();
 
         $conv_data = json_encode($attendance_data);
+
+
+
 
        return view('content.attendance.view_employee_attendancelist',['data'=>json_decode($conv_data,true),'emp_data'=>json_decode($conv_name,true),'week_data'=>json_decode($conv_week,true)]);
    }
@@ -207,6 +214,7 @@ public function viewAttendanceWeekList($areaid,$employeeid){
 
     $employee = Employees::all('givenname','familyname','partyid')->where('partyid',$employeeid);
     $area = Area::all('areaid','name')->where('areaid',$areaid);
+    $parentarea = Area::select('parentareaid')->where('areaid',$areaid)->get();
     $week = Schedule::all();
 
 
@@ -215,7 +223,7 @@ public function viewAttendanceWeekList($areaid,$employeeid){
 
 
 
-    return view('content.attendance.view_employee_weeklist',compact('week','area','employee'));
+    return view('content.attendance.view_employee_weeklist',compact('week','area','employee','parentarea'));
 }
 
 

@@ -7,11 +7,7 @@
         $(document).ready(function(){
             var table =  $('#list').DataTable({
 
-                bInfo:false
-                ,  columnDefs: [
-                { targets: [0], visible: false}
 
-            ]
             });
 
             $('#list tbody').on( 'click', '#btn_showAttn', function () {

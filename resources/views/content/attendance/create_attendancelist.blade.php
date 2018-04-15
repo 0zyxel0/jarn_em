@@ -38,10 +38,6 @@
 
 
             $(".add-row").click(function(){
-                var fdate = $("#fromdate").val();
-                var tdate = $("#todate").val();
-                console.log(fdate);
-                console.log(tdate);
                 var markup = ""
                     +"<tr>"
                     +"<td>1</td>"
@@ -59,9 +55,9 @@
                     +"<td>"
                     +"<select name='presenttype[]' class='form-control'>"
                     +"<option disabled>Select Attendance Type...</option>"
-                    +"<option value='Whole Day'>Whole Day</option>"
-                    +"<option value='AM'>AM</option>"
-                    +"<option value='PM'>PM</option>"
+                    +"@foreach($presenttype as $pt)"
+                    +"<option value={{$pt['id']}}>{{$pt['typename']}}</option>"
+                    +"@endforeach"
                     +"</select>"
                     +"</td>"
                     +"<td>"
@@ -194,9 +190,9 @@
                                 <td>
                                     <select name="presenttype[]" class="form-control">
                                         <option disabled>Select Attendance Type...</option>
-                                        <option value="Whole Day">Whole Day</option>
-                                        <option value="AM">AM</option>
-                                        <option value="PM">PM</option>
+                                        @foreach($presenttype as $pt)
+                                            <option value="{{$pt['id']}}">{{$pt['typename']}}</option>
+                                        @endforeach
 
                                     </select>
                                 </td>

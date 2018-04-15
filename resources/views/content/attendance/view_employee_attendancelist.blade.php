@@ -104,7 +104,7 @@
                             <tr>
                                 <td>{{$d['startdate']}}</td>
                                 <td>{{$d['isPresent']}}</td>
-                                <td>{{$d['presenttype']}}</td>
+                                <td>{{$d['typename']}}</td>
                                 <td>{{$d['name']}}</td>
                                 <td>{{$d['project_name']}}</td>
                             </tr>
