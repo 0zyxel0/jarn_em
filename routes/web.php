@@ -73,6 +73,15 @@ Route::get('/generateWeekSchedule','AttendanceController@generateWeekSchedule');
 
 //--------------------- END Attendance GET Routes-------------------------//
 
+//--------------------- Payroll GET Routes-------------------------//
+Route::get('generatePayslip','PayrollController@generateAttendanceSalary');
+
+
+//--------------------- END Payroll GET Routes-------------------------//
+
+
+
+
 //---------------------Attendance POST Routes-------------------------//
 
 
