@@ -2,9 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\EmployeeGovernmentDetail;
+use App\EmployeeImage;
+use App\EmployeeTeam;
+use App\Area;
+use App\EmployeeTeamAssignment;
 use Illuminate\Http\Request;
+use Faker\Provider\Uuid;
 use DB;
-
+use App\Employees;
+use App\EmployeeSalary;
+use Illuminate\Support\Facades\Input;
+use App\EmployeeArea;
+use Symfony\Component\Console\Tests\TerminalTest;
 
 class PayrollController extends Controller
 {
@@ -28,4 +38,29 @@ class PayrollController extends Controller
         $query_json = json_encode($query);
 
         return view('content.payroll.view_employee_area_payroll',['data'=>json_decode($query_json, true)]);   }
+
+    public function viewPayrollList(){
+
+        $area = Area::select('areaid','name')->whereNull('parentareaid')->get();
+
+        return view('content.payroll.view_pickmonth_payroll',compact('area'));
+    }
+
+
+    public function getAreaSiteList(Request $request){
+
+
+        $selected_area = $request->selectarea;
+
+        if($request->ajax()){
+            $area = Area::select('areaid','name')->where('parentareaid',$selected_area)->get();
+
+
+        }
+        return "N/A";
+
+    }
+
+
+
 }

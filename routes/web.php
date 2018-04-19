@@ -53,7 +53,9 @@ Route::post('/areadetails/{areaid}','AreaController@saveChildAreaRecord');
 
 //---------------------END Area POST Routes-------------------------//
 
-
+//---------------------Payroll GET Routes-------------------------//
+Route::get('/viewList','PayrollController@viewPayrollList');
+//---------------------END Payroll GET Routes-------------------------//
 
 
 //---------------------Attendance GET Routes-------------------------//

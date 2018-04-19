@@ -52,9 +52,12 @@
 
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">
-                            Employee
-                        </h3>
+                        <ul class="list-unstyled">
+                            <li>Period</li>
+                            <li>From</li>
+                            <li>To</li>
+                        </ul>
+
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
