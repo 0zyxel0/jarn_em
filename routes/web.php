@@ -24,8 +24,9 @@ Route::get('/show','UploadController@show');
 
 
 Route::get('/newEmployee','EmployeeController@newEmployee');
-Route::get('/weeklist/{areaid}/{id}/{week}','AttendanceController@createWeeklist');
+
 Route::get('/createSchedule','ScheduleController@createSchedule');
+Route::get('/viewdeductionlist','DeductionController@viewEmployeeDeductionList');
 Route::get('/createDeductionType','DeductionController@createDeductionType');
 Route::get('/showEmployeeList', 'EmployeeController@showEmployeeList');
 Route::get('/editEmployeeDetails/{id}', 'EmployeeController@editEmployeeDetails');
@@ -55,7 +56,15 @@ Route::post('/areadetails/{areaid}','AreaController@saveChildAreaRecord');
 
 //---------------------Payroll GET Routes-------------------------//
 Route::get('/viewList','PayrollController@viewPayrollList');
+Route::get('generatePayslip','PayrollController@generateAttendanceSalary');
+Route::get('area-ajax/{areaid}','PayrollController@getAreaSiteList');
+
 //---------------------END Payroll GET Routes-------------------------//
+
+//--------------------- Payroll POST Routes-------------------------//
+Route::post('/viewList','PayrollController@generateAttendanceSalary');
+
+//--------------------- END Payroll POST Routes-------------------------//
 
 
 //---------------------Attendance GET Routes-------------------------//
@@ -63,7 +72,7 @@ Route::get('/viewList','PayrollController@viewPayrollList');
 Route::get('/attendancelist', 'AttendanceController@getEmployeeAttendanceList');
 Route::get('/areatiles','AttendanceController@viewAreaTileList');
 Route::get('/arealocation/{areaid}','AttendanceController@viewAreaLocationTileList');
-
+Route::get('/weeklist/{areaid}/{id}/{week}','AttendanceController@createWeeklist');
 Route::get('/weektiles/{areaid}','AttendanceController@viewAreaTileWeekList');
 Route::get('/areaEmployee/{areaid}','AttendanceController@getAreaEmployeeList');
 Route::get('/attendance/{areaid}/{employeeid}','AttendanceController@viewAttendanceWeekList');
@@ -75,11 +84,7 @@ Route::get('/generateWeekSchedule','AttendanceController@generateWeekSchedule');
 
 //--------------------- END Attendance GET Routes-------------------------//
 
-//--------------------- Payroll GET Routes-------------------------//
-Route::get('generatePayslip','PayrollController@generateAttendanceSalary');
 
-
-//--------------------- END Payroll GET Routes-------------------------//
 
 
 

@@ -6,36 +6,15 @@
     <script>
         $(document).ready(function(){
             var table =  $('#employee-list').DataTable({
-
                 "columnDefs":
                     [
                         {
-                            "targets": [0,3,6,7],
+                            "targets": 0,
                             "visible": false,
                             "searchable": false
-                        },
-                        {
-
-                            "targets":[4],
-                            "render": function(data){
-
-                              return (data/8);
-
-                            }
-                        },
-                        {
-
-                            "targets":[8],
-                            "data":null,
-                            "render": function(full)
-                            {
-                                return ((full[4]/8)*(full[5]));
-
-                            }
-
                         }
-                    ],
 
+                    ]
             });
 
             $('#employee-list tbody').on( 'click', '#btn_editProfile', function () {
@@ -73,32 +52,10 @@
 
                 <div class="box">
                     <div class="box-header">
-                        <table class="table ">
-                            <thead>
-                            <tr>
-
-                            <td>FROM</td>
-                                @foreach($fromDate as $d)
-                                    <td>{{$d['startdate']}}</td>
-                                @endforeach
-
-
-
-                            </tr>
-                            <tr>
-                                <td> TO</td>
-                                @foreach($toDate as $d)
-                                    <td>{{$d['enddate']}}</td>
-                                @endforeach
-                            </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-
+                        <h3 class="box-title">
+                            Employee
+                        </h3>
                     </div>
-                </div>
-                <div class="box">
-
                     <!-- /.box-header -->
                     <div class="box-body">
 
@@ -106,44 +63,29 @@
                             <thead>
                             <tr role="row">
                             <tr role="row">
-                                <th>partyid</th>
-                                <th>Family Name</th>
+                                <th>id</th>
                                 <th>Given Name</th>
-                                <th>Hours</th>
-                                <th>Total Work Days</th>
-                                <th>Rate</th>
-                                <th>From</th>
-                                <th>To</th>
-                                <th>Gross Salary</th>
-                                <th>Deduction</th>
+                                <th>Family Name</th>
+                                <th>Total Deduction</th>
                                 <th>Options</th>
                             </tr>
                             </tr>
                             </thead>
                             <tbody>
-
                             @foreach($data as $item)
                                 <tr>
                                     <td>   {{$item['partyid']}}</td>
-                                    <td>   {{$item['familyname']}}</td>
                                     <td>   {{$item['givenname']}}</td>
-                                    <td>   {{$item['hours']}}</td>
-                                    <td>{{$item['hours']}}</td>
-                                    <td>   {{$item['daily_rate']}}</td>
-                                    @foreach($fromDate as $d)
-                                        <td>{{$d['scheduleid']}}</td>
-                                    @endforeach
-                                    @foreach($toDate as $d)
-                                        <td>{{$d['scheduleid']}}</td>
-                                    @endforeach
-                                    <td></td>
-                                    <td></td>
+                                    <td>   {{$item['familyname']}}</td>
+                                    <td>   {{$item['amount']}}</td>
+
                                     <td>
-                                        <button id="btn_viewProfile"><i class="fa fa-book"></i> View Details</button>
-                                        <button id="btn_editProfile"><i class="fa fa-edit"></i> Edit</button>
+                                        <button id="btn_viewProfile"><i class="fa fa-book"></i> View</button>
+                                        <button id="btn_editProfile"><i class="fa fa-edit"></i> Add</button>
                                     </td>
                                 </tr>
                             @endforeach
+
 
 
                             </tbody>

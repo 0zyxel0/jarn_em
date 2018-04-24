@@ -36,4 +36,18 @@ class DeductionController extends Controller
 
         return redirect('/createDeductionType');
     }
+
+
+    public function viewEmployeeDeductionList(){
+
+        $query = DB::select('
+                    select e.partyid, e.givenname, e.familyname, amount
+                    from employees e
+                    left join employee_deductions ed on e.partyid = ed.partyid
+        ');
+
+        $query_json = json_encode($query);
+
+        return view('content.deduction.view_employeelist_deduction',['data'=>json_decode($query_json,true)]);
+    }
 }
