@@ -99,7 +99,7 @@ class TeamController extends Controller
 
        $team = $request->get('teamid');
        $leader = $request->get('selectleader');
-    //    dd($team,$leader);
+
 
        EmployeeTeam::where('teamid',$team)->update(['userpartyid'=>$leader]);
         return redirect('viewMembers/' .$team);

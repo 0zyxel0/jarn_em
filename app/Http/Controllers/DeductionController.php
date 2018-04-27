@@ -50,4 +50,11 @@ class DeductionController extends Controller
 
         return view('content.deduction.view_employeelist_deduction',['data'=>json_decode($query_json,true)]);
     }
+
+    public function createDeduction($partyid){
+
+        $data = Employees::where('partyid',$partyid)->get();
+
+        return view('content.deduction.edit_employee_deduction',compact('data'));
+    }
 }

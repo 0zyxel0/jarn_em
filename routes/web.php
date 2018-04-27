@@ -26,8 +26,7 @@ Route::get('/show','UploadController@show');
 Route::get('/newEmployee','EmployeeController@newEmployee');
 
 Route::get('/createSchedule','ScheduleController@createSchedule');
-Route::get('/viewdeductionlist','DeductionController@viewEmployeeDeductionList');
-Route::get('/createDeductionType','DeductionController@createDeductionType');
+
 Route::get('/showEmployeeList', 'EmployeeController@showEmployeeList');
 Route::get('/editEmployeeDetails/{id}', 'EmployeeController@editEmployeeDetails');
 Route::get('/viewTeamList','TeamController@viewTeamList');
@@ -40,6 +39,33 @@ Route::get('/newprojects','ProjectsController@createProjects');
 
 
 
+//---------------------Inventory GET Routes-------------------------//
+
+
+
+Route::get('/viewInventory','InventoryController@viewList');
+//---------------------END Inventory GET Routes-------------------------//
+
+
+//---------------------Inventory POST Routes-------------------------//
+Route::post('store','InventoryController@saveItems');
+
+//---------------------END Inventory POST Routes-------------------------//
+
+
+
+
+//---------------------Deduction GET Routes-------------------------//
+Route::get('/viewdeductionlist','DeductionController@viewEmployeeDeductionList');
+Route::get('/createDeductionType','DeductionController@createDeductionType');
+Route::get('/addDeduction/{partyid}','DeductionController@createDeduction');
+
+//--------------------- END Deduction GET Routes-------------------------//
+
+//---------------------Deduction POST Routes-------------------------//
+
+Route::post('/saveDeductionType','DeductionController@store');
+//---------------------END Deduction POST Routes-------------------------//
 
 //---------------------Area GET Routes-------------------------//
 
@@ -94,16 +120,16 @@ Route::get('/generateWeekSchedule','AttendanceController@generateWeekSchedule');
 
 Route::post('generateWeekSchedule','AttendanceController@generateWeekSchedule');
 Route::post('generateWeekList','AttendanceController@generateWeekList');
-
+Route::post('/weeklist/{id}/{week}/store','ScheduleAttendanceController@store');
 //--------------------- END Attendance POST Routes-------------------------//
 
 
-Route::post('/weeklist/{id}/{week}/store','ScheduleAttendanceController@store');
+
 Route::post('/editEmployeeDetails/{id}', 'EmployeeController@updateEmployeeDetails');
 
 Route::post('/viewMembers/{id}','TeamController@store');
 Route::post('/saveSchedule','ScheduleController@store');
-Route::post('/saveDeductionType','DeductionController@store');
+
 Route::post('/saveProjectDetails' ,'ProjectsController@saveProjectDetails');
 Route::post('/profile/{id}','UploadController@store');
 Route::post('saveAreaDetails','AreaController@saveAreaDetails');

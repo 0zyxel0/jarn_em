@@ -109,6 +109,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="/jarn_em/public/viewList"><i class="fa fa-circle-o"></i> Create Payslip</a></li>
+                    <li><a href="/jarn_em/public/viewdeductionlist"><i class="fa fa-circle-o"></i> Manage Deduction</a></li>
                     <li><a href="/jarn_em/public/viewList"><i class="fa fa-circle-o"></i> Cash Advance</a></li>
 
                 </ul>
@@ -134,7 +135,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/jarn_em/public/area"><i class="fa fa-circle-o"></i>Inventory List</a></li>
+                    <li><a href="/jarn_em/public/viewInventory"><i class="fa fa-circle-o"></i>Inventory List</a></li>
                 </ul>
             </li>
 

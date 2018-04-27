@@ -23,10 +23,10 @@
                 window.location.href='editEmployeeDetails/'+data[0];
             });
 
-            $('#employee-list tbody').on( 'click', '#btn_viewProfile', function () {
+            $('#employee-list tbody').on( 'click', '#btn_viewDeductions', function () {
 
                 var data = table.row( $(this).parents('tr') ).data();
-                window.location.href='profile/'+data[0];
+                window.location.href='addDeduction/'+data[0];
             });
 
         });
@@ -63,7 +63,7 @@
                             <thead>
                             <tr role="row">
                             <tr role="row">
-                                <th>id</th>
+                                <th>partyid</th>
                                 <th>Given Name</th>
                                 <th>Family Name</th>
                                 <th>Total Deduction</th>
@@ -80,8 +80,8 @@
                                     <td>   {{$item['amount']}}</td>
 
                                     <td>
-                                        <button id="btn_viewProfile"><i class="fa fa-book"></i> View</button>
-                                        <button id="btn_editProfile"><i class="fa fa-edit"></i> Add</button>
+                                        <button id="btn_viewDeductions"><i class="fa fa-book"></i> View</button>
+                                        <button id=""><i class="fa fa-edit"></i> Add</button>
                                     </td>
                                 </tr>
                             @endforeach
