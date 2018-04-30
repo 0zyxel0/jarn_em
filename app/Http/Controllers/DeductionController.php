@@ -5,6 +5,7 @@ use App\EmployeeGovernmentDetail;
 use App\EmployeeImage;
 use App\EmployeeTeam;
 use App\EmployeeTeamAssignment;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
 use Faker\Provider\Uuid;
 use DB;
@@ -66,10 +67,13 @@ class DeductionController extends Controller
         })->get();
 
 
-        $user_deduction = PersonDeduction::join('deduction_types', function($join){
-            $join->on('person_deductions.deduction_typeid','=','deduction_types.id');
-        })
-        ->where('partyid',$partyid)->get();
+        $user_deduction = EmployeeDeduction::join('deduction_types', function($join){
+            $join->on('employee_deductions.deduction_typeid','=','deduction_types.id');
+        })->where('partyid',$partyid)->get();
+
+
+
+
 
 
 
@@ -97,21 +101,12 @@ class DeductionController extends Controller
 
         $genId = Uuid::uuid();
 
-        $deduction = new PersonDeduction();
+
 
         $req_item = $request->qty;
         $inventId = Input::get('inventory_item');
-$partyid = $request->partyid;
+        $partyid = $request->partyid;
 
-        $deduction->deductionid = $genId;
-        $deduction->partyid = $request->partyid;
-        $deduction->deduction_typeid = $request->deducttype;
-        $deduction->inventoryid =$inventId;
-        $deduction->amount = $request->qty;
-        $deduction->remarks = $request->comments;
-        $deduction->payment_schemeid =$request->terms;
-        $deduction->status= 1;
-        $deduction->save();
 
 
 
@@ -122,6 +117,19 @@ $partyid = $request->partyid;
 
         //Going to Person Deduction Table
         $deduction_assignment = new EmployeeDeduction();
+
+        $deduction_assignment->deductionid = $genId;
+        $deduction_assignment->deduction_typeid = $request->deducttype;
+        $deduction_assignment->partyid = $request->partyid;
+        $deduction_assignment->comments = $request->comments;
+        $deduction_assignment->inventoryid = $inventId;
+        $deduction_assignment->quantity = $request->qty;
+        $deduction_assignment->total_price = $request->price;
+        $deduction_assignment->status = 1;
+        $deduction_assignment->createdby = $request->username;
+        $deduction_assignment->save();
+
+
 
 
 

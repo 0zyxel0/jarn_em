@@ -14,11 +14,13 @@ class CreateEmployeeDeductionsTable extends Migration
     public function up()
     {
         Schema::create('employee_deductions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->string('deductionid');
             $table->string('deduction_typeid');
             $table->string('partyid');
-            $table->string('amount');
-            $table->text('reason')->nullable();
+            $table->string('inventoryid');
+            $table->float('quantity');
+            $table->float('total_price');
+            $table->text('comments')->nullable();
             $table->boolean('status');
             $table->string('createdby');
             $table->timestamps();

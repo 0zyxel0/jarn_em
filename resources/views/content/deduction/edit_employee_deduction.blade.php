@@ -84,18 +84,6 @@
                                         </select>
                                     </div>
 
-
-                                    <div class="form-group">
-                                        <label>Terms</label>
-                                        <select class="form-control" id="terms" name="terms">
-                                            <option>1 Month</option>
-                                            <option>2 Month</option>
-                                            <option>3 Month</option>
-                                            <option>6 Month</option>
-                                        </select>
-                                        <!-- /.input group -->
-                                    </div>
-
                                     <div class="form-group">
                                         <label>Item</label>
                                         <select class="form-control" id="inventory_item" name="inventory_item">
@@ -153,9 +141,10 @@
                             <tr role="row">
                                 <th>deductionid</th>
                                 <th>Deduction Type</th>
-                                <th>Amount</th>
+                                <th>Quantity</th>
+                                <th>Total Amount</th>
                                 <th>Entered Date</th>
-                                <th>Terms</th>
+
                                 <th>Status</th>
 
                             </tr>
@@ -166,9 +155,9 @@
                                 <tr>
                                     <td>{{$ud['deductionid']}}</td>
                                     <td>{{$ud['name']}}</td>
-                                    <td>{{$ud['amount']}}</td>
+                                    <td>{{$ud['quantity']}}</td>
+                                    <td>{{$ud['total_price']}}</td>
                                     <td>{{$ud['created_at']}}</td>
-                                    <td>{{$ud['payment_schemeid']}}</td>
                                     <td>{{$ud['status']}}</td>
 
                                 </tr>
