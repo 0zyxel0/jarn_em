@@ -115,6 +115,7 @@
                                 <th>From</th>
                                 <th>To</th>
                                 <th>Gross Salary</th>
+
                                 <th>Deduction</th>
                                 <th>Options</th>
                             </tr>
@@ -136,6 +137,7 @@
                                     @foreach($toDate as $d)
                                         <td>{{$d['scheduleid']}}</td>
                                     @endforeach
+
                                     <td></td>
                                     <td></td>
                                     <td>

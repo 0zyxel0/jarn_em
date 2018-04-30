@@ -38,7 +38,6 @@ Route::get('/viewprojects','ProjectsController@viewProjects');
 Route::get('/newprojects','ProjectsController@createProjects');
 
 
-
 //---------------------Inventory GET Routes-------------------------//
 
 
@@ -59,12 +58,14 @@ Route::post('store','InventoryController@saveItems');
 Route::get('/viewdeductionlist','DeductionController@viewEmployeeDeductionList');
 Route::get('/createDeductionType','DeductionController@createDeductionType');
 Route::get('/addDeduction/{partyid}','DeductionController@createDeduction');
-
+Route::get('/addDeduction/price-ajax/{itemid}/{quantity}','DeductionController@generateSellingPrice');
 //--------------------- END Deduction GET Routes-------------------------//
 
 //---------------------Deduction POST Routes-------------------------//
 
 Route::post('/saveDeductionType','DeductionController@store');
+
+Route::post('/addDeduction/{partyid}','DeductionController@assignDeduction');
 //---------------------END Deduction POST Routes-------------------------//
 
 //---------------------Area GET Routes-------------------------//

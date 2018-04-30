@@ -13,6 +13,10 @@ use App\EmployeeSalary;
 use App\Area;
 use Illuminate\Support\Facades\Input;
 use App\DeductionType;
+use App\Inventory;
+use App\StockAvailability;
+use App\EmployeeDeduction;
+use App\PersonDeduction;
 
 class DeductionController extends Controller
 {
@@ -55,6 +59,73 @@ class DeductionController extends Controller
 
         $data = Employees::where('partyid',$partyid)->get();
 
-        return view('content.deduction.edit_employee_deduction',compact('data'));
+        $deduct = DeductionType::all();
+
+        $item = Inventory::join('stock_availabilities', function($join){
+            $join->on('inventories.inventoryid','=','stock_availabilities.inventoryid');
+        })->get();
+
+
+        $user_deduction = PersonDeduction::join('deduction_types', function($join){
+            $join->on('person_deductions.deduction_typeid','=','deduction_types.id');
+        })
+        ->where('partyid',$partyid)->get();
+
+
+
+        return view('content.deduction.edit_employee_deduction',compact('data','deduct','item','user_deduction'));
+    }
+
+    public function generateSellingPrice($itemid,$quantity){
+
+
+
+
+        $price = DB::select('
+            SELECT (selling_price * "'.$quantity.'") as price
+            FROM stock_availabilities
+            WHERE inventoryid = "'.$itemid.'"
+            
+        ');
+        return json_encode($price);
+
+    }
+
+
+    public function assignDeduction(Request $request){
+
+
+        $genId = Uuid::uuid();
+
+        $deduction = new PersonDeduction();
+
+        $req_item = $request->qty;
+        $inventId = Input::get('inventory_item');
+$partyid = $request->partyid;
+
+        $deduction->deductionid = $genId;
+        $deduction->partyid = $request->partyid;
+        $deduction->deduction_typeid = $request->deducttype;
+        $deduction->inventoryid =$inventId;
+        $deduction->amount = $request->qty;
+        $deduction->remarks = $request->comments;
+        $deduction->payment_schemeid =$request->terms;
+        $deduction->status= 1;
+        $deduction->save();
+
+
+
+        DB::table('stock_availabilities')
+            ->where('inventoryid' ,$inventId)
+            ->update(['available_stock'=> DB::raw('available_stock - "'.$req_item.'"')]);
+
+
+        //Going to Person Deduction Table
+        $deduction_assignment = new EmployeeDeduction();
+
+
+
+
+        return redirect('/addDeduction/'.$partyid);
     }
 }

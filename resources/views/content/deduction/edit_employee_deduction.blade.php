@@ -2,40 +2,50 @@
 
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
-
+    <script src="{{ asset('js/bootstrap3.min.js') }}"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function(){
+            var table =  $('#employee-list').DataTable({
 
-            $('#cmd').click(function(){
-                $('#content').append('<br>a datepicker <input class="datepicker_recurring_start"/>');
-            });
-            $('body').on('focus',".datepicker_recurring_start", function(){
-                $(this).datepicker();
             });
 
 
-            $("#startdate").datepicker({ autoclose:true});
-            $("#enddate").datepicker({ autoclose:true});
 
-            $("#birthday").datepicker({
-                maxDate: '+0d',
-                changeMonth: true,
-                changeYear: true,
-                autoclose:true,
-                dateFormat: 'dd-mm-yy' })
-                .on("changeDate", function (e) {
 
-                    var currentDate = new Date();
-                    var selectedDate = new Date($(this).val());
-                    var age = currentDate.getFullYear() - selectedDate.getFullYear();
-                    var m = currentDate.getMonth() - selectedDate.getMonth();
-                    if (m < 0 || (m === 0 && currentDate.getDate() < selectedDate.getDate())) {
-                        age--;
+            $('#qty').on("input propertychange",function(){
+
+
+                var quantity = $(this).val();
+                var itemid =$('#inventory_item :selected').val();
+
+                var token = $("input[name='_token']").val();
+                event.preventDefault();
+                $.ajax({
+                    url: "price-ajax/"+itemid+"/"+quantity,
+                    method: 'get',
+                    datatype:"json",
+                    data: {itemid:itemid,quantity:quantity, _token:token},
+
+                    success: function(data) {
+
+                        $.each(JSON.parse(data), function(key, value){
+                            //console.log(value['name']);
+
+                            $('input[name="price"]').attr('value',value['price']);
+
+
+                        });
+
+                    },
+                    error:function(data,error){
+                        alert(data,error);
                     }
-                    $('#age').attr('value', age);
                 });
+            });
         });
     </script>
+
+
 
     <section class="content-header">
         @foreach($data as $d)
@@ -51,233 +61,215 @@
     </section>
     <section class="content">
         <div class="row">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box-body">
+
+                        <div class="box box-warning">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Add Deductions</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <form method="post" action="saveDeduction" data-parsley-validate="">
+                                    <!-- text input -->
+
+                                    <div class="form-group">
+                                        <label>Deduction Type</label>
+                                        <select class="form-control" id="deducttype" name="deducttype">
+                                            @foreach($deduct as $de)
+                                                <option value="{{$de['id']}}">{{$de['name']}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label>Terms</label>
+                                        <select class="form-control" id="terms" name="terms">
+                                            <option>1 Month</option>
+                                            <option>2 Month</option>
+                                            <option>3 Month</option>
+                                            <option>6 Month</option>
+                                        </select>
+                                        <!-- /.input group -->
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Item</label>
+                                        <select class="form-control" id="inventory_item" name="inventory_item">
+                                            @foreach($item as $i)
+                                                <option value="{{$i['inventoryid']}}">{{$i['item']}} : Available ({{$i['available_stock']}}) at P{{$i['selling_price']}}</option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Quantity</label>
+                                        <input type="text" class="form-control" placeholder="Enter ..." id="qty" name="qty" required="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Price</label>
+                                        <input type="text" class="form-control" placeholder="Enter ..." id="price" name="price" value="" required="" readonly>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Remarks
+                                        </label>
+                                        <textarea class="form-control" rows="3" placeholder="Enter ..." id="comments" name="comments"></textarea>
+                                    </div>
+                                    @foreach($data as $d)
+                                        <input type="hidden" name="partyid" id="partyid" value="{{$d['partyid']}}">
+                                    @endforeach
+                                    <input type="hidden" name="username" id="username" value="{{ Auth::user()->id }}">
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </form>
+
+
+                            </div>                    <!-- /.box-body -->
+                        </div>
+
+
+                </div>
+                </div>
+            </div>
             <!-- left column -->
             <div class="col-md-6">
-                <div class="box box-warning">
+                <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Employee Details</h3>
+                        <h3 class="box-title">Current Deduction</h3>
                     </div>
                     <!-- /.box-header -->
+                    <!-- form start -->
+
                     <div class="box-body">
-                        <form action="saveEmployeeDetails" method="post" data-parsley-validate="">
-                            <!-- text input -->
+                        <table id="employee-list" class="table table-bordered table-striped dataTable" >
+                            <thead>
+                            <tr role="row">
+                            <tr role="row">
+                                <th>deductionid</th>
+                                <th>Deduction Type</th>
+                                <th>Amount</th>
+                                <th>Entered Date</th>
+                                <th>Terms</th>
+                                <th>Status</th>
 
-                            <div class="form-group">
-                                <label>Given Name</label>
-                                <input type="text" class="form-control" placeholder="Enter ..." id="givenname" name="givenname" required="">
-                            </div>
-                            <div class="form-group">
-                                <label>Family Name</label>
-                                <input type="text" class="form-control" placeholder="Enter ..." id="familyname" name="familyname" required="">
-                            </div>
-                            <div class="form-group">
-                                <label>Middle Name</label>
-                                <input type="text" class="form-control" placeholder="Enter ..." id="middlename" name="middlename" required="">
-                            </div>
-                            <div class="form-group">
-                                <label>Gender</label>
-                                <select class="form-control" id="gender" name="gender">
-                                    <option>Male</option>
-                                    <option>Female</option>
+                            </tr>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($user_deduction as $ud)
+                                <tr>
+                                    <td>{{$ud['deductionid']}}</td>
+                                    <td>{{$ud['name']}}</td>
+                                    <td>{{$ud['amount']}}</td>
+                                    <td>{{$ud['created_at']}}</td>
+                                    <td>{{$ud['payment_schemeid']}}</td>
+                                    <td>{{$ud['status']}}</td>
 
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon "><i class="fa fa-envelope"></i></span>
-                                    <input type="email" class="form-control" placeholder="Email" id="email" name="email" data-parsley-trigger="change">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                    <input type="text" class="form-control" placeholder="Contact Number" id="contactnumber" name="contactnumber" required="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Birthdate:</label>
-
-                                <div class="input-group date">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    <input type="text" class="form-control pull-right" id="birthday" name="birthday">
-                                </div>
-                                <!-- /.input group -->
-                            </div>
-                            <div class="form-group">
-                                <label>Age:</label>
-                                <input type="text" class="form-control" id="age" name="age" >
-                                <!-- /.input group -->
-                            </div>
-                            <div class="form-group">
-                                <label>Religion:</label>
-                                <input type="text" class="form-control" id="religion" name="religion" >
-                                <!-- /.input group -->
-                            </div>
-
-                            <div class="form-group">
-                                <label>Civil Status</label>
-                                <select class="form-control" id="civilstatus" name="civilstatus">
-                                    <option>Single</option>
-                                    <option>Married</option>
-                                    <option>Divorced</option>
-                                    <option>Widowed</option>
-                                </select>
-                                <!-- /.input group -->
-                            </div>
-
-                            <div class="form-group">
-                                <label>Address</label>
-                                <textarea class="form-control" rows="3" placeholder="Enter ..." id="address" name="address" required=""></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Comments</label>
-                                <textarea class="form-control" rows="3" placeholder="Enter ..." id="comments" name="comments"></textarea>
-                            </div>
-
-                            <div class="box-footer">
-                                <div class="form-group">
-                                    <label>Start Date:</label>
-
-                                    <div class="input-group date">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        <input type="text" class="form-control pull-right" id="startdate" name="startdate" required="">
-                                    </div>
-                                    <!-- /.input group -->
-                                </div>
-                                <div class="form-group">
-                                    <label>End Date:</label>
-
-                                    <div class="input-group date">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        <input type="text" class="form-control pull-right" id="enddate">
-                                    </div>
-                                    <!-- /.input group -->
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Employee Status</label>
-                                    <select class="form-control" id="emp_stat" name="emp_stat" required="">
-                                        <option>Full-Time</option>
-                                        <option>Contractual</option>
-
-                                    </select>
-                                    <!-- /.input group -->
-                                </div>
-
-                            </div>
+                                </tr>
+                            @endforeach
 
 
 
+                            </tbody>
 
+                        </table>
                     </div>
                     <!-- /.box-body -->
+
+                    <!-- /.box-footer -->
                 </div>
             </div>
             <!-- right column -->
             <div class="col-md-6">
-                <div class="box box-success">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Assign Team</h3>
-                    </div>
-                    <div class="box-body">
-
-                        <div class="form-group">
-                            <label>Team Name</label>
-                            <select class="form-control" id="assignteam" name="assignteam">
-                                <option value="">----</option>
-
-                            </select>
-                        </div>
-
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- Horizontal Form -->
-                <div class="box box-info">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Area Assignment</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <!-- form start -->
-
-                    <div class="box-body">
-
-                        <div class="form-group">
-                            <label>Area</label>
-                            <select class="form-control" name="areaid" id="areaid">
-                                <option value="">----</option>
-
-                            </select>
-                        </div>
-
-
-
-
-                        <!-- /.box-body -->
-
-                        <!-- /.box-footer -->
-                    </div>
-                </div>
-
 
                 <div class="box box-danger">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Salary Details</h3>
+                        <h3 class="box-title">Deduction History</h3>
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
 
                     <div class="box-body">
-                        <div class="form-group">
-                            <label>Salary Rate</label>
-                            <input type="text" class="form-control" placeholder="Enter ..." id="salary_rate" name="salary_rate" required="" data-parsley-pattern="^[0-9]*\.[0-9]{2}$">
+
+                        <div class="nav-tabs-custom">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Rice</a></li>
+                                <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Corn</a></li>
+                                <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Materials</a></li>
+                                <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Cash Advance</a></li>
+                                <li class=""><a href="#tab_4" data-toggle="tab" aria-expanded="false">Paluwagan</a></li>
+
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab_1">
+                                    <table id="" class="table table-bordered table-striped dataTable" >
+                                        <thead>
+                                        <tr role="row">
+                                        <tr role="row">
+                                            <th>deductionid</th>
+                                            <th>Start Date</th>
+                                            <th>Terms</th>
+                                            <th>Options</th>
+                                        </tr>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.tab-pane -->
+                                <div class="tab-pane" id="tab_2">
+                                    <table id="" class="table table-bordered table-striped dataTable" >
+                                        <thead>
+                                        <tr role="row">
+                                        <tr role="row">
+                                            <th>deductionid</th>
+                                            <th>Start Date</th>
+                                            <th>Terms</th>
+                                            <th>Options</th>
+                                        </tr>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.tab-pane -->
+                                <div class="tab-pane" id="tab_3">
+                                    <table id="employee-list" class="table table-bordered table-striped dataTable" >
+                                        <thead>
+                                        <tr role="row">
+                                        <tr role="row">
+                                            <th>deductionid</th>
+                                            <th>Start Date</th>
+                                            <th>Terms</th>
+                                            <th>Options</th>
+                                        </tr>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.tab-pane -->
+                            </div>
+                            <!-- /.tab-content -->
                         </div>
-                        <div class="form-group">
-                            <label>SSS ID</label>
-                            <input type="text" id="sss_id" name="sss_id" class="form-control" placeholder="Enter ...">
-                        </div>
-                        <div class="form-group">
-                            <label>PHILHEALTH ID</label>
-                            <input type="text" class="form-control" id="philhealth_id" name="philhealth_id" placeholder="Enter ...">
-                        </div>
-                        <div class="form-group">
-                            <label>PAG-IBIG</label>
-                            <input type="text" class="form-control" id="pagibig_id" name="pagibig_id" placeholder="Enter ...">
-                        </div>
-                        <div class="form-group">
-                            <label>TIN</label>
-                            <input type="text" class="form-control" id="tax_id" name="tax_id" placeholder="Enter ...">
-                        </div>
+
+
+
                     </div>
                     <!-- /.box-body -->
 
                     <!-- /.box-footer -->
 
                 </div>
-
-                <div class="box box-success">
-
-                    <div class="box-body" style="text-align: center;">
-
-                        <div class="form-group">
-                            <input type="hidden" name="username" value="{{ Auth::user()->id }}">
-                            <input type="hidden" name="_token" value="{{csrf_token()}}">
-                            <button type="submit" class="btn-lg btn-info">Save</button>
-                        </div>
-                        </form>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-
-
 
             </div>
             <!--/.col (right) -->

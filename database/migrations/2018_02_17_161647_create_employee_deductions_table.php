@@ -17,8 +17,9 @@ class CreateEmployeeDeductionsTable extends Migration
             $table->increments('id');
             $table->string('deduction_typeid');
             $table->string('partyid');
-            $table->text('reason');
             $table->string('amount');
+            $table->text('reason')->nullable();
+            $table->boolean('status');
             $table->string('createdby');
             $table->timestamps();
         });

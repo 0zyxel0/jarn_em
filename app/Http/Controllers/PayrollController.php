@@ -29,15 +29,16 @@ class PayrollController extends Controller
         select distinct sa.partyid,e.givenname,e.familyname, x.hours,es.daily_rate
         from schedule_attendances sa 
         left join 
-        (SELECT s.partyid,SUM(pst.hours) as hours FROM `schedule_attendances` s
-        LEFT JOIN present_status_types pst on s.presenttype = pst.id
-         where s.startdate between "'.$wFrom.'" and "'.$wTo.'" 
-        GROUP BY s.partyid
-        ) as x
-        on sa.partyid = x.partyid
+                    (
+                        SELECT s.partyid,SUM(pst.hours) as hours 
+                        FROM `schedule_attendances` s
+                        LEFT JOIN present_status_types pst on s.presenttype = pst.id
+                        WHERE s.startdate between "'.$wFrom.'" and "'.$wTo.'" 
+                        GROUP BY s.partyid
+                    ) as x on sa.partyid = x.partyid
         left join employees e on e.partyid = sa.partyid
         left join employee_salaries es on es.partyid = e.partyid
-        
+       
         where sa.areaid = "'.$areaid.'"
        
         
@@ -64,6 +65,7 @@ class PayrollController extends Controller
         $toDate_json = json_encode($toDate);
 
 
+
         return view('content.payroll.view_employee_area_payroll',['data'=>json_decode($query_json, true),'toDate'=>json_decode($toDate_json,true),'fromDate'=>json_decode($fromDate_json,true
         )]);
 
@@ -75,6 +77,7 @@ class PayrollController extends Controller
 
         $area = Area::select('areaid','name')->whereNull('parentareaid')->get();
         $weekTo = Schedule::all();
+
         return view('content.payroll.view_pickmonth_payroll',compact('area','weekTo'));
     }
 

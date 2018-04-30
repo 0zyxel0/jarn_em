@@ -94,7 +94,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/jarn_em/public/createDeductionType"><i class="fa fa-circle-o"></i>Add Deduction Type</a></li>
+                    <li><a href="/jarn_em/public/createDeductionType"><i class="fa fa-circle-o"></i>Deduction Type</a></li>
                     <li><a href="/jarn_em/public/viewdeductionlist"><i class="fa fa-circle-o"></i>View Deduction List</a></li>
 
 
