@@ -139,7 +139,7 @@
                             <thead>
                             <tr role="row">
                             <tr role="row">
-                                <th>deductionid</th>
+
                                 <th>Deduction Type</th>
                                 <th>Quantity</th>
                                 <th>Total Amount</th>
@@ -153,7 +153,7 @@
                             <tbody>
                             @foreach($user_deduction as $ud)
                                 <tr>
-                                    <td>{{$ud['deductionid']}}</td>
+
                                     <td>{{$ud['name']}}</td>
                                     <td>{{$ud['quantity']}}</td>
                                     <td>{{$ud['total_price']}}</td>
