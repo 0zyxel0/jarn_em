@@ -46,9 +46,17 @@ class DeductionController extends Controller
     public function viewEmployeeDeductionList(){
 
         $query = DB::select('
-                    select e.partyid, e.givenname, e.familyname, amount
+                    select e.partyid, e.givenname, e.familyname, ed.total_price
                     from employees e
-                    left join employee_deductions ed on e.partyid = ed.partyid
+                    left join 
+                    (
+                      select DISTINCT partyid,SUM(total_price) as total_price
+                      from employee_deductions
+                      Group by partyid
+                      
+                    ) ed on ed.partyid=e.partyid
+                    
+                    
         ');
 
         $query_json = json_encode($query);

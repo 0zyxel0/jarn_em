@@ -77,7 +77,7 @@
                                     <td>   {{$item['partyid']}}</td>
                                     <td>   {{$item['givenname']}}</td>
                                     <td>   {{$item['familyname']}}</td>
-                                    <td>   {{$item['amount']}}</td>
+                                    <td>   {{$item['total_price']}}</td>
 
                                     <td>
                                         <button id="btn_viewDeductions"><i class="fa fa-book"></i> View</button>

@@ -26,7 +26,7 @@ class PayrollController extends Controller
 
       // dd($areaid,$wFrom,$wTo);
         $query = DB::select('
-        select distinct sa.partyid,e.givenname,e.familyname, x.hours,es.daily_rate
+        select distinct sa.partyid,e.givenname,e.familyname, x.hours,es.daily_rate, ed.total_price
         from schedule_attendances sa 
         left join 
                     (
@@ -38,7 +38,13 @@ class PayrollController extends Controller
                     ) as x on sa.partyid = x.partyid
         left join employees e on e.partyid = sa.partyid
         left join employee_salaries es on es.partyid = e.partyid
-       
+        left join 
+                    (
+                      select DISTINCT partyid,SUM(total_price) as total_price
+                      from employee_deductions
+                      Group by partyid
+                      
+                    ) ed on ed.partyid=e.partyid
         where sa.areaid = "'.$areaid.'"
        
         
@@ -77,6 +83,8 @@ class PayrollController extends Controller
 
         $area = Area::select('areaid','name')->whereNull('parentareaid')->get();
         $weekTo = Schedule::all();
+
+
 
         return view('content.payroll.view_pickmonth_payroll',compact('area','weekTo'));
     }

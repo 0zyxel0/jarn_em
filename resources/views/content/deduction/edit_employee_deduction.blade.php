@@ -48,6 +48,7 @@
 
 
     <section class="content-header">
+        <button class="btn btn-block btn-default" onclick="location.href='/jarn_em/public/viewdeductionlist'; return false;" type="button" style="width: 150px;"> &lt; Back to Dashboard</button>
         @foreach($data as $d)
         <h1>
             Deduction History of {{$d['givenname']}} {{$d['familyname']}}
@@ -141,7 +142,7 @@
                             <tr role="row">
 
                                 <th>Deduction Type</th>
-                                <th>Quantity</th>
+                                <th>Quantity (Kg)</th>
                                 <th>Total Amount</th>
                                 <th>Entered Date</th>
 

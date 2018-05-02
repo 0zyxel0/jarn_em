@@ -33,7 +33,19 @@
 
                             }
 
+                        },
+                        {
+
+                            "targets":[10],
+                            "data":null,
+                            "render": function(full)
+                            {
+                                return (((full[4]/8)*(full[5])-(full[9])));
+
+                            }
+
                         }
+
                     ],
 
             });
@@ -115,8 +127,8 @@
                                 <th>From</th>
                                 <th>To</th>
                                 <th>Gross Salary</th>
-
                                 <th>Deduction</th>
+                                <th>Net Salary</th>
                                 <th>Options</th>
                             </tr>
                             </tr>
@@ -139,6 +151,7 @@
                                     @endforeach
 
                                     <td></td>
+                                    <td>{{$item['total_price']}}</td>
                                     <td></td>
                                     <td>
                                         <button id="btn_viewProfile"><i class="fa fa-book"></i> View Details</button>
