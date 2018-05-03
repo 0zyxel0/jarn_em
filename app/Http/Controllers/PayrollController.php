@@ -77,6 +77,39 @@ class PayrollController extends Controller
 
     }
 
+    public function viewGeneratedPayslip($partyid,$startdate,$enddate){
+
+        $query = DB::select('
+        select distinct sa.partyid,e.givenname,e.familyname, x.hours,es.daily_rate, ed.total_price
+        from schedule_attendances sa 
+        left join 
+                    (
+                        SELECT s.partyid,SUM(pst.hours) as hours 
+                        FROM `schedule_attendances` s
+                        LEFT JOIN present_status_types pst on s.presenttype = pst.id
+                        WHERE s.scheduleid ="'.$startdate.'"
+                         and s.scheduleid = "'.$enddate.'"
+                        GROUP BY s.partyid
+                    ) as x on sa.partyid = x.partyid
+        left join employees e on e.partyid = sa.partyid
+        left join employee_salaries es on es.partyid = e.partyid
+        left join 
+                    (
+                      select DISTINCT partyid,SUM(total_price) as total_price
+                      from employee_deductions
+                      Group by partyid
+                      
+                    ) ed on ed.partyid=e.partyid
+        where sa.partyid = "'.$partyid.'"
+       
+        
+        ');
+dd($query);
+        $query_json = json_encode($query);
+
+        return view('content.payroll.view_employee_payslipdetails',['data'=>json_decode($query_json,true)]);
+    }
+
     public function viewPayrollList(){
 
 

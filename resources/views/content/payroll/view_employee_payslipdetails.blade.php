@@ -19,7 +19,7 @@
                             "targets":[4],
                             "render": function(data){
 
-                              return (data/8);
+                                return (data/8);
 
                             }
                         },
@@ -56,10 +56,10 @@
                 window.location.href='editEmployeeDetails/'+data[0];
             });
 
-            $('#employee-list tbody').on( 'click', '#btn_viewDetails', function () {
+            $('#employee-list tbody').on( 'click', '#btn_viewProfile', function () {
 
                 var data = table.row( $(this).parents('tr') ).data();
-                window.location.href='viewEmployeePayslip/'+data[0]+'/'+data[6]+'/'+data[7];
+                window.location.href='profile/'+data[0];
             });
 
         });
@@ -85,27 +85,7 @@
 
                 <div class="box">
                     <div class="box-header">
-                        <table class="table ">
-                            <thead>
-                            <tr>
-
-                            <td>FROM</td>
-                                @foreach($fromDate as $d)
-                                    <td>{{$d['startdate']}}</td>
-                                @endforeach
-
-
-
-                            </tr>
-                            <tr>
-                                <td> TO</td>
-                                @foreach($toDate as $d)
-                                    <td>{{$d['enddate']}}</td>
-                                @endforeach
-                            </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
+                        Salary Payslip
 
                     </div>
                 </div>
@@ -113,56 +93,60 @@
 
                     <!-- /.box-header -->
                     <div class="box-body">
+                    @foreach($data as $d)
 
-                        <table id="employee-list" class="table table-bordered table-striped dataTable" >
-                            <thead>
-                            <tr role="row">
-                            <tr role="row">
-                                <th>partyid</th>
-                                <th>Family Name</th>
-                                <th>Given Name</th>
-                                <th>Hours</th>
-                                <th>Total Work Days</th>
-                                <th>Rate</th>
-                                <th>From</th>
-                                <th>To</th>
-                                <th>Gross Salary</th>
-                                <th>Deduction</th>
-                                <th>Net Salary</th>
-                                <th>Options</th>
-                            </tr>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            @foreach($data as $item)
+                            <table width="100%">
+                                <tbody>
                                 <tr>
-                                    <td>   {{$item['partyid']}}</td>
-                                    <td>   {{$item['familyname']}}</td>
-                                    <td>   {{$item['givenname']}}</td>
-                                    <td>   {{$item['hours']}}</td>
-                                    <td>{{$item['hours']}}</td>
-                                    <td>   {{$item['daily_rate']}}</td>
-                                    @foreach($fromDate as $d)
-                                        <td>{{$d['scheduleid']}}</td>
-                                    @endforeach
-                                    @foreach($toDate as $d)
-                                        <td>{{$d['scheduleid']}}</td>
-                                    @endforeach
-
-                                    <td></td>
-                                    <td>{{$item['total_price']}}</td>
-                                    <td></td>
-                                    <td>
-                                        <button id="btn_viewDetails"><i class="fa fa-book"></i> View Details</button>
-                                        <button id="btn_editProfile"><i class="fa fa-edit"></i> Edit</button>
-                                    </td>
+                                    <th>Employee</th>
+                                    <td> {{$d['givenname']}} {{$d['familyname']}}</td>
+                                    <th>Employee Id</th>
+                                    <td> {{$d['partyid']}}</td>
                                 </tr>
-                            @endforeach
 
+                                <tr>
+                                    <th>Department</th>
+                                    <td>Engineer</td>
+                                    <th>Job Title</th>
+                                    <td>Finance Manager</td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                    @endforeach
+
+                        <table class="table" width="100%">
+                            <tbody>
+                            <tr>
+                                <th>Gross Salary</th>
+                                <td></td>
+
+                            </tr>
+                            <tr>
+                                <th>Deduction</th>
+                                <td>{{$d['total_price']}}</td>
+                            </tr>
+                            <tr>
+                                <th>Net Salary</th>
+                                <td>{{$d['hours']}}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Bonus</th>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <th>Payment Amount</th>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <th>Comment</th>
+                                <td> </td>
+                            </tr>
 
                             </tbody>
-
                         </table>
                     </div>
                     <!-- /.box-body -->

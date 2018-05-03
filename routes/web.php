@@ -85,7 +85,7 @@ Route::post('/areadetails/{areaid}','AreaController@saveChildAreaRecord');
 Route::get('/viewList','PayrollController@viewPayrollList');
 Route::get('generatePayslip','PayrollController@generateAttendanceSalary');
 Route::get('area-ajax/{areaid}','PayrollController@getAreaSiteList');
-
+Route::get('/viewEmployeePayslip/{partyid}/{startdate}/{enddate}','PayrollController@viewGeneratedPayslip');
 //---------------------END Payroll GET Routes-------------------------//
 
 //--------------------- Payroll POST Routes-------------------------//
