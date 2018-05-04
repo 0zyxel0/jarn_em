@@ -87,8 +87,7 @@ class PayrollController extends Controller
                         SELECT s.partyid,SUM(pst.hours) as hours 
                         FROM `schedule_attendances` s
                         LEFT JOIN present_status_types pst on s.presenttype = pst.id
-                        WHERE s.scheduleid ="'.$startdate.'"
-                         and s.scheduleid = "'.$enddate.'"
+                         WHERE s.startdate between "'.$startdate.'" and "'.$enddate.'" 
                         GROUP BY s.partyid
                     ) as x on sa.partyid = x.partyid
         left join employees e on e.partyid = sa.partyid
@@ -104,7 +103,7 @@ class PayrollController extends Controller
        
         
         ');
-dd($query);
+
         $query_json = json_encode($query);
 
         return view('content.payroll.view_employee_payslipdetails',['data'=>json_decode($query_json,true)]);

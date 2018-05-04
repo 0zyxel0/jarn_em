@@ -59,7 +59,9 @@
             $('#employee-list tbody').on( 'click', '#btn_viewDetails', function () {
 
                 var data = table.row( $(this).parents('tr') ).data();
-                window.location.href='viewEmployeePayslip/'+data[0]+'/'+data[6]+'/'+data[7];
+                var sdate = $('#fstartdate').val();
+                var edate = $('#fenddate').val();
+                window.location.href='viewEmployeePayslip/'+data[0]+'/'+sdate+'/'+edate;
             });
 
         });
@@ -91,7 +93,7 @@
 
                             <td>FROM</td>
                                 @foreach($fromDate as $d)
-                                    <td>{{$d['startdate']}}</td>
+                                    <td>{{$d['startdate']}} <input type="hidden" value="{{$d['startdate']}}" id="fstartdate"/></td>
                                 @endforeach
 
 
@@ -100,7 +102,7 @@
                             <tr>
                                 <td> TO</td>
                                 @foreach($toDate as $d)
-                                    <td>{{$d['enddate']}}</td>
+                                    <td>{{$d['enddate']}} <input type="hidden" value="{{$d['enddate']}}" id="fenddate"/></td>
                                 @endforeach
                             </tr>
                             </thead>
@@ -129,6 +131,7 @@
                                 <th>Gross Salary</th>
                                 <th>Deduction</th>
                                 <th>Net Salary</th>
+
                                 <th>Options</th>
                             </tr>
                             </tr>
@@ -153,6 +156,7 @@
                                     <td></td>
                                     <td>{{$item['total_price']}}</td>
                                     <td></td>
+
                                     <td>
                                         <button id="btn_viewDetails"><i class="fa fa-book"></i> View Details</button>
                                         <button id="btn_editProfile"><i class="fa fa-edit"></i> Edit</button>

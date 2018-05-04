@@ -62,6 +62,11 @@
                 window.location.href='profile/'+data[0];
             });
 
+            var hourField = $('#hourData').val();
+            var dayField = $('#dayData').val();
+
+
+
         });
     </script>
 
@@ -113,13 +118,28 @@
                                 </tbody>
                             </table>
 
-                    @endforeach
+
 
                         <table class="table" width="100%">
                             <tbody>
                             <tr>
+                                <th>Daily Rate</th>
+                                <td><input type="text" value="" id="rateData" name="rateData" value="{{$d['daily_rate']}}"/>{{$d['daily_rate']}}</td>
+
+                            </tr>
+                            <tr>
+                                <th>Hours Worked</th>
+                                <td><input type="text" value="{{$d['hours']}}" name="hourData" id="hourData">{{$d['hours']}}</td>
+
+                            </tr>
+                            <tr>
+                                <th>Days Worked</th>
+                                <td><input type="text" value="" name="dayData" id="dayData"></td>
+
+                            </tr>
+                            <tr>
                                 <th>Gross Salary</th>
-                                <td></td>
+                                <td><input type="text" value="" id="GrossSalary" name="GrossSalary"/></td>
 
                             </tr>
                             <tr>
@@ -148,6 +168,7 @@
 
                             </tbody>
                         </table>
+                        @endforeach
                     </div>
                     <!-- /.box-body -->
                 </div>
