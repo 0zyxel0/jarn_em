@@ -65,7 +65,33 @@
             var hourField = $('#hourData').val();
             var dayField = $('#dayData').val();
 
+            var getHourValue = $('#hourDataField').val();
 
+            function computeDaysWorked(getHourValue){
+                   return (getHourValue/8);
+            }
+
+            function computeGrossSalary(getDaysWorked,getDailyRate){
+                return (getDaysWorked * getDailyRate)
+            }
+
+            function computeNetSalary(getDeductions,getGrossSalary){
+                return (getGrossSalary - getDeductions)
+            }
+
+            $("#daysWorkedField").attr("value",(computeDaysWorked(getHourValue))).val((computeDaysWorked(getHourValue)));
+
+            var getDaysWorked =  $("#daysWorkedField").val();
+            var getDailyRate =  $("#rateDataField").val();
+
+            $("#grossSalaryField").attr("value",(computeGrossSalary(getDaysWorked,getDailyRate))).val(computeGrossSalary(getDaysWorked,getDailyRate));
+
+            var getDeductions = $('#deductionField').val();
+            var getGrossSalary = $('#grossSalaryField').val();
+
+            $("#netSalaryField").attr("value",(computeNetSalary(getDeductions,getGrossSalary))).val(computeNetSalary(getDeductions,getGrossSalary));
+
+            $('#totalAmountField').attr("value",$('#netSalaryField').val()).val($('#netSalaryField').val());
 
         });
     </script>
@@ -124,46 +150,49 @@
                             <tbody>
                             <tr>
                                 <th>Daily Rate</th>
-                                <td><input type="text" value="" id="rateData" name="rateData" value="{{$d['daily_rate']}}"/>{{$d['daily_rate']}}</td>
+                                <td><input type="text" id="rateDataField" name="rateDataField" value="{{$d['daily_rate']}}"/></td>
 
                             </tr>
                             <tr>
                                 <th>Hours Worked</th>
-                                <td><input type="text" value="{{$d['hours']}}" name="hourData" id="hourData">{{$d['hours']}}</td>
+                                <td><input type="text" value="{{$d['hours']}}" name="hourDataField" id="hourDataField"></td>
 
                             </tr>
                             <tr>
                                 <th>Days Worked</th>
-                                <td><input type="text" value="" name="dayData" id="dayData"></td>
+                                <td><input type="text" value="" name="daysWorkedField" id="daysWorkedField"></td>
 
                             </tr>
                             <tr>
                                 <th>Gross Salary</th>
-                                <td><input type="text" value="" id="GrossSalary" name="GrossSalary"/></td>
+                                <td><input type="text" value="" id="grossSalaryField" name="grossSalaryField"/></td>
 
                             </tr>
                             <tr>
                                 <th>Deduction</th>
-                                <td>{{$d['total_price']}}</td>
+
+                                <td><input type="text" value="{{$d['total_price']}}" name="deductionField" id="deductionField"></td>
+
                             </tr>
                             <tr>
                                 <th>Net Salary</th>
-                                <td>{{$d['hours']}}</td>
+                                <td><input type="text" value="" name="netSalaryField" id="netSalaryField"></td>
+
                             </tr>
 
                             <tr>
                                 <th>Bonus</th>
-                                <td></td>
+                                <td><input type="text" name="bonusField" id="bonusField"/></td>
                             </tr>
 
                             <tr>
                                 <th>Payment Amount</th>
-                                <td></td>
+                                <td><input type="text" value="" name="totalAmountField" id="totalAmountField"></td>
                             </tr>
 
                             <tr>
                                 <th>Comment</th>
-                                <td> </td>
+                                <td><input type="text" name="commentsField" id="commentsField"/></td>
                             </tr>
 
                             </tbody>
