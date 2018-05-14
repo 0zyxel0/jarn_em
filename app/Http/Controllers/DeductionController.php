@@ -72,7 +72,8 @@ class DeductionController extends Controller
 
         $item = Inventory::join('stock_availabilities', function($join){
             $join->on('inventories.inventoryid','=','stock_availabilities.inventoryid');
-        })->get();
+
+        })->where('stock_availabilities.available_stock','<>',0)->get();
 
 
         $user_deduction = EmployeeDeduction::join('deduction_types', function($join){
@@ -123,7 +124,6 @@ class DeductionController extends Controller
             ->update(['available_stock'=> DB::raw('available_stock - "'.$req_item.'"')]);
 
 
-        //Going to Person Deduction Table
         $deduction_assignment = new EmployeeDeduction();
 
         $deduction_assignment->deductionid = $genId;

@@ -16,12 +16,7 @@ class CreatePersonDeductionsTable extends Migration
         Schema::create('person_deductions', function (Blueprint $table) {
             $table->string('deductionid');
             $table->string('partyid');
-            $table->integer('deduction_typeid');
-            $table->string('inventoryid')->nullable();
             $table->float('amount')->nullable();
-            $table->string('remarks')->nullable();
-            $table->string('payment_schemeid')->nullable();
-            $table->boolean('status');
             $table->timestamps();
         });
     }
