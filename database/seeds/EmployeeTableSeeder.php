@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 
 class EmployeeTableSeeder extends Seeder
@@ -29,7 +30,7 @@ class EmployeeTableSeeder extends Seeder
             'status' => 'Contractual',
              'religion' => '',
             'startdate' => '2018-03-22',
-            'enddate' => '',
+            'enddate' => null,
              'religion' => '',
             'isActive' => '1',
             'updatedby' => '1'
