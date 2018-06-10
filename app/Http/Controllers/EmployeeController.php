@@ -7,6 +7,7 @@ use App\EmployeeImage;
 use App\EmployeeTeam;
 use App\Area;
 use App\EmployeeTeamAssignment;
+use App\PersonDeduction;
 use Illuminate\Http\Request;
 use Faker\Provider\Uuid;
 use DB;
@@ -20,6 +21,15 @@ class EmployeeController extends Controller
 {
    public function saveEmployeeDetails(Request $request){
        $genId =  Uuid::uuid();
+
+       $deductions = new PersonDeduction;
+
+       $deductionid = Uuid::uuid();
+
+       $deductions->deductionid=$deductionid;
+       $deductions->partyid=$genId;
+       $deductions->amount = 0;
+       $deductions->save();
 
        $employee = new Employees;
 
@@ -140,8 +150,8 @@ $area_spec = DB::table('employee_areas')
     ->get();
 $team = EmployeeTeam::all();
 $salary = EmployeeSalary::where('partyid',$id)->get();
-$governmentid = EmployeeGovernmentDetail::select('name','government_num')->where('partyid',$id)->get();
 
+$governmentid = EmployeeGovernmentDetail::select('name','government_num')->where('partyid',$id)->get();
 
 
 return view('content.employee.edit_employee',compact('data','area','area_spec','team','salary','governmentid'));
@@ -188,8 +198,6 @@ public function newEmployee(){
 
 public function updateEmployeeDetails(Request $request){
 
-$input = $request->all();
-    return "Feature Not Yet Available";
 
 }
 

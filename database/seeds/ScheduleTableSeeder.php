@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Provider\Uuid;
 
 class ScheduleTableSeeder extends Seeder
 {
@@ -14,61 +15,76 @@ class ScheduleTableSeeder extends Seeder
     {
         DB::table('schedules')->insert(
             [
-            'scheduleid'           => '2694c946-b262-3a56-8b71-9c5f529f778f',
+            'scheduleid'           => Uuid::uuid(),
             'year_number'          => 2018,
             'week_number'       => 1,
             'startdate' => '2018-01-01',
             'enddate'        => '2018-01-06',
             'createdby' => 1,
             'isActive' => 0
-            ],
+            ]);
+        DB::table('schedules')->insert(
             [
-                'scheduleid'           => 'bd806508-2c66-11e8-b467-0ed5f89f718b',
+                'scheduleid'           => Uuid::uuid(),
                 'year_number'          => 2018,
                 'week_number'       => 2,
                 'startdate' => '2018-01-07',
                 'enddate'        => '2018-01-13',
                 'createdby' => 1,
                 'isActive' => 0
-            ],
+            ]);
+        DB::table('schedules')->insert(
             [
-                'scheduleid'           => 'd6c665c6-2c66-11e8-b467-0ed5f89f718b',
+                'scheduleid'           => Uuid::uuid(),
                 'year_number'          => 2018,
                 'week_number'       => 3,
                 'startdate' => '2018-01-14',
                 'enddate'        => '2018-01-20',
                 'createdby' => 1,
                 'isActive' => 0
-            ],
+            ]
+        );
+        DB::table('schedules')->insert(
             [
-                'scheduleid'           => 'f877fc5c-2c66-11e8-b467-0ed5f89f718b',
+                'scheduleid'           => Uuid::uuid(),
                 'year_number'          => 2018,
                 'week_number'       => 4,
                 'startdate' => '2018-01-21',
                 'enddate'        => '2018-01-27',
                 'createdby' => 1,
                 'isActive' => 0
-            ],
+            ]
+            );
+
+        DB::table('schedules')->insert(
+
+                [
+                    'scheduleid'           => Uuid::uuid(),
+                    'year_number'          => 2018,
+                    'week_number'       => 5,
+                    'startdate' => '2018-01-28',
+                    'enddate'        => '2018-02-03',
+                    'createdby' => 1,
+                    'isActive' => 0
+                ]
+
+            );
+
+        DB::table('schedules')->insert(
             [
-                'scheduleid'           => '09261124-2c67-11e8-b467-0ed5f89f718b',
-                'year_number'          => 2018,
-                'week_number'       => 5,
-                'startdate' => '2018-01-28',
-                'enddate'        => '2018-02-03',
-                'createdby' => 1,
-                'isActive' => 0
-            ],
-            [
-                'scheduleid'           => '22a2cc3c-2c67-11e8-b467-0ed5f89f718b',
+                'scheduleid'           => Uuid::uuid(),
                 'year_number'          => 2018,
                 'week_number'       => 6,
                 'startdate' => '2018-02-04',
                 'enddate'        => '2018-02-10',
                 'createdby' => 1,
                 'isActive' => 0
-            ],
+            ]
+        );
+
+        DB::table('schedules')->insert(
             [
-                'scheduleid'           => '4095aeb2-2c67-11e8-b467-0ed5f89f718b',
+                'scheduleid'           => Uuid::uuid(),
                 'year_number'          => 2018,
                 'week_number'       => 7,
                 'startdate' => '2018-02-11',
@@ -76,9 +92,11 @@ class ScheduleTableSeeder extends Seeder
                 'createdby' => 1,
                 'isActive' => 0
             ]
-            ,
+        );
+
+        DB::table('schedules')->insert(
             [
-                'scheduleid'           => '4f86e33c-2c67-11e8-b467-0ed5f89f718b',
+                'scheduleid'           => Uuid::uuid(),
                 'year_number'          => 2018,
                 'week_number'       => 8,
                 'startdate' => '2018-02-18',
@@ -86,9 +104,11 @@ class ScheduleTableSeeder extends Seeder
                 'createdby' => 1,
                 'isActive' => 0
             ]
-            ,
+        );
+
+        DB::table('schedules')->insert(
             [
-                'scheduleid'           => '60fe8638-2c67-11e8-b467-0ed5f89f718b',
+                'scheduleid'           => Uuid::uuid(),
                 'year_number'          => 2018,
                 'week_number'       => 9,
                 'startdate' => '2018-02-25',
@@ -96,9 +116,12 @@ class ScheduleTableSeeder extends Seeder
                 'createdby' => 1,
                 'isActive' => 0
             ]
-            ,
+        );
+
+
+        DB::table('schedules')->insert(
             [
-                'scheduleid'           => '9bff3bc4-2c67-11e8-b467-0ed5f89f718b',
+                'scheduleid'           => Uuid::uuid(),
                 'year_number'          => 2018,
                 'week_number'       => 10,
                 'startdate' => '2018-03-04',
@@ -106,8 +129,6 @@ class ScheduleTableSeeder extends Seeder
                 'createdby' => 1,
                 'isActive' => 0
             ]
-
-
         );
     }
 }

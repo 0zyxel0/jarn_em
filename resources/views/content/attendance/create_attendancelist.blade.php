@@ -60,6 +60,7 @@
                     +"@endforeach"
                     +"</select>"
                     +"</td>"
+
                     +"<td>"
                     +"<select name='areaid[]' class='form-control'>"
                     +"<option disabled>Select Area...</option>"
@@ -146,6 +147,7 @@
 
                                 <th>Present</th>
                                 <th>Present Type</th>
+                                <th>Hours</th>
                                 <th>Area</th>
                                 <th>Project</th>
 
@@ -159,6 +161,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+
                                 <td></td>
                                 <td></td>
                                 <td><button class="pull-right">Submit For Approval</button></td>
@@ -196,6 +199,7 @@
 
                                     </select>
                                 </td>
+                                <td></td>
                                 <td>
                                     <select name="areaid[]" class="form-control">
                                         <option disabled>Select Area...</option>
