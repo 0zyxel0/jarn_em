@@ -82,10 +82,6 @@ class DeductionController extends Controller
 
 
 
-
-
-
-
         return view('content.deduction.edit_employee_deduction',compact('data','deduct','item','user_deduction'));
     }
 
@@ -106,9 +102,7 @@ class DeductionController extends Controller
 
 
     public function assignDeduction(Request $request){
-
-
-        $genId = Uuid::uuid();
+            $genId = Uuid::uuid();
 
 
 
@@ -137,8 +131,7 @@ class DeductionController extends Controller
         $deduction_assignment->createdby = $request->username;
         $deduction_assignment->save();
 
-
-
+        PersonDeduction::where('partyid',$partyid)->update(['amount'=>DB::raw('amount + "'.$request->price.'"')]);
 
 
 

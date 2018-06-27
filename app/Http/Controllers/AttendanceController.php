@@ -151,6 +151,8 @@ public function viewAreaTileList(){
 public function viewAreaLocationTileList($parentid){
     $area = Area::select('areaid','name')->where('parentareaid',$parentid)->get();
 
+  //  $employeeCount = DB::select('select count(partyid) from employee_areas where areaid = "'.$areaid.'" group by areaid');
+   // dd($employeeCount);
     return view('content.attendance.view_arealocationtile', compact('area'));
 }
 

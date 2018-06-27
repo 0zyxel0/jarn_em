@@ -37,7 +37,10 @@
     @foreach($data as $data)
     <section class="content">
         <div class="row">
-            <div class="col-md-12">
+
+
+
+            <div class="col-xs-12">
             <div class="box box-success">
                 <div class="box-header with-border">
                     <h3 class="box-title">Last Updated : {{$data['updated_at']}}</h3>
@@ -49,7 +52,7 @@
             </div>
             </div>
             <!-- left column -->
-            <div class="col-md-6">
+            <div class="col-xs-12">
                 <div class="box box-warning">
                     <div class="box-header with-border">
                         <h3 class="box-title">Employee Details</h3>
@@ -120,11 +123,11 @@
                             <div class="form-group">
                                 <label>Civil Status</label>
                                 <select class="form-control" id="civilstatus" name="civilstatus">
-                                    <option selected>Current : {{$data['civilstatus']}}</option>
-                                    <option>Single</option>
-                                    <option>Married</option>
-                                    <option>Divorced</option>
-                                    <option>Widowed</option>
+                                    <option selected value="{{$data['civilstatus']}}">Current : {{$data['civilstatus']}}</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Divorced">Divorced</option>
+                                    <option value="Widowed">Widowed</option>
                                 </select>
                                 <!-- /.input group -->
                             </div>
@@ -166,7 +169,7 @@
                                 <div class="form-group">
                                     <label>Employee Status</label>
                                     <select class="form-control" id="emp_stat" name="emp_stat" required="">
-                                        <option>Current : {{$data['status']}}</option>
+                                        <option value="{{$data['status']}}">Current : {{$data['status']}}</option>
                                         <option>Permanent</option>
                                         <option>Contractual</option>
                                         <option>Renewed</option>
@@ -174,118 +177,70 @@
                                     <!-- /.input group -->
                                 </div>
 
-                            </div>
+                                <div class="form-group">
+                                    <label>is Active</label>
+                                    <select class="form-control" id="isActive" name="isActive" required="">
+                                        <option value="{{$data['isActive']}}">Current : Active</option>
+                                        <option value="0">Deactivate</option>
+
+                                    </select>
+                                    <!-- /.input group -->
+                                </div>
+
+                                @endforeach
+
+                                        <h3 class="box-title">Salary Details</h3>
+                                <hr>
+                                        <div class="form-group">
+                                            <label>Rate</label>
+                                            @foreach($salary as $sal)
+
+                                                <input type="text" class="form-control" id="emp_rate" name="emp_rate" placeholder="Enter ..." value="{{$sal['daily_rate']}}">
+                                            @endforeach
+                                        </div>
+
+                                <h3 class="box-title">Area</h3>
+                                <hr>
+                                <div class="form-group">
+
+                                    <select class="form-control" id="emp_area" name="emp_area">
+
+                                        @foreach($area as $a)
+                                            <option value="{{$a['areaid']}}">{{$a['name']}}</option>
+                                        @endforeach
 
 
+                                    </select>
+                                </div>
+                                <h3 class="box-title">Team</h3>
+                                <hr>
+                                <div class="form-group">
+
+                                    <select class="form-control" id="emp_team" name="emp_team">
+
+                                        @foreach($team as $t)
+                                            <option value="{{$t['teamid']}}">{{$t['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                    </div>
+
+                                <input type="hidden" name="username" value="{{ Auth::user()->id }}">
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                <button type="submit" class="btn-lg btn-info">Save</button>
 
 
+                            </form>
                     </div>
                     <!-- /.box-body -->
                 </div>
             </div>
             <!-- right column -->
-            <div class="col-md-6">
-                <div class="box box-success">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Assign Team</h3>
-                    </div>
-                    <div class="box-body">
 
-                        <div class="form-group">
-                            <label>Team Name</label>
-                            <select class="form-control">
-
-                                @foreach($team as $t)
-                                    <option value="{{$t['teamid']}}">{{$t['name']}}</option>
-                                   @endforeach
-                            </select>
-                        </div>
-
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- Horizontal Form -->
-                <div class="box box-info">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Area Assignment</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <!-- form start -->
-
-                    <div class="box-body">
-
-                        <div class="form-group">
-                            <label>Area</label>
-                            <select class="form-control">
-
-                                @foreach($area as $a)
-                                        <option value="{{$a['areaid']}}">{{$a['name']}}</option>
-                                    @endforeach
-
-
-                            </select>
-                        </div>
-
-
-
-
-                        <!-- /.box-body -->
-
-                        <!-- /.box-footer -->
-                    </div>
-                </div>
-
-
-                <div class="box box-danger">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Salary Details</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <!-- form start -->
-
-                    <div class="box-body">
-                        <div class="form-group">
-                            <label>Rate</label>
-                            @foreach($salary as $sal)
-
-                            <input type="text" class="form-control" placeholder="Enter ..." value="{{$sal['daily_rate']}}">
-                            @endforeach
-                        </div>
-                        @foreach($governmentid as $gov)
-                            <div class="form-group">
-                                <label>{{$gov['name']}}</label>
-                                <input type="text" class="form-control" placeholder="Enter ..." value="{{$gov['government_num']}}">
-                            </div>
-                        @endforeach
-
-
-                    </div>
-                    <!-- /.box-body -->
-
-                    <!-- /.box-footer -->
-
-                </div>
-
-                <div class="box box-success">
-
-                    <div class="box-body" style="text-align: center;">
-
-                        <div class="form-group">
-                            <input type="hidden" name="username" value="{{ Auth::user()->id }}">
-                            <input type="hidden" name="_token" value="{{csrf_token()}}">
-                            <button type="submit" class="btn-lg btn-info">Save</button>
-                        </div>
-                        @endforeach
-                    </form>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-
-
-
-            </div>
             <!--/.col (right) -->
         </div>
+
+
 
     </section>
 @stop

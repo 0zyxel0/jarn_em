@@ -171,7 +171,7 @@
                             <tr>
                                 <th>Deduction</th>
 
-                                <td><input type="text" value="{{$d['total_price']}}" name="deductionField" id="deductionField"></td>
+                                <td><input type="text" value="{{$d['amount']}}" name="deductionField" id="deductionField"></td>
 
                             </tr>
                             <tr>

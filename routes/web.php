@@ -94,6 +94,19 @@ Route::post('/viewList','PayrollController@generateAttendanceSalary');
 //--------------------- END Payroll POST Routes-------------------------//
 
 
+//--------------------- Reports GET Routes-------------------------//
+Route::get('/viewReports','ReportsController@viewReportInventory');
+Route::get('/viewPayrollReport','ReportsController@viewPayrollReport');
+
+Route::post('/viewPayrollReport','ReportsController@generatePayrollReport');
+
+//--------------------- END Reports GET Routes-------------------------//
+
+
+
+
+
+
 //---------------------Attendance GET Routes-------------------------//
 
 Route::get('/attendancelist', 'AttendanceController@getEmployeeAttendanceList');

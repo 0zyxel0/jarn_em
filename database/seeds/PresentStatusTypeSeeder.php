@@ -46,6 +46,34 @@ class PresentStatusTypeSeeder extends Seeder
             ]
         );
 
+        DB::table('present_status_types')->insert(
+            [
+                'typename' => 'AM_3H',
+                'hours' => 3.0,
+            ]
+        );
+
+        DB::table('present_status_types')->insert(
+            [
+                'typename' => 'PM_1H',
+                'hours' => 1.0,
+            ]
+        );
+
+        DB::table('present_status_types')->insert(
+            [
+                'typename' => 'PM_2H',
+                'hours' => 2.0,
+            ]
+        );
+
+        DB::table('present_status_types')->insert(
+            [
+                'typename' => 'PM_3H',
+                'hours' => 3.0,
+            ]
+        );
+
 
 
 

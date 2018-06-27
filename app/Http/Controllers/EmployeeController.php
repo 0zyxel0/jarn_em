@@ -197,6 +197,60 @@ public function newEmployee(){
 }
 
 public function updateEmployeeDetails(Request $request){
+$input = $request->all();
+
+
+
+
+    $partyid = $request->get('partyid');
+    $givenname = $request->get('givenname');
+    $familyname = $request->get('familyname');
+    $middlename = $request->get('middlename');
+    $gender = $request->get('gender');
+    $email = $request->get('email');
+    $contactnumber = $request->get('contactnumber');
+    $birthday = $request->get('birthday');
+    $age = $request->get('age');
+    $religion = $request->get('religion');
+    $civilstatus = $request->get('civilstatus');
+    $address = $request->get('address');
+    $comments = $request->get('comments');
+    $isActive = $request->get('isActive');
+    $emp_stat = $request->get('emp_stat');
+    $username =$request->get('username');
+    $emp_rate = $request->get('emp_rate');
+    $emp_area = $request->get('emp_area');
+    $emp_team = $request->get('emp_team');
+    $username = $request->get('username');
+    dd($input,$partyid);
+
+
+
+    Employees::where('partyid',$partyid)
+               ->update([
+                          'givenname'=>$givenname
+                         ,'familyname'=>$familyname
+                         ,'middlename'=>$middlename
+                         ,'birthday'=>$birthday
+                         ,'age'=>$age
+                         ,'gender'=>$gender
+                         ,'email'=>$email
+                         ,'religion'=>$religion
+                         ,'address'=>$address
+                         ,'contactnumber'=>$contactnumber
+                         ,'civilstatus'=>$civilstatus
+                         ,'comments'=>$comments
+                         ,'status'=>$emp_stat
+                         ,'isActive'=>$isActive
+                         ,'updatedby'=>$username
+                        ]);
+
+    EmployeeArea::where('partyid',$partyid)
+        ->update([]);
+    EmployeeSalary::where('partyid',$partyid)
+        ->update([]);
+    EmployeeTeamAssignment::where('partyid',$partyid)
+        ->update([]);
 
 
 }

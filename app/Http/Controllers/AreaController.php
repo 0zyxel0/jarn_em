@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\EmployeeArea;
 use Illuminate\Http\Request;
 use Faker\Provider\Uuid;
 use DB;
@@ -25,6 +26,7 @@ class AreaController extends Controller
         $area = Area::select('areaid','name')->where('areaid',$areaid)->get();
 
         $areaData = Area::select('areaid','name','address','size')->where('parentareaid',$areaid)->get();
+
 
         return view('content.area.view_child_area',compact('areaData','area'));
     }
