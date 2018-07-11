@@ -204,7 +204,9 @@
                                 <div class="form-group">
 
                                     <select class="form-control" id="emp_area" name="emp_area">
-
+                                        @foreach($area_assignment as $aa)
+                                            <option value="{{$aa['areaid']}}">Current Area :{{$aa['name']}}</option>
+                                        @endforeach
                                         @foreach($area as $a)
                                             <option value="{{$a['areaid']}}">{{$a['name']}}</option>
                                         @endforeach
@@ -217,7 +219,9 @@
                                 <div class="form-group">
 
                                     <select class="form-control" id="emp_team" name="emp_team">
-
+                                        @foreach($team_assignment as $t)
+                                            <option value="{{$t['teamid']}}">Current Team :{{$t['name']}}</option>
+                                        @endforeach
                                         @foreach($team as $t)
                                             <option value="{{$t['teamid']}}">{{$t['name']}}</option>
                                         @endforeach

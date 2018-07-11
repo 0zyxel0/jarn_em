@@ -46,15 +46,10 @@ class DeductionController extends Controller
     public function viewEmployeeDeductionList(){
 
         $query = DB::select('
-                    select e.partyid, e.givenname, e.familyname, ed.total_price
+                    select e.partyid, e.givenname, e.familyname, pd.amount
                     from employees e
-                    left join 
-                    (
-                      select DISTINCT partyid,SUM(total_price) as total_price
-                      from employee_deductions
-                      Group by partyid
-                      
-                    ) ed on ed.partyid=e.partyid
+                    left join person_deductions pd on pd.partyid = e.partyid
+                    
                     
                     
         ');
@@ -78,7 +73,7 @@ class DeductionController extends Controller
 
         $user_deduction = EmployeeDeduction::join('deduction_types', function($join){
             $join->on('employee_deductions.deduction_typeid','=','deduction_types.id');
-        })->where('partyid',$partyid)->get();
+        })->where('partyid',$partyid)->where('status',1)->get();
 
 
 
@@ -98,6 +93,14 @@ class DeductionController extends Controller
         ');
         return json_encode($price);
 
+    }
+
+
+    public function getInventoryItem($itemType){
+        $items = Inventory::join('stock_availabilities', function($join){
+            $join->on('stock_availabilities.inventoryid','=','inventories.inventoryid');
+        })->where('item_type',$itemType)->get();
+        return json_encode($items);
     }
 
 
@@ -137,4 +140,10 @@ class DeductionController extends Controller
 
         return redirect('/addDeduction/'.$partyid);
     }
+
+
+
+    /*AJAX CALLS*/
+
+
 }

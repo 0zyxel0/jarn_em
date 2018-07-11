@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DeductionType;
 use App\EmployeeGovernmentDetail;
 use App\EmployeeImage;
 use App\EmployeeTeam;
@@ -26,9 +27,12 @@ class InventoryController extends Controller
             $join->on('inventories.inventoryid','=','stock_availabilities.inventoryid');
         })->get();
 
-       // dd($data);
-        return view('content.inventory.view_inventory_list',compact('data'));
+        $item_type = DeductionType::all();
+
+        return view('content.inventory.view_inventory_list',compact('data','item_type'));
     }
+
+
 
 
     public function saveItems(Request $request)
@@ -39,6 +43,7 @@ class InventoryController extends Controller
 
         $invent->inventoryid = $genId;
         $invent->item = $request->item_name;
+        $invent->item_type = $request->item_type;
         $invent->quantity = $request->qty;
         $invent->metric = $request->metric;
         $invent->price_amount = $request->price;

@@ -147,7 +147,6 @@
 
                                 <th>Present</th>
                                 <th>Present Type</th>
-                                <th>Hours</th>
                                 <th>Area</th>
                                 <th>Project</th>
 
@@ -180,7 +179,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input type="text" class="form-control pull-right startdate" id="startdate" name="startdate[]">
+                                            <input type="text" class="form-control pull-right startdate" id="startdate" name="startdate[]" required>
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -199,7 +198,7 @@
 
                                     </select>
                                 </td>
-                                <td></td>
+
                                 <td>
                                     <select name="areaid[]" class="form-control">
                                         <option disabled>Select Area...</option>

@@ -9,7 +9,34 @@
 
             });
 
+            $("select[name='deducttype']").change(function(){
+                var deducttype = $(this).val();
+                var token = $("input[name='_token']").val();
+                console.log(deducttype);
+                $.ajax({
+                    url:"item-ajax/"+deducttype,
+                    method: 'GET',
+                    datatype:"json",
+                    data: {id:deducttype, _token:token},
 
+                success: function(data) {
+                  console.log(data);
+                    var $box = $("#inventory_item");
+                    $box.empty(); // remove old options
+                    $.each(JSON.parse(data), function(key, value){
+                        //console.log(value['name']);
+
+                        $('select[name="inventory_item"]').append('<option value="'+ value['inventoryid'] +'">' + value['item'] + ' (Available :' +value['available_stock'] +')'+'</option>');
+
+                    });
+
+
+                },
+                error:function(data){
+                    alert('error');
+                }
+            });
+            });
 
 
             $('#qty').on("input propertychange",function(){
@@ -42,6 +69,11 @@
                     }
                 });
             });
+
+
+
+
+
         });
     </script>
 
@@ -79,6 +111,7 @@
                                     <div class="form-group">
                                         <label>Deduction Type</label>
                                         <select class="form-control" id="deducttype" name="deducttype">
+                                            <option>-----</option>
                                             @foreach($deduct as $de)
                                                 <option value="{{$de['id']}}">{{$de['name']}}</option>
                                             @endforeach
@@ -88,9 +121,7 @@
                                     <div class="form-group">
                                         <label>Item</label>
                                         <select class="form-control" id="inventory_item" name="inventory_item">
-                                            @foreach($item as $i)
-                                                <option value="{{$i['inventoryid']}}">{{$i['item']}} : Available ({{$i['available_stock']}}) at P{{$i['selling_price']}}</option>
-                                            @endforeach
+
 
                                         </select>
                                     </div>

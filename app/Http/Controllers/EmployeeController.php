@@ -50,7 +50,7 @@ class EmployeeController extends Controller
       $employee->address = $request->address;
       $employee->comments = $request->comments;
       $employee->startdate =date("Y-m-d", strtotime($request->startdate));
-      $employee->enddate = $request->enddate;
+      $employee->enddate = date("Y-m-d", strtotime($request->enddate));
       $employee->status = $request->emp_stat;
       $employee->isActive = '1';
       $employee->updatedby = $request->username;
@@ -141,20 +141,40 @@ public function showEmployeeList(){
 public function editEmployeeDetails($id){
 
 $data = Employees::where('partyid',$id)->get();
+    $data_json  = json_encode($data);
 $area = Area::all('areaid','name');
+    $area_json  = json_encode($area);
 
-$area_spec = DB::table('employee_areas')
-    ->select('areas.areaid','areas.name')
-    ->join('areas','employee_areas.areaid','=','areas.areaid')
-    ->where('employee_areas.partyid',$id)
-    ->get();
 $team = EmployeeTeam::all();
+    $team_json  = json_encode($team);
 $salary = EmployeeSalary::where('partyid',$id)->get();
+    $salary_json  = json_encode($salary);
 
+    $team_assignment = DB::table('employee_team_assignments')
+        ->select('employee_team_assignments.teamid','employee_teams.name')
+        ->join('employee_teams','employee_teams.teamid','=','employee_team_assignments.teamid')
+        ->where('employee_team_assignments.partyid',$id)
+        ->get();
+    $team_assignment_json  = json_encode($team_assignment);
+
+    $area_assignment = DB::table('employee_areas')
+        ->select('employee_areas.areaid','areas.name')
+        ->join('areas','areas.areaid','=','employee_areas.areaid')
+        ->where('employee_areas.partyid',$id)
+        ->get();
+    $area_assignment_json  = json_encode($area_assignment);
 $governmentid = EmployeeGovernmentDetail::select('name','government_num')->where('partyid',$id)->get();
-
-
-return view('content.employee.edit_employee',compact('data','area','area_spec','team','salary','governmentid'));
+    $governmentid_json  = json_encode($governmentid);
+return view('content.employee.edit_employee'
+    ,[
+        'data'=>json_decode($data_json,true),
+        'area'=>json_decode($area_json,true),
+        'team_assignment'=>json_decode($team_assignment_json,true),
+        'salary'=>json_decode($salary_json,true),
+        'team'=>json_decode($team_json,true),
+        'governmentid'=>json_decode($governmentid_json,true),
+        'area_assignment'=>json_decode($area_assignment_json,true)
+    ]);
 
 }
 
@@ -197,7 +217,7 @@ public function newEmployee(){
 }
 
 public function updateEmployeeDetails(Request $request){
-$input = $request->all();
+
 
 
 
@@ -222,7 +242,7 @@ $input = $request->all();
     $emp_area = $request->get('emp_area');
     $emp_team = $request->get('emp_team');
     $username = $request->get('username');
-    dd($input,$partyid);
+
 
 
 
@@ -246,13 +266,13 @@ $input = $request->all();
                         ]);
 
     EmployeeArea::where('partyid',$partyid)
-        ->update([]);
+        ->update(['areaid'=>$emp_area]);
     EmployeeSalary::where('partyid',$partyid)
-        ->update([]);
+        ->update(['daily_rate'=>$emp_rate]);
     EmployeeTeamAssignment::where('partyid',$partyid)
-        ->update([]);
+        ->update(['teamid'=>$emp_team]);
 
-
+    return 'success';
 }
 
 }

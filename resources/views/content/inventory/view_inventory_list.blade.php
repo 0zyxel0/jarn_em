@@ -10,7 +10,7 @@
                 "columnDefs":
                     [
                         {
-                            "targets": 0,
+                            "targets": [0,1],
                             "visible": false,
                             "searchable": false
                         }
@@ -60,9 +60,9 @@
                             <thead>
                             <tr>
                                 <th>InventoryId</th>
+                                <th>Item Type</th>
                                 <th>Item</th>
                                 <th>Metric</th>
-
                                 <th>Stock Level</th>
                                 <th>Price Amount Bought</th>
                                 <th>Selling Price</th>
@@ -75,6 +75,7 @@
                             @foreach($data as $item)
                                 <tr>
                                     <td>   {{$item['inventoryid']}}</td>
+                                    <td>   {{$item['item_type']}}</td>
                                     <td>   {{$item['item']}}</td>
                                     <td>   {{$item['metric']}}</td>
                                     <td>   {{$item['available_stock']}}</td>
@@ -114,6 +115,17 @@
                         <div class="form-group">
                             <label>Item Name</label>
                             <input type="text" class="form-control" placeholder="Enter ..." id="item_name" name="item_name" required="">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Item Type</label>
+                            <select class="form-control" id="item_type" name="item_type">
+                                <option>-----</option>
+                                @foreach($item_type as $i)
+                                    <option value="{{$i['id']}}">{{$i['name']}}</option>
+                                @endforeach
+
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>Quantity</label>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\EmployeeDeduction;
 use App\EmployeeGovernmentDetail;
 use App\EmployeeImage;
 use App\EmployeeTeam;
@@ -15,7 +16,9 @@ use App\Employees;
 use App\EmployeeSalary;
 use Illuminate\Support\Facades\Input;
 use App\EmployeeArea;
+use App\Payroll;
 use Symfony\Component\Console\Tests\TerminalTest;
+use Carbon\Carbon;
 
 class PayrollController extends Controller
 {
@@ -101,7 +104,31 @@ class PayrollController extends Controller
 
         $query_json = json_encode($query);
 
-        return view('content.payroll.view_employee_payslipdetails',['data'=>json_decode($query_json,true)]);
+      $getDeductions = DB::select('
+      SELECT ed.deductionid,dt.name, ed.quantity, ed.total_price, ed.status, ed.comments
+      FROM employee_deductions ed 
+      JOIN deduction_types dt on dt.id = ed.deduction_typeid
+      WHERE ed.status = 1
+      and ed.partyid = "'.$partyid.'"
+      ');
+
+        $query_getDeductions = json_encode($getDeductions);
+
+
+        $getDeductionsList = DB::select('
+      SELECT ed.deductionid
+      FROM employee_deductions ed 
+      JOIN deduction_types dt on dt.id = ed.deduction_typeid
+      WHERE ed.status = 1
+      and ed.partyid = "'.$partyid.'"
+      ');
+
+        $query_getDeductionsList = json_encode($getDeductionsList);
+
+
+
+
+        return view('content.payroll.view_employee_payslipdetails',['data'=>json_decode($query_json,true),'deduct'=>json_decode($query_getDeductions,true),'deductionList'=>json_decode($query_getDeductionsList,true)]);
     }
 
     public function viewPayrollList(){
@@ -127,6 +154,45 @@ class PayrollController extends Controller
 
     }
 
+
+
+    public function updatePayslipStatus(Request $request){
+
+        $genid = Uuid::uuid();
+
+        $payroll = new Payroll();
+
+
+
+        $payroll->payrollid= $genid;
+        $payroll->partyid = $request->partyid;
+        $payroll->coverage_start =date("Y-m-d", strtotime($request->coverage_start));
+        $payroll->coverage_end =date("Y-m-d", strtotime($request->coverage_end));
+        $payroll->paymentdate =  date("Y-m-d", strtotime($request->paymentdate));
+        $payroll->gross_amount = $request->grossSalaryField;
+        $payroll->deduction_amount = $request->deductionField;
+        $payroll->net_amount = $request->netSalaryField;
+        $payroll->bonus_amount = $request-> bonusField;
+        $payroll->total_paidamount = $request-> totalAmountField;
+        $payroll->comments = $request->commentsField;
+        $payroll->status = 'Paid';
+        $payroll->updatedby = $request->username;
+        $payroll->createdby = $request->username;
+        $payroll->save();
+        $dataset=[];
+        foreach( $request->deductid_ as $key => $value)
+            {
+                $dataset[] = [$value ];
+            }
+      DB::table('employee_deductions')
+            ->whereIn('deductionid', $dataset)
+            ->update(['status' => 0]);
+        DB::table('person_deductions')
+            ->where('partyid',$request->partyid)
+            ->update(['amount'=>0]);
+
+        return redirect()->back();
+    }
 
 
 

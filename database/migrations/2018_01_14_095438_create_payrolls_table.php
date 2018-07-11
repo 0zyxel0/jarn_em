@@ -15,9 +15,16 @@ class CreatePayrollsTable extends Migration
     {
         Schema::create('payrolls', function (Blueprint $table) {
             $table->uuid('payrollid')->unique();
-            $table->string('employeeid');
+            $table->string('partyid');
+            $table->date('coverage_start');
+            $table->date('coverage_end');
             $table->date('paymentdate');
-            $table->float('amount');
+            $table->float('gross_amount')->nullable();
+            $table->float('deduction_amount')->nullable();
+            $table->float('net_amount')->nullable();
+            $table->float('bonus_amount')->nullable();
+            $table->float('total_paidamount')->nullable();
+            $table->string('comments')->nullable();
             $table->string('status');
             $table->string('updatedby');
             $table->string('createdby');

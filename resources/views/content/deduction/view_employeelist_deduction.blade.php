@@ -1,13 +1,15 @@
 @extends('layouts.master')
 @section('content')
     <script src="{{ asset('js/jquery.js') }}"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{ asset('js/jquery-ui.js') }}"></script>
     <link rel="stylesheet" href="{{asset('css/datatables.css')}}">
     <script>
         $(document).ready(function(){
             var table =  $('#employee-list').DataTable({
                 "columnDefs":
                     [
+
+
                         {
                             "targets": 0,
                             "visible": false,
@@ -77,7 +79,7 @@
                                     <td>   {{$item['partyid']}}</td>
                                     <td>   {{$item['givenname']}}</td>
                                     <td>   {{$item['familyname']}}</td>
-                                    <td>   {{$item['total_price']}}</td>
+                                    <td>   {{$item['amount']}}</td>
 
                                     <td>
                                         <button id="btn_viewDeductions"><i class="fa fa-book"></i> View</button>

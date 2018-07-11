@@ -59,6 +59,7 @@ Route::get('/viewdeductionlist','DeductionController@viewEmployeeDeductionList')
 Route::get('/createDeductionType','DeductionController@createDeductionType');
 Route::get('/addDeduction/{partyid}','DeductionController@createDeduction');
 Route::get('/addDeduction/price-ajax/{itemid}/{quantity}','DeductionController@generateSellingPrice');
+Route::get('/addDeduction/item-ajax/{itemid}','DeductionController@getInventoryItem');
 //--------------------- END Deduction GET Routes-------------------------//
 
 //---------------------Deduction POST Routes-------------------------//
@@ -90,7 +91,7 @@ Route::get('/viewEmployeePayslip/{partyid}/{startdate}/{enddate}','PayrollContro
 
 //--------------------- Payroll POST Routes-------------------------//
 Route::post('/viewList','PayrollController@generateAttendanceSalary');
-
+Route::post('/viewEmployeePayslip/{partyid}/{startdate}/{enddate}','PayrollController@updatePayslipStatus');
 //--------------------- END Payroll POST Routes-------------------------//
 
 

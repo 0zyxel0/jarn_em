@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
     <script src="{{ asset('js/jquery.js') }}"></script>
-    <script src="{{ asset('js/jquery-ui.js') }}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $(document).ready(function(){
             $("select[name='selectarea']").change(function(){
@@ -39,8 +39,8 @@
 
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Payroll</a></li>
-            <li class="active">Payroll List</li>
+            <li><a href="#">Reports</a></li>
+            <li class="active">View Payroll List</li>
         </ol>
     </section>
 
@@ -49,7 +49,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Generate Payroll List</h3>
+                        <h3 class="box-title">Generate Payroll Report</h3>
                         <hr/>
                         <form method="post" action="">
                             <div class="form-group">
