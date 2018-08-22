@@ -29,7 +29,7 @@ class PayrollController extends Controller
 
       // dd($areaid,$wFrom,$wTo);
         $query = DB::select('
-        select distinct sa.partyid,e.givenname,e.familyname, x.hours,es.daily_rate, ed.total_price
+        select distinct sa.partyid,e.givenname,e.familyname, x.hours,es.daily_rate, pds.amount
         from schedule_attendances sa 
         left join 
                     (
@@ -41,13 +41,7 @@ class PayrollController extends Controller
                     ) as x on sa.partyid = x.partyid
         left join employees e on e.partyid = sa.partyid
         left join employee_salaries es on es.partyid = e.partyid
-        left join 
-                    (
-                      select DISTINCT partyid,SUM(total_price) as total_price
-                      from employee_deductions
-                      Group by partyid
-                      
-                    ) ed on ed.partyid=e.partyid
+         left join person_deductions pds on pds.partyid = e.partyid 
         where sa.areaid = "'.$areaid.'"
        
         

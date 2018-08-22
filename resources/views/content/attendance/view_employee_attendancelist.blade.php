@@ -25,6 +25,8 @@
                 "paging":   false,
                 "info":     false
             });
+
+            $('.flash-message').fadeIn('fast').delay(1000).fadeOut('fast');
         });
     </script>
     <style>
@@ -65,6 +67,14 @@
         </ol>
     </section>
     <section class="content">
+        <div class="flash-message">
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                @if(Session::has('alert-' . $msg))
+
+                    <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                @endif
+            @endforeach
+        </div> <!-- end .flash-message -->
         <div class="row">
             <div class="col-xs-12">                <!-- /.box -->
 

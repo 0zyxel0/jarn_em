@@ -48,12 +48,40 @@ class AttendanceController extends Controller
    public function createWeeklist($areaid,$id, $week){
 
         $emp = Employees::all()->where('partyid',$id);
+
        $sked = Schedule::all()->where('scheduleid',$week);
         $area = Area::select('areaid','name')->where('parentareaid',$areaid)->get();
 
         $project = Project::all('projectid','project_name');
         $presenttype = PresentStatusType::select('id','typename')->get();
-       return view('content.attendance.create_attendancelist',compact('sked','emp','area','project','presenttype'));
+
+       $attendance_data = DB::table('employees')
+           ->select('employees.partyid','employees.givenname','employees.familyname','areas.name','projects.project_name','schedule_attendances.startdate','schedule_attendances.isPresent','present_status_types.typename','schedules.week_number','schedules.year_number')
+           // ->select('*')
+           ->leftJoin('schedule_attendances','employees.partyid','=','schedule_attendances.partyid')
+           ->leftJoin('schedules','schedule_attendances.scheduleid','=','schedules.scheduleid')
+           ->leftJoin('projects','schedule_attendances.projectid','=','projects.projectid')
+           ->leftJoin('present_status_types','present_status_types.id','=','schedule_attendances.presenttype')
+           ->leftJoin('areas','areas.areaid','=','schedule_attendances.areaid')
+           ->where('employees.partyid',$id)
+           ->where('schedules.scheduleid',$week)
+           ->get();
+
+       $conv_emp = json_encode($emp);
+       $conv_sked = json_encode($sked);
+       $conv_area = json_encode($area);
+       $conv_project = json_encode($project);
+       $conv_presenttype = json_encode($presenttype);
+       $conv_attendance = json_encode($attendance_data);
+
+       return view('content.attendance.create_attendancelist',
+           ['attendance'=>json_decode($conv_attendance,true)
+               ,'emp'=>json_decode($conv_emp,true)
+               ,'sked'=>json_decode($conv_sked,true)
+               ,'area'=>json_decode($conv_area,true)
+               ,'project'=>json_decode($conv_project,true)
+               ,'presenttype'=>json_decode($conv_presenttype,true)
+           ]);
    }
 
 
@@ -229,5 +257,18 @@ public function viewAttendanceWeekList($areaid,$employeeid){
 }
 
 
+    public function createAttendanceSchedule($employeeid,$scheduleid,$areaid,$startdate, $enddate){
+        $emp = Employees::all()->where('partyid',$employeeid);
+        $sked = Schedule::all()->where('scheduleid',$scheduleid);
+        $project = Project::all('projectid','project_name');
+        $presenttype = PresentStatusType::select('id','typename')->get();
+        $area = Area::select('areaid','name')->where('parentareaid',$areaid)->get();
+
+
+
+
+        return view('content.attendance.view_employee_test',compact('sked','emp','area','project','presenttype'));
+
+    }
 
 }

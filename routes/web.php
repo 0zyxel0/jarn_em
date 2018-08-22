@@ -98,6 +98,7 @@ Route::post('/viewEmployeePayslip/{partyid}/{startdate}/{enddate}','PayrollContr
 //--------------------- Reports GET Routes-------------------------//
 Route::get('/viewReports','ReportsController@viewReportInventory');
 Route::get('/viewPayrollReport','ReportsController@viewPayrollReport');
+Route::get('/viewAreaPayrollReport','ReportsController@viewAreaPayrollReport');
 
 Route::post('/viewPayrollReport','ReportsController@generatePayrollReport');
 
@@ -122,7 +123,7 @@ Route::get('/viewEmployeeAttendanceList/{partyid}/{scheduleid}','AttendanceContr
 Route::get('generateWeekSchedule/{areaid}/{scheduleid}','AttendanceController@generateWeekSchedule');
 Route::get('/viewareaattendance','AttendanceController@viewAreaAttendance');
 Route::get('/generateWeekSchedule','AttendanceController@generateWeekSchedule');
-
+Route::get('/viewEmployeeAttendance/{partyid}/{scheduleid}/{areaid}/{startdate}/{enddate}','AttendanceController@createAttendanceSchedule');
 //--------------------- END Attendance GET Routes-------------------------//
 
 

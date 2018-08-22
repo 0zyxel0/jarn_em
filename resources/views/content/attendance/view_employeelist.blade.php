@@ -6,8 +6,15 @@
     <script>
         $(document).ready(function(){
             var table =  $('#list').DataTable({
+                "columnDefs":
+                    [
+                        {
+                            "targets": [0,1],
+                            "visible": false,
+                            "searchable": false
+                        }
 
-
+                    ]
             });
 
             $('#list tbody').on( 'click', '#btn_showAttn', function () {

@@ -15,6 +15,7 @@ use App\Employees;
 use App\EmployeeSalary;
 use Illuminate\Support\Facades\Input;
 use App\EmployeeArea;
+use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Component\Console\Tests\TerminalTest;
 
 class EmployeeController extends Controller
@@ -50,7 +51,7 @@ class EmployeeController extends Controller
       $employee->address = $request->address;
       $employee->comments = $request->comments;
       $employee->startdate =date("Y-m-d", strtotime($request->startdate));
-      $employee->enddate = date("Y-m-d", strtotime($request->enddate));
+      $employee->enddate = NULL;
       $employee->status = $request->emp_stat;
       $employee->isActive = '1';
       $employee->updatedby = $request->username;
@@ -272,7 +273,7 @@ public function updateEmployeeDetails(Request $request){
     EmployeeTeamAssignment::where('partyid',$partyid)
         ->update(['teamid'=>$emp_team]);
 
-    return 'success';
+    return redirect()->back();
 }
 
 }

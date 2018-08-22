@@ -16,7 +16,7 @@
                             "data":null,
                             "render": function(full)
                             {
-                                return (full[3]/8);
+                                return ((full[3]/8).toFixed(1));
 
                             }
 
@@ -27,7 +27,7 @@
                             "data":null,
                             "render": function(full)
                             {
-                                return ((full[3]/8)*full[4]);
+                                return (((full[3]/8)*full[4]).toFixed(2));
 
                             }
 
@@ -38,7 +38,7 @@
                             "data":null,
                             "render": function(full)
                             {
-                                return (((full[3]/8)*full[4])-full[10]);
+                                return ((((full[3]/8)*full[4])-full[10]).toFixed(2));
 
                             }
 

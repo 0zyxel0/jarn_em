@@ -154,7 +154,7 @@
                                     @endforeach
 
                                     <td></td>
-                                    <td>{{$item['total_price']}}</td>
+                                    <td>{{$item['amount']}}</td>
                                     <td></td>
 
                                     <td>

@@ -28,7 +28,22 @@ class ScheduleAttendanceController extends Controller
 
         $genid = Uuid::uuid();
 
-      // $input = $request->all();
+       $input = $request->all();
+        $date_set = [];
+       foreach($input['startdate'] as $key => $value){
+            array_push($date_set,(date("Y-m-d", strtotime($value))));
+       }
+
+       $model = ScheduleAttendance::where([
+               ['startdate', $date_set],
+               ['partyid',$request->get('partyid')],
+               ['presenttype',$request->get('presenttype')]
+           ])
+
+         ->first();
+
+
+
         $partyid = $request->get('partyid');
         $scheduleid = $request->get('scheduleid');
         $username = $request->get('username');
@@ -52,11 +67,12 @@ class ScheduleAttendanceController extends Controller
                           ,'areaid'=>$area[$key]
                           ,'projectid'=>$projectid[$key]
                           ,'createdby'=>$username
+                          ,'created_at' => date('Y-m-d H:i:s')
+                          ,'updated_at' => date('Y-m-d H:i:s')
             ];
         }
 
 
-       DB::table('schedule_attendances')->insert($dataset);
 
 
         $statusid = Uuid::uuid();
@@ -67,9 +83,28 @@ class ScheduleAttendanceController extends Controller
         $status->partyid = $partyid;
         $status->status = "Submitted";
         $status->updatedby = $username;
-        $status->save();
 
-       return redirect('/viewEmployeeAttendanceList/'.$partyid.'/'.$scheduleid);
+        if($model != null){
+
+            //$request->session()->flash('alert-danger', 'Error, Record Exists!');
+
+            //return redirect('/weeklist/'.$partyid.'/'.$scheduleid);
+           return redirect()->back()->with('alert-danger', 'Error, Record Exists!');
+           // return Redirect::back()->withErrors(['alert-danger', 'Error, Record Exists!']);
+//dd('Record Exists',$status);
+        }else{
+            DB::table('schedule_attendances')->insert($dataset);
+            $status->save();
+            $request->session()->flash('alert-success', 'Successful Added!');
+            //dd('New Object',$status);
+            return redirect('/viewEmployeeAttendanceList/'.$partyid.'/'.$scheduleid);
+
+        }
+
 
     }
+
+
+
+
 }

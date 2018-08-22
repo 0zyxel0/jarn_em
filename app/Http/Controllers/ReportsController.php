@@ -94,5 +94,23 @@ class ReportsController extends Controller
         return view('content.reports.report_generated_payroll_list',['data'=>json_decode($query_json, true)]);
     }
 
+    public function viewAreaPayrollReport(){
+        $report = DB::select('
 
+select x.areaid,x.name,SUM(x.amount) as amount from (
+												SELECT (SUM(pst.hours/8)*es.daily_rate) as amount,a.name,a.areaid
+													FROM `schedule_attendances` s
+													LEFT JOIN present_status_types pst on s.presenttype = pst.id  
+													LEFT JOIN employee_salaries es on s.partyid = es.partyid        
+													LEFT JOIN employee_areas ea on ea.partyid =es.partyid       
+													LEFT JOIN areas a on a.areaid = ea.areaid  
+                          GROUP BY s.partyid
+								)x
+Group by x.areaid
+        ');
+
+        $query_json = json_encode($report);
+
+        return view('content.reports.report_generated_area_payroll_list',['data'=>json_decode($query_json, true)]);
+    }
 }

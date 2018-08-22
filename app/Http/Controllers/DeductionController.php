@@ -75,9 +75,12 @@ class DeductionController extends Controller
             $join->on('employee_deductions.deduction_typeid','=','deduction_types.id');
         })->where('partyid',$partyid)->where('status',1)->get();
 
+        $rice_deduction = EmployeeDeduction::where('deduction_typeid','=','1')->get();
+        $corn_deduction = EmployeeDeduction::where('deduction_typeid','=','2')->get();
 
 
-        return view('content.deduction.edit_employee_deduction',compact('data','deduct','item','user_deduction'));
+
+        return view('content.deduction.edit_employee_deduction',compact('data','deduct','item','user_deduction','rice_deduction','corn_deduction'));
     }
 
     public function generateSellingPrice($itemid,$quantity){

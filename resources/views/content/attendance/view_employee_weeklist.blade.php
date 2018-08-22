@@ -12,7 +12,7 @@
                     ,bInfo:false
                     ,order: [[ 4, "desc" ]]
                     ,  columnDefs: [
-                    { targets: [ 0,1,2], visible: false}
+                    { targets: [0,1,2,3,4,7,8 ], visible: false}
 
                 ]
                 }
@@ -28,6 +28,12 @@
 
                 var data = table.row( $(this).parents('tr') ).data();
                 window.location.href='/jarn_em/public/viewEmployeeAttendanceList/'+data[3]+'/'+data[2];
+            });
+
+            $('#list tbody').on( 'click', '#btn_TestAttendance', function () {
+
+                var data = table.row( $(this).parents('tr') ).data();
+                window.location.href='/jarn_em/public/viewEmployeeAttendance/'+data[3]+'/'+data[2]+'/'+data[0]+'/'+data[7]+'/'+data[8];
             });
 
         });
@@ -70,6 +76,8 @@
                                 <th>Year</th>
                                 <th>Week #</th>
                                 <th>Coverage</th>
+                                <th>Start</th>
+                                <th>End</th>
                                 <th>Option</th>
 
                             </tr>
@@ -85,9 +93,12 @@
                                     <td>{{$week['year_number']}}</td>
                                     <td>{{$week['week_number']}}</td>
                                     <td>{{$week['startdate']}} ~ {{$week['enddate']}}</td>
+                                    <td>{{$week['startdate']}}</td>
+                                    <td>{{$week['enddate']}}</td>
                                     <td>
                                         <button id="btn_viewAttendance"><i class="fa fa-book"></i> View Attendance</button>
                                         <button id="btn_setAttendance"><i class="fa fa-edit"></i> Update Attendance</button>
+                                        <!--button id="btn_TestAttendance"><i class="fa fa-book"></i>TEST Attendance</button-->
                                     </td>
                                 </tr>
                             @endforeach

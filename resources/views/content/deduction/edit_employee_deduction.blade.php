@@ -5,14 +5,29 @@
     <script src="{{ asset('js/bootstrap3.min.js') }}"></script>
     <script>
         $(document).ready(function(){
+            $("#monthform").hide();
             var table =  $('#employee-list').DataTable({
 
             });
 
+
+            $("select[name='months']").change(function(){
+                var getPrice = $('#price').val();
+                var getMonthlyDivisor = $("select[name='months']").val();
+                var calculateMonthPrice = ((getPrice/getMonthlyDivisor)).toFixed(2);
+                $("#calculatedprice").val(calculateMonthPrice);
+               // console.log(calculateMonthPrice);
+            });
+
+
             $("select[name='deducttype']").change(function(){
                 var deducttype = $(this).val();
+                if(deducttype == '3'){
+
+                    $("#monthform").show();
+                }else{$("#monthform").hide();}
                 var token = $("input[name='_token']").val();
-                console.log(deducttype);
+                //console.log(deducttype);
                 $.ajax({
                     url:"item-ajax/"+deducttype,
                     method: 'GET',
@@ -20,7 +35,7 @@
                     data: {id:deducttype, _token:token},
 
                 success: function(data) {
-                  console.log(data);
+                 // console.log(data);
                     var $box = $("#inventory_item");
                     $box.empty(); // remove old options
                     $.each(JSON.parse(data), function(key, value){
@@ -37,6 +52,7 @@
                 }
             });
             });
+
 
 
             $('#qty').on("input propertychange",function(){
@@ -136,6 +152,18 @@
                                         <input type="text" class="form-control" placeholder="Enter ..." id="price" name="price" value="" required="" readonly>
                                     </div>
 
+                                    <div class="form-group" id="monthform">
+                                        <label>Months to Pay</label>
+                                        <select class="form-control" id="months" name="months">
+                                            <option selected>-------</option>
+                                            <option value="1">1 Month</option>
+                                            <option value="2">2 Months</option>
+                                            <option value="3">3 Months</option>
+                                        </select>
+                                        <label>Monthly Price</label>
+                                        <input type="text" class="form-control" placeholder="" id="calculatedprice" name="calculatedprice" value="" required="" readonly>
+                                    </div>
+
                                     <div class="form-group">
                                         <label>Remarks
                                         </label>
@@ -222,25 +250,32 @@
                             <ul class="nav nav-tabs">
                                 <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Rice</a></li>
                                 <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Corn</a></li>
-                                <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Materials</a></li>
-                                <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Cash Advance</a></li>
-                                <li class=""><a href="#tab_4" data-toggle="tab" aria-expanded="false">Paluwagan</a></li>
+                                <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Materials</a></li>
+                                <li class=""><a href="#tab_4" data-toggle="tab" aria-expanded="false">Cash Advance</a></li>
+                                <li class=""><a href="#tab_5" data-toggle="tab" aria-expanded="false">Paluwagan</a></li>
 
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab_1">
                                     <table id="" class="table table-bordered table-striped dataTable" >
                                         <thead>
+
                                         <tr role="row">
-                                        <tr role="row">
-                                            <th>deductionid</th>
-                                            <th>Start Date</th>
-                                            <th>Terms</th>
-                                            <th>Options</th>
+                                            <th>Date</th>
+
+                                            <th>Kg</th>
+                                            <th>Total Price</th>
                                         </tr>
-                                        </tr>
+
                                         </thead>
                                         <tbody>
+                                        @foreach($rice_deduction as $ud)
+                                            <tr>
+                                                <td>{{$ud['created_at']}}</td>
+                                                <td>{{$ud['quantity']}}</td>
+                                                <td>{{$ud['total_price']}}</td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -248,16 +283,22 @@
                                 <div class="tab-pane" id="tab_2">
                                     <table id="" class="table table-bordered table-striped dataTable" >
                                         <thead>
+
                                         <tr role="row">
-                                        <tr role="row">
-                                            <th>deductionid</th>
-                                            <th>Start Date</th>
-                                            <th>Terms</th>
-                                            <th>Options</th>
+                                            <th>Date</th>
+                                            <th>Kg</th>
+                                            <th>Total Price</th>
                                         </tr>
-                                        </tr>
+
                                         </thead>
                                         <tbody>
+                                        @foreach($corn_deduction as $ud)
+                                            <tr>
+                                                <td>{{$ud['created_at']}}</td>
+                                                <td>{{$ud['quantity']}}</td>
+                                                <td>{{$ud['total_price']}}</td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
