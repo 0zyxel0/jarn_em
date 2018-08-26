@@ -1,26 +1,30 @@
-@extends('layouts.master')
+@extends('layouts.reports')
 @section('content')
+    <script src="{{asset('js/datatables.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.jqueryui.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.jqueryui.css" />
 
-    <script src="{{ asset('js/jquery.js') }}"></script>
-    <script src="{{ asset('js/bootstrap3.min.js') }}"></script>
-    <link rel="stylesheet" href="{{asset('css/datatables.css')}}">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+    <!--Required for Datatables to function-->
+    <script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="{{asset('DataTables/datatables.min.css')}}"/>
+    <script src="{{asset('js/DataTables/datatables.min.js')}}"></script>
     <script>
         $(document).ready(function(){
             var table =  $('#list').DataTable( {
-                "columnDefs":
-                    [
+                "dom": 'lBfrtiBp',
+                'buttons': ['copy', 'excel', 'csv', 'pdf', 'print' ],
 
-                    ],
 
             } );
         });
     </script>
 
     <section class="content-header">
-        <h1>
-            Reports
-        </h1>
+        <button class="btn btn-block btn-default" onclick="location.href='viewReports'; return false;" type="button" style="width: 150px;"> < Back to Reports</button>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Reports</a></li>
